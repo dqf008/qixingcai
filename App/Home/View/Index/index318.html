@@ -1,0 +1,1096 @@
+<html><head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<meta name="theme-color" content="#920783">
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <title>会员</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/mystyle.css"/>
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/jquery.alerts.css"/>
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/appcg.min.js?if=4567"></script>
+	<style type="text/css" media="screen">#sound {visibility:hidden}</style>
+  	<link type="text/css" rel="stylesheet" href="__PUBLIC__/css/mystyle7.css"></head>
+  <body>
+	
+	<div class="topbj top_bj_7">
+		<div class="top top_7">
+			<div class="topleft"></div>
+			<div class="topright">
+			<div class="topmenu topright2">
+				<ul class="nav nav_top">
+					<!-- <li><a href="JavaScript:;" rel="tab_luxian">换线路</a></li> -->
+					<li><a href="JavaScript:;" rel="tab_detail">下注明细</a></li>
+					<li><a href="JavaScript:;" rel="tab_bill">历史账单</a></li>
+					<li><a href="JavaScript:;" rel="tab_member">会员资料</a></li>
+					<li><a href="JavaScript:;" rel="tab_award">开奖号码</a></li>
+					<li><a href="JavaScript:;" rel="tab_rule">规则说明</a></li>
+					<li><a href="/index.php/api/load">聚宝盆APP</a></li>
+					<li><a href="JavaScript:;" rel="tab_pass">修改密码</a></li>
+					<li><a href="__MODULE__/Login/retreats">退出</a></li>
+					<!-- <li id="cgchat_num" class="cgchat_emain_no"></li> -->
+				</ul>
+				<ul class="top_gun">
+					<li class="gun_name">七星彩</li>
+					<li class="gun"><marquee scrolldelay="400" style="height:15px;line-height:15px"> <span id="news"><{$news2['n_content']}></span></marquee></li>
+					<!-- <span>离停盘时间：</span><li id="timeTag">22小时56分31秒</li> -->
+
+				<if condition="$status1 eq 1">
+	            <!-- <span id="TimeLabel1">离封盘时间还有：</span>
+	            <li id="TimeLabel2">8小时48分38秒</li> -->
+	            <span id="TimeLabel1"></span><li id="TimeLabel2"></li>
+	            <else/>
+	            <li id="jnkc"></li>
+					<script>setInterval("jnkc.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+ 
+					</script>
+	            </if>
+				</ul>
+
+<script language="javascript">
+
+
+ $(function(){
+ 	if(<{$status1}> ==1){
+	var t1,t2;
+  //var nCounts = <{$time1}>;
+  	t1='<{$titles}>';
+ 	var f_stime = <{$time}>;
+ 	 ShowCountDown(f_stime,'TimeLabel2');
+    }
+  //  var f_o_state = 1;
+
+  // var o_stime = <{$o_stime}>;
+  // var f_stime = <{$f_stime}>;
+
+
+ var interval = 1000;
+function ShowCountDown(leftsecond,divname){
+  var day1=Math.floor(leftsecond/(60*60*24));
+  var hour=Math.floor((leftsecond-day1*24*60*60)/3600);
+  var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);
+  var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
+  var cc = document.getElementById(divname);
+  var dd = document.getElementById('TimeLabel1');
+  dd.innerHTML=t1;
+  if(day1>0){
+    cc.innerHTML = day1+"天"+hour+"小时"+minute+"分"+second+"秒";
+  }else{
+    cc.innerHTML = hour+"小时"+minute+"分"+second+"秒";
+  }
+    if(hour==0 && minute==0 && second==0){
+      window.location.reload();
+    }
+    //if (f_o_state ==1) {
+       f_stime = f_stime-1;
+    // }else{
+    //    o_stime = o_stime-1;
+    // }
+
+}
+  //if (f_o_state == 1) {  //距离封盘时间
+      window.setInterval(function(){ShowCountDown(f_stime,'TimeLabel2');}, interval);
+  // }else{   //距离开盘时间
+  //     window.setInterval(function(){ShowCountDown(o_stime,'timeTag');}, interval);
+  // }
+
+})
+
+function findIndex(){
+	window.location.href="__MODULE__/Index/index";
+}
+// var ut='<{$ustatus}>';
+// if(parseInt(ut)==1){	
+// 	$("#aa").text('该账号异地登陆了，被迫下线！');
+// 	//alert("该账号异地登陆了，被迫下线！");
+// 	window.location.href="/index.php/Login/retreats";
+	
+// }
+</script>
+
+
+				<ul class="top_kaida">
+					<li><a href="JavaScript:;" rel="tab_erziding">二字定</a></li>
+					<li class="active"><a href="JavaScript:;" rel="tab_kuaida">快打</a></li>
+					<li><a href="JavaScript:;" rel="tab_kuaixuan">快选</a></li>
+					<li><a href="JavaScript:;" rel="tab_frank">赔率变动表</a></li>
+					<li><a href="JavaScript:;" rel="tab_import">txt导入</a></li>
+					<!-- <li><a href="http://www.jiangcho.com" target="_BLANK">（奖虫）APP</a></li> -->
+				</ul>
+			</div>
+			</div>
+			
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="main_main">
+		<div class="fixPos"></div>
+		<div class="main_left">
+			<span id="credits_remaining" style="display:none">5000</span>
+			<iframe frameborder="0" marginwidth="0" marginheight="0" id="leftprint" name="leftprint" scrolling="yes" src="__MODULE__/Index/appprint"></iframe>
+		</div>
+		<div class="clear"></div>
+		<!-- main_left end -->
+		<!-- 快打 -->
+		<div id="tab_main">
+		<ol>
+		<li id="tab_detail" style="display:none">
+			<div class="main_center main_center_erziding"><!-- 下注明细 -->
+				<div class="detailsearch">
+					<ul>
+						<li class="detailsearchimg"> &nbsp;</li>
+						<li>查号码:<input type="text" id="detailsearchnumber" name="detailsearchnumber" pattern="\d" maxlength="4/"></li>
+						<li></li>
+						<li><label class="checkbox">现 <input id="detailsearchsendsizi" type="checkbox" name="detailsearchsendsizi" value="1" /></label></li>
+						<li>列出:<select id="soclass1" name="soclass" class="chosen-select" data-placeholder="列出"><option value="0">赔率</option><option value="1">金额</option><option value="2">退码</option></select><input type="text" id="ds_s_money" name="ds_s_money" maxlength="8/"></li>					
+						<li>至:<input type="text" id="ds_s_money_end" name="ds_s_money_end" maxlength="8/"></li>
+						<li>分类:<select id="so_s_classid" name="so_s_classid" class="chosen-select" data-placeholder="分类"><option value="0">全部</option><option value="1">二定位</option><option value="口口XX">口口XX</option><option value="口X口X">口X口X</option><option value="口XX口">口XX口</option><option value="X口X口">X口X口</option><option value="X口口X">X口口X</option><option value="XX口口">XX口口</option><option value="三定位">三定位</option><option value="口口口X">口口口X</option><option value="口口X口">口口X口</option><option value="口X口口">口X口口</option><option value="X口口口">X口口口</option><option value="四定位">四定位</option><option value="二字现">二字现</option><option value="三字现">三字现</option><option value="四字现">四字现</option><!-- <option value="10001">二定</option><option value="10002">快打</option><option value="10003">快选</option> --></select></li>
+						<li><button class="btn" id="detailsearch1" onclick="getPages('1')" type="button">搜索</button></li>
+						<li><button class="btn" id="detailprint" type="button">打印</button></li>
+						<li><button class="btn" id="detailhitaward1" onclick="getPages('2')"  type="button">中奖明细</button></li>
+						<input type="hidden" name="qishu" value="" />
+					</ul>
+				</div>
+				<span id="ds_s_issueno" style="display:none"></span>
+				<table class="table table-bordered table-condensed table-hover tablecenter">
+				<thead>
+					<tr class="xiazhukuang">
+						<th colspan="11" id="ds_title">本期下注明细</th>
+					</tr>
+
+					<tr class="xiazhukuang2">
+						<th width="7%">彩种</th>
+						<th width="11%">注单编号</th>
+						<th width="16%">下单时间</th>
+						<th width="8%">号码</th>
+						<th width="8%">金额</th>
+						<th width="6%">赔率</th>
+						<th width="11%">中奖</th>
+						<th width="8%">回水</th>
+						<th width="*">盈亏</th>
+						<th width="7%">状态</th>
+						<th width="7%"><label class="checkbox">全选<input id="DetailcheckboxALLID" type="checkbox"></label><button class="btn btnTuima" id="detailtuima" type="button">退码</button></th>
+					</tr>
+				</thead>
+				<tbody id="DetailList">
+				<!-- <tr><td>七星彩</td><td>44649102014155160</td><td>10-20 14:15:52</td><td class="number">11<span>现</span></td><td class="money">1</td><td class="frank">12.6</td><td>--</td><td>0.069</td><td>-0.931</td><td>成功</td><td><input id="checkboxID845119" type="checkbox" value="845119"></td></tr>
+				<tr class="tuima"><td>七星彩</td><td>44649102011363852</td><td>10-20 11:36:48<br>退10-20 11:36:55</td><td class="number">99XX<span></span></td><td class="money">1</td><td class="frank">92.1</td><td>--</td><td>0.06</td><td>-0.94</td><td>退码</td><td>--</td></tr> -->
+				</tbody>
+				</table>
+				<div id="DetailListPager" class="pagination"></div><div class="clear"></div>
+			</div>
+			<script type="text/javascript">
+			function getPages(e){
+				//var xian=0;
+				var p=$('input[name="pageinput"]').val();
+				// var haoma=$('#detailsearchnumber').val();
+				// 	xian=$('input[name="detailsearchsendsizi"]:checked').val();
+				// var type=$('select[name="soclass"] option:selected').val();
+				// var types=$('select[name="so_s_classid"] option:selected').val();
+				// var ks1=$('input[name="ds_s_money"]').val();
+				// var ks2=$('input[name="ds_s_money_end"]').val();
+				getPage(p,e);
+				//alert(xian);
+			}
+			function getPage(p,e){
+				var p=p;
+				var e=e;
+				var xian=0;
+				var haoma=$('#detailsearchnumber').val();
+					xian=$('input[name="detailsearchsendsizi"]:checked').val();
+				var type=$('select[name="soclass"] option:selected').val();
+				var types=$('select[name="so_s_classid"] option:selected').val();
+				var ks1=$('input[name="ds_s_money"]').val();
+				var ks2=$('input[name="ds_s_money_end"]').val();
+				var qishu=$('input[name="qishu"]').val();
+				//下注
+				$.ajax({
+		          type: "get",
+		          url: "__MODULE__/Index/xiazhumingxi",
+		          dataType: "json",
+		          data: {action:'detail',p:p,type1:e,haoma:haoma,type:type,xian:xian,types:types,ks1:ks1,ks2:ks2,qishu:qishu},
+		          success: function(msg){
+		             // console.log(msg['data']);
+		             // console.log(msg['sum']);
+		             var data=msg['data'];
+		             var code=msg['code'];
+		             var html='',moneys=0,sum=0,wins2=0,wins3=0,moneys1=0,wins1=0;
+		            if(code==200){
+		            	for(var i=0;i<data.length;i++){
+		            		if(data[i]['js']==0){
+		            			
+		            			html+='<tr><td>七星彩</td><td>'+data[i]['did']+'</td><td>'+data[i]['addtime']+'</td><td class="number">'+data[i]['mingxi_2']+'<span>'+data[i]['mingxi_3']+'</span></td><td class="money">'+data[i]['money']+'</td><td class="frank">'+data[i]['odds']+'</td>';
+		            			  
+		            			if(data[i]['status']==1){
+		            				html+='<td>'+data[i]['zj']+'</td>';
+		            			}else{
+		            				html+='<td>--</td>';
+		            			}
+		            			html+='<td>'+data[i]['win']+'</td><td>'+data[i]['yingkui']+'</td><td>成功</td><td><input id="checkboxID'+data[i]['id']+'" type="checkbox" value="'+data[i]['id']+'"></td></tr>';
+		            			
+
+		            			moneys+=parseFloat(data[i]['money']);
+			            		wins2+=parseFloat(data[i]['win']);
+			            		moneys1+=parseFloat(data[i]['zj']);
+			            		wins3+=parseFloat(data[i]['yingkui']);
+			            		sum+=1;
+		            		}else{
+		            			var wins=data[i]['money']-data[i]['win'];
+		            			html+='<tr class="tuima"><td>七星彩</td><td>'+data[i]['did']+'</td><td>10-20 11:36:48<br>退'+data[i]['addtime']+'</td><td class="number">'+data[i]['mingxi_2']+'<span>'+data[i]['mingxi_3']+'</span></td><td class="money">'+data[i]['money']+'</td><td class="frank">'+data[i]['odds']+'</td><td>--</td><td>'+data[i]['win']+'</td><td>-'+wins+'</td><td>退码</td><td>--</td></tr>';
+		            		}
+		            	}
+
+		            	html+='<tr id="detailheji"><td colspan="2">合计</td><td>'+sum+'</td><td> </td><td>'+moneys.toFixed(2)+'</td><td> </td><td>'+moneys1.toFixed(2)+'</td><td>'+wins2.toFixed(3)+'</td><td>'+wins3.toFixed(3)+'</td><td> </td><td> </td></tr>';
+		            	
+		            	$('#DetailList').html(html);
+		            	$('#DetailListPager').html(msg['show']);
+		            }else{
+		            	$('#DetailList').html('<tr><td>没有数据</td></tr>');
+		            	$('#DetailListPager').html('');
+		            }
+		          }
+		        });
+			}
+			</script>
+		</li><li id="tab_bill" style="display:none">
+			<div class="main_center main_center_erziding">
+				<table class="table table-bordered table-condensed table-hover tablecenter">
+				<thead>
+					<tr class="xiazhukuang">
+						<th colspan="11">历史账单</th>
+					</tr>
+					<tr class="xiazhukuang2">
+						<th>日期</th>
+						<th>期号</th>
+						<th>笔数</th>
+						<th>金额</th>
+						<th>回水</th>
+						<th>中奖</th>
+						<th>盈亏</th>
+					</tr>
+				</thead>
+				<tbody id="billList"><!-- <tr><td>2017-10-20</td><td class="red"><a href="JavaScript:;" onclick="cgBill.listclick(17123)">17123</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>2017-10-17</td><td><a href="JavaScript:;" onclick="cgBill.listclick(17122)">17122</a></td><td>2</td><td>2</td><td>0.51</td><td>0</td><td>-2</td></tr><tr><td>2017-10-15</td><td><a href="JavaScript:;" onclick="cgBill.listclick(17121)">17121</a></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr class="xiazhukuang2"><th colspan="2">合计</th><th>2</th><th>2</th><th>0.51</th><th></th><th>-2</th></tr> --></tbody>
+				</table>
+				<div id="billListPager" class="pagination"></div><div class="clear"></div>
+			</div>
+		</li>
+		<li id="tab_member" style="display:none">
+			<div class="main_center main_center_erziding">
+				<div class="memberleft">
+					<table class="table table-bordered table-condensed table-hover">
+					<thead>
+						<tr class="xiazhukuang">
+							<th colspan="2">会员资料</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>账　　号:<{$Think.session.unames}></td><td id="m_username"></td>
+						</tr>
+						<tr>
+							<td>姓　　名:</td><td id="m_nickname"></td>
+						</tr>
+						<tr>
+							<td>信用额度:<{$Think.session.umoneys}></td><td id="m_credits"></td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				<div class="memberright">
+					<table class="table table-bordered table-condensed table-hover">
+					<thead>
+						<tr class="xiazhukuang">
+							<th colspan="3">会员资料</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>自动:<input type="radio" name="entermode" value="0" checked></td>
+							<td>小票打印:<input type="radio" name="sendmode" value="1" checked></td>
+							<td>实际赔率:<input type="radio" name="isfpfrankhotzhuan" value="1" checked></td>
+						</tr>
+						<tr>
+							<td>回车:<input type="radio" name="entermode" value="1"></td>
+							<td>显示彩种:<input type="radio" name="sendmode" value="0"></td>
+							<td>转换赔率:<input type="radio" name="isfpfrankhotzhuan" value="0"></td>
+						</tr>
+						<tr>
+							<td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+				<table class="table-member">
+				<tbody>
+				<tr>
+					<td width="47%">&nbsp;1、小票打印请使用系统自带浏览器&nbsp;&nbsp;<img src="__PUBLIC__/images/ie7.png" width="35"></td>
+					<td width="53%" rowspan="2">&nbsp;<button class="btn" id="memberbuts" type="button">提交</button></td>
+				</tr>
+				<tr>
+					<td>&nbsp;2、提示:+号代表x号</td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;3、小票打印处，增加了分页，每页显示500笔。</td>
+				</tr>
+				<tr>
+				<td colspan="2">&nbsp;4、下注明细里，颜色（<font color="#ff0000" size="4">●</font>）或（<font color="#339900" size="4">●</font>）连在一起的，代表是在同一张小票上。</td>
+				</tr>
+				<tr>
+					<td colspan="2">&nbsp;5、小票打印处内容超过500笔，再次下单后，系统会自动清空之前小票打印内容，请注意使用。</td>
+				</tr>
+				</tbody>
+				</table>
+				<!-- <table class="table table-bordered table-condensed table-hover tablecenter">
+				<thead>
+					<tr class="xiazhukuang">
+						<th colspan="9">会员资料</th>
+					</tr>
+					<tr class="xiazhukuang2">
+						<th>类别</th>
+						<th>最小下注</th>
+						<th>赔率上限(多个用/分开)</th>
+						<th>单注上限</th>
+						<th>单项上限</th>
+						<th>交易回水</th>
+						<th>赔率</th>
+
+					</tr>
+				</thead>
+				<tbody id="memberList">
+				</tbody>
+				</table> -->
+				<table class="table table-bordered table-condensed table-hover tablecenter">
+				<thead>
+					<tr class="xiazhukuang">
+						<th colspan="9">会员资料</th>
+					</tr>
+					<tr class="xiazhukuang2">
+						<th>类别</th>
+						<th>最小下注</th>
+						<th>赔率上限(多个用/分开)</th>
+						<th>单注上限</th>
+						<th>单项上限</th>
+						<th>交易回水/赔率</th>
+						<!-- <th>赔率</th> -->
+
+					</tr>
+				</thead>
+				<tbody id="memberList">
+				<tr><td class="mred">直码</td>
+				<td><span><{$market->ding43}></span></td>
+				<td><span><{$loss->ding41}></span></td>
+				<td><{$market->ding41}></td>
+				<td><{$market->ding42}></td>
+
+				<td><select name="hs_1" id="hs_5" data-pid="0" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j1}></select></td></tr>
+
+
+				<tr class="xiazhukuang2"><th class="mred">两同</th><th> </th><th> </th><th> </th><th> </th><th><select name="hs_1" id="hs_1" style="display:none"><option value="0">0</option></select></th><th> </th></tr>
+				<tr>
+				  <td>数字不同</td>
+				  <td class="altbg2" width="12%"><{$market->tong23}></td>
+					<td class="altbg2" width="20%"><{$loss->tong211}></td>
+					<td class="altbg1" width="12%"><{$market->tong21}></td>
+					<td class="altbg2" width="12%"><{$market->tong22}></td>
+				  <td>
+				    <select name="hs_2" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j2}></select>
+				  </td>
+				</tr>
+				<tr>
+				  <td>两数相同</td>
+				  <td class="altbg2" width="12%"><{$market->tong23}></td>
+			<td class="altbg2" width="20%"><{$loss->tong221}></td>
+			<td class="altbg1" width="12%"><{$market->tong21}></td>
+			<td class="altbg2" width="12%"><{$market->tong22}></td>
+				  <td>
+				    <select name="hs_3" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j3}></select>
+				  </td>
+				</tr>
+				<tr class="xiazhukuang2"><th class="mred">三同</th><th> </th><th> </th><th> </th><th> </th><th><select name="" id="hs_4" style="display:none"><option value="0">0</option></select></th><th> </th></tr>
+
+				<tr>
+				  <td>数字不同</td>
+				  <td class="altbg2" width="12%"><{$market->tong33}></td>
+			<td class="altbg2" width="20%"><{$loss->tong311}></td>
+			<td class="altbg1" width="12%"><{$market->tong31}></td>
+			<td class="altbg2" width="12%"><{$market->tong32}></td>
+				  <td>
+				    <select name="hs_4" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j4}></select>
+				  </td>
+				</tr>
+				<tr>
+				  <td>两数相同</td>
+				  <td class="altbg2" width="12%"><{$market->tong33}></td>
+			<td class="altbg2" width="20%"><{$loss->tong321}></td>
+			<td class="altbg1" width="12%"><{$market->tong31}></td>
+			<td class="altbg2" width="12%"><{$market->tong32}></td>
+				  <td>
+				    <select name="hs_5" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j5}></select>
+				  </td>
+				</tr>
+				<tr>
+				  <td>三数相同</td>
+				  <td class="altbg2" width="12%"><{$market->tong33}></td>
+			<td class="altbg2" width="20%"><{$loss->tong331}></td>
+			<td class="altbg1" width="12%"><{$market->tong31}></td>
+			<td class="altbg2" width="12%"><{$market->tong32}></td>
+				  <td>
+				    <select name="hs_6" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j6}></select>
+				  </td>
+				</tr>
+				<tr class="xiazhukuang2"><th class="mred">四同</th><th> </th><th> </th><th> </th><th> </th><th><select name="hs" id="hs_4" style="display:none"><option value="0">0</option></select></th><th> </th></tr>
+				<tr>
+				  <td>数字不同</td>
+				  <td class="altbg2" width="12%"><{$market->tong43}></td>
+			<td class="altbg2" width="20%"><{$loss->tong411}></td>
+			<td class="altbg1" width="12%"><{$market->tong41}></td>
+			<td class="altbg2" width="12%"><{$market->tong42}></td>
+				  <td>
+				    <select name="hs_7" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j7}></select>
+				  </td>
+				</tr>
+				
+				<tr>
+				  <td>两数相同</td>
+				  <td class="altbg2" width="12%"><{$market->tong43}></td>
+			<td class="altbg2" width="20%"><{$loss->tong421}></td>
+			<td class="altbg1" width="12%"><{$market->tong41}></td>
+			<td class="altbg2" width="12%"><{$market->tong42}></td>
+				  <td>
+				    <select name="hs_8" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j8}></select>
+				  </td>
+				</tr>
+				<tr>
+				  <td>两两相同</td>
+				  <td class="altbg2" width="12%"><{$market->tong43}></td>
+			<td class="altbg2" width="20%"><{$loss->tong431}></td>
+			<td class="altbg1" width="12%"><{$market->tong41}></td>
+			<td class="altbg2" width="12%"><{$market->tong42}></td>
+				  <td>
+				    <select name="hs_9" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j9}></select>
+				  </td>
+				</tr>
+				<tr>
+				  <td>三数相同</td>
+				  <td class="altbg2" width="12%"><{$market->tong43}></td>
+			<td class="altbg2" width="20%"><{$loss->tong441}></td>
+			<td class="altbg1" width="12%"><{$market->tong41}></td>
+			<td class="altbg2" width="12%"><{$market->tong42}></td>
+				  <td>
+				    <select name="hs_10" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j10}></select>
+				  </td>
+				</tr>
+				<tr>
+				  <td>四数相同</td>
+				  <td class="altbg2" width="12%"><{$market->tong43}></td>
+			<td class="altbg2" width="20%"><{$loss->tong451}></td>
+			<td class="altbg1" width="12%"><{$market->tong41}></td>
+			<td class="altbg2" width="12%"><{$market->tong42}></td>
+				  <td>
+				    <select name="hs_11" id="hs_102" data-pid="1" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j11}></select>
+				  </td>
+				</tr>
+				
+				<tr><td class="mred">二定</td>
+
+				<td class="altbg2"><span><{$market->ding23}></span></td>
+			<td class="altbg2"><span><{$loss->ding21}></span></td>
+			<td class="altbg1" width="12%"><{$market->ding21}></td>
+			<td class="altbg2" width="12%"><{$market->ding22}></td>
+
+			<td>
+				<select name="hs_12" id="hs_5" data-pid="0" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j12}></select></td>
+				</tr>
+
+
+				<tr><td class="mred">三定</td>
+
+				<td class="altbg2"><span><{$market->ding33}></span></td>
+			<td class="altbg2"><span><{$loss->ding31}></span></td>
+			<td class="altbg1" width="12%"><{$market->ding31}></td>
+			<td class="altbg2" width="12%"><{$market->ding32}></td>
+
+				<td><select name="hs_13" id="hs_5" data-pid="0" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><{$j13}></select></td>
+
+				</tr>
+
+				<!-- <tr><td class="mred">四字现</td><td>0.2</td><td>9550</td><td>100</td><td>1701</td><td><select name="hs_5" id="hs_5" data-pid="0" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><option value="0.255" selected="">0.255</option></select></td><td><select name="hs_5" id="hs_5" data-pid="0" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><option value="0.255" selected="">0.255</option></select></td></tr> -->
+				</tbody>
+				</table>
+				<div class="clear"></div>
+			</div>
+		</li>
+		<script type="text/javascript">
+			$('#memberbuts').click(function(){
+				var hs_1=$('select[name="hs_1"] option:selected').val();
+				var hs_2=$('select[name="hs_2"] option:selected').val();
+				var hs_3=$('select[name="hs_3"] option:selected').val();
+				var hs_4=$('select[name="hs_4"] option:selected').val();
+				var hs_5=$('select[name="hs_5"] option:selected').val();
+				var hs_6=$('select[name="hs_6"] option:selected').val();
+				var hs_7=$('select[name="hs_7"] option:selected').val();
+				var hs_8=$('select[name="hs_8"] option:selected').val();
+				var hs_9=$('select[name="hs_9"] option:selected').val();
+				var hs_10=$('select[name="hs_10"] option:selected').val();
+				var hs_11=$('select[name="hs_11"] option:selected').val();
+				var hs_12=$('select[name="hs_12"] option:selected').val();
+				var hs_13=$('select[name="hs_13"] option:selected').val();
+				 $.ajax({
+			      type: "post",
+			      url: "__MODULE__/Index/user1",
+			      dataType: "json",
+			      data: {action:'ajax_odd',hs_1:hs_1,hs_2:hs_2,hs_3:hs_3,hs_4:hs_4,hs_5:hs_5,hs_6:hs_6,hs_7:hs_7,hs_8:hs_8,hs_9:hs_9,hs_10:hs_10,hs_11:hs_11,hs_12:hs_12,hs_13:hs_13},
+			      success: function(msg){
+			      	if(msg.code==200){
+			      		jAlert("保存成功", "提示框",function() {});
+			            return false;
+			      		// $(".notic").html('保存成功');
+			        //     $(".notic").fadeIn().delay(1000).fadeOut();
+			        //     return false;	
+			      	}else{
+			      		jAlert("保存失败", "提示框",function() {});
+			            return false;
+			      	}
+			       		
+			      }
+			    });
+			});
+		</script>
+		<li id="tab_award" style="display:none">
+			<div class="main_center main_center_erziding">
+				<table class="table table-bordered table-condensed table-hover tablecenter">
+				<thead>
+					<tr class="xiazhukuang">
+						<th colspan="9">开奖号码</th>
+					</tr>
+					<tr id="awardnumberstr" class="xiazhukuang2">
+						<th>开奖时间</th>
+						<th>期号</th>
+						<th>仟</th>
+						<th>佰</th>
+						<th>拾</th>
+						<th>个</th>
+						<th>球5</th>
+						<th style="display: none;">球6</th>
+						<th style="display: none;">球7</th>
+					</tr>
+				</thead>
+				<tbody id="awardList">
+				<if condition="$data2">
+					<volist name="data2" id="vo">
+					<if condition="$vo['status'] eq 1">
+						<tr><td>--</td><td><{$vo.qishu}></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td></tr>
+					<else/>
+						<tr><td><{$vo.kaijiang}></td><td><{$vo.qishu}></td><td><div class="periodImg periodImg_1"><{$vo.m_ball1}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball2}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball3}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball4}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball5}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball6}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball7}></div></td></tr>
+					</if>
+					</volist>	
+				<else/>
+				</if>
+				
+				
+				</tbody>
+				</table>
+				<div class="clear"></div>
+			</div>
+		</li>
+		<li id="tab_kuaida">
+		<if condition="$status neq 1">
+			<div class="main_center main_center_kuaida" style="display:block">
+				<table class="table table-bordered table-condensed tablecenter">
+				<thead><tr class="xiazhukuang"><th>系统提示</th></tr></thead>
+				<tbody><tr><td style="height: 100px">已经关盘。</td></tr></tbody>
+				</table>
+			</div>
+		</if>
+		<if condition="$status eq 1">
+		<div class="main_center main_center_kuaida" style="display:block">
+			<table class="table table-bordered table-condensed table-hover tablecenter">
+			<thead>
+				<tr class="xiazhukuang">
+					<th colspan="7">下注框</th>
+				</tr>
+				<tr class="xiazhukuang2">
+					<th width="12%">彩种</th>
+					<th width="22%">注单编号</th>
+					<th width="16%">号码</th>
+					<th width="15%">赔率</th>
+					<th width="15%">金额</th>
+					<th width="10%">状态</th>
+					<th width="10%"><label class="checkbox">全选<input id="checkboxALLID" type="checkbox"></label><button class="btn btnTuima" id="xiazhutuima" type="button">退码</button></th>
+				</tr>
+			</thead>
+			<tbody id="SoonOrder"><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr><tr class="buqiOrder"><td>&nbsp;</td><td>--</td><td class="number">--</td><td class="frank">--</td><td class="money">--</td><td>--</td><td>--</td></tr></tbody>
+			</table>
+			<form name="loginform" id="loginform" method="post">
+			<div class="xiazhu_main">
+				<ul class="xiazhu_title">
+					<li><label class="checkbox">四字现 <input id="sendsizi" name="sendsizi" type="checkbox" onclick="statusNum()" value="1"></label></li>
+					<li><label class="checkbox">全转 <input id="sendqz" type="checkbox" name="sendqz" onclick="statusNum()" value="1"></label></li>
+				</ul>
+				<ul class="xiazhu_xia">
+					<li>号码</li>
+					<li><input type="text" onpaste="return false" id="sendnumber" name="number" autocomplete="off" pattern="\d" maxlength="4/"  style="height:40px;width:95px" onkeypress="if(event.keyCode==13) focusNextInput(this);"> </li>
+					<li class="xian" id="sendxian" style="display: none;">现</li>
+					<li>金额</li><!--onkeyup="findMoney()"-->
+					<li><input type="text" id="sendmoney" name="money" autocomplete="off" pattern="\d" maxlength="5/"  style="height:40px"> </li>
+					<li><button id="sendxiazhu1" class="btn" type="button">确定下注</button></li>
+					<li id="aa"></li>
+					<li class="frankmoney" style="display: none;">赔率:<span class="frank" id="sfrank"></span> 可下:<span class="money" id="smoney"></span>
+					  <input type="hidden" name="odds" value="">
+				      <input type="hidden" name="limit" value="">
+				      <input type="hidden" name="moneys" value="">
+					</li>
+				</ul>
+			</div>
+			</form>
+			<div class="IE6height"></div>
+		</div>
+		</if>
+<script type="text/javascript">
+	//停押号码
+	function arrHaoma(){
+		var urls="__MODULE__/Index/arrhaoma";
+        $.ajax({
+            url: urls,
+            type:"POST",
+            data:{
+            	type:'arrhaoma',
+            },
+            async: false,
+            dataType:'json',
+          success: function (data) {
+          	var html='';
+          	if(data.code==200){
+          		var datas=data.data;
+          		var sum=0,moneys=0;
+          		for(var i=0;i<datas.length;i++){
+          			html+='<tr><td>'+datas[i]['mingxi_2']+'</td><td>'+datas[i]['money']+'</td><td><input id="checkboxID'+datas[i]['id']+'" type="checkbox" value="'+datas[i]['id']+'"></td></tr>';
+          			sum+=1;
+          			moneys+=parseFloat(datas[i]['money']);
+          		}
+          		html+='<tr><td colspan="3" class="heji">笔数:'+sum+'  总金额:'+moneys.
+toFixed(2)+'</td></tr>';
+			$('#sotpnumber').html(html);
+          	}else{
+          		html='<tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr>';
+          		$('#sotpnumber').html(html);
+          	}
+          	
+
+            }
+
+          });
+	}
+	
+	$(function(){//停押号码全选反选
+		$("#stopnumberBox").attr("checked", !1),
+	    $("#stopnumberBox").click(function() {
+	    	1 == this.checked ? $("#sotpnumber input[type=checkbox]").checkBox("all") : $("#sotpnumber input[type=checkbox]").checkBox("none")
+	    });
+	     $("#stopnumberBtnDel").click(function() {
+              stopnumbeBtnDel();
+            }) 
+	}); 
+	function stopnumbeBtnDel(){
+		 var _self = this,
+            delid = "";
+            if (delid = $("#sotpnumber input[type=checkbox]").checkedValue(), "" == delid) return jAlert("请选择要删除的停押号码！", "提示框",
+            function() {}),
+            !1;
+            jsonAjax("./delHaoma", "POST", "action=stopnumberdel&delid=" + delid + "&s_issueno=" + $("#s_issueon").val(), "json", '');
+            arrHaoma();
+            delHaoma();
+	}
+	function delHaoma(){
+		var urls="__MODULE__/Index/delsHaoma";
+        $.ajax({
+            url: urls,
+            type:"POST",
+            data:{
+            	type:'arrhaoma',
+            },
+            async: false,
+            dataType:'json',
+          success: function (data) {
+          	var html='';
+          	if(data.code==200){
+          		var datas=data.data;
+          		var sum=0,moneys=0;
+          		for(var i=0;i<datas.length;i++){
+          			html+='<tr><td>'+datas[i]['mingxi_2']+'</td><td>'+datas[i]['money']+'</td></tr>';
+          			
+          		}
+			$('#sotpnumberdel').html(html);
+          	}
+          	
+
+            }
+
+          });
+	}
+    //jQuery实现在一个输入框按回车键后光标跳到下一个输入框  
+    function focusNextInput(thisInput)  
+    {   
+        var inputs = document.getElementsByTagName("input");   
+        for(var i = 0;i<inputs.length;i++){   
+            // 如果是最后一个，则焦点回到第一个   
+            if(i==(inputs.length-1)){   
+                inputs[0].focus(); break;   
+            }else if(thisInput == inputs[i]){ 
+            	getStatus();  
+                inputs[i+1].focus(); break;   
+            }   
+        }   
+    }   
+</script> 
+		<script type="text/javascript">
+		var tijiaos='';
+		$("#loginform").keydown(function(e){
+			//alert('111');
+			var number,money,moneys;
+		  money = $("#sendmoney").val();
+		  moneys=$('input[name="moneys"]').val();
+		  number=$('input[name="number"]').val();
+		 if(money.length!='' && moneys!=0){
+		 	 var e = e || event,
+			 keycode = e.which || e.keyCode;
+			 //alert(keycode);
+			// if (keycode==13 && tijiaos!=2) {
+			 	getStatus();
+				console.log(tijiaos);
+			 	$("#sendxiazhu1").trigger("click");
+			 	  //$("#sendmoney").val(' ');
+				  $('input[name="moneys"]').val(' ');
+				  $('input[name="number"]').val(' ');
+
+			 // 	$('input[name="moneys"]').val('');
+				// $('input[name="number"]').val('');
+			 	
+			// }
+		 }
+
+});
+			//下注
+			$('#sendxiazhu1').click(function(){
+				//判断号码
+				
+				//alert('1111');
+				//findMoney();
+				
+				var number,money,sizixian,limit,moneys,odds;
+				number=$('input[name="number"]').val();
+				money=$('input[name="money"]').val();
+				limit=$('input[name="limit"]').val();
+				  var money = $("#sendmoney").val();
+			   var moneys=$('input[name="moneys"]').val();
+		
+				if(number==''){
+		       	jAlert("号码必须为数字！", "提示框",function() {});
+		       	$('input[name="number"]').val('');
+		          //alert('金额必须为数字！');
+		          return false;
+		       }
+		       if(money==''){
+		       	jAlert("金额必须为数字！", "提示框",function() {});
+		       	$("#sendmoney").value='';
+		          //alert('金额必须为数字！');
+		          return false;
+		       }else if(parseFloat(money) < parseFloat(moneys)){
+		       	jAlert("下注金额不能低于"+moneys+"！", "提示框",function() {});
+		       	$("#sendmoney").value='';
+		          //alert('下注金额不能低于'+moneys+'！');
+		          return false;
+		       }
+		       if(parseFloat(money)>parseFloat(limit)){
+		       	jAlert("不能超出单注上限"+limit+"！", "提示框",function() {});
+		       	$("#sendmoney").value='';
+		          //alert('不能超出单注上限'+limit+'！');
+		          return false;
+		       }
+				// if($("#sendsizi").attr('checked') == 'checked'){
+			 //     sizixian = 1; //四字现
+			 //  	}
+				var sizixian=$('input[name="sendsizi"]:checked').val();
+				var sendqz=$('input[name="sendqz"]:checked').val();//全转
+				//下注
+				$.ajax({
+		          type: "post",
+		          url: "__MODULE__/Index/xiazhu",
+		          dataType: "json",
+		          data: {sendqz:sendqz,number:number,action:'xiazhu',money:money,sizixian:sizixian,odds:odds,limit:limit},
+		          success: function(msg){
+		          	tijiaos=2;
+		          	playmsg();
+		            // console.log(msg);
+		            if(msg == -2){
+		              //alert("非法提交！");
+		              jAlert('非法提交！', "提示框", function() {});
+		               return false;
+		            }else if(msg == -3){
+		               //alert("下注金额超过上限！");
+		               jAlert('下注金额超过上限！', "提示框", function() {});
+		                return false;
+		            }else if(msg == -31){
+		               //alert("下注金额不能低于"+moneys+"！");
+		               jAlert("注金额不能低于"+moneys+"！", function() {});
+		                return false;
+		            }else if(msg == -4){
+		               //alert("余额不足！");
+		               jAlert("余额不足！", function() {});
+		                return false;
+		            }else if(msg == -5){
+		               //alert("下注失败！");
+		               jAlert("下注失败！", function() {});
+		                return false;
+		            }else if(msg == -6){
+		               //alert("该号码暂停销售！");
+		               jAlert("该号码暂停销售！", function() {});
+		                return false;
+		            }else if(msg == -19){
+		               //alert("管理员已关闭下注功能！");
+		               jAlert("管理员已关闭下注功能！", function() {});
+		                return false;
+		            }else{
+		              $(".frankmoney").hide();
+		              $("#smoney").text('');
+		              $("input[name='limit']").val('');
+		              $("input[name='odds']").val('');
+		              $("input[name='moneys']").val('');
+		              $("#sendnumber").val('');
+		              $("#money").val('');
+		              //$("#sendmoney").val('');
+					  $('input[name="moneys"]').val('');
+					  $('input[name="number"]').val('');
+		              //$("#sendnumber").focus();
+		            }
+		             $(".frankmoney").hide();
+		             jsonAjax("__MODULE__/Index/xiazhukuang","get", "action=soonorder"+ "&time=" + new Date().getMilliseconds(), "json", cgOrber.GetSoonOrder);
+		            leftprint.location.reload(); 	
+
+		            $('#sendnumber').focus();
+		            //window.location.reload();
+
+		          }
+		        });
+		        return false;
+				//leftprint.location.reload();
+				//LeftPintIframe.refresh()
+			});
+			$('#sendnumber').blur(function(){
+				var val=$(this).val();
+				if(val.length!=''){
+					getStatus();
+				}
+				//alert(val);
+			});
+			function findMoney(){
+			   getStatus();
+			   var money = $("#sendmoney").val();
+			   var moneys=$('input[name="moneys"]').val();
+		       var limit=$("input[name='limit']").val();
+
+		       // if(money==''){
+		       // 	jAlert("金额必须为数字！", "提示框",function() {});
+		       // 	$("#sendmoney").value='';
+		       //    //alert('金额必须为数字！');
+		       //    return false;
+		       // }else if(parseFloat(money) < parseFloat(moneys)){
+		       // 	jAlert("下注金额不能低于"+moneys+"！", "提示框",function() {});
+		       // 	$("#sendmoney").value='';
+		       //    //alert('下注金额不能低于'+moneys+'！');
+		       //    return false;
+		       // }
+		       // if(parseFloat(money)>parseFloat(limit)){
+		       // 	jAlert("不能超出单注上限"+limit+"！", "提示框",function() {});
+		       // 	$("#sendmoney").value='';
+		       //    //alert('不能超出单注上限'+limit+'！');
+		       //    return false;
+		       // }
+			}
+			function statusNum(){
+			 var num = $('#sendnumber').val();
+			  if($("#sendsizi").attr('checked') == 'checked'){
+			    var sizixian = 1; //四字现
+			  }
+			  if($("#sendqz").attr('checked') == 'checked'){
+			    var zhuan24 = 1;  //全转
+			  }
+			  if(num.length != 0){
+			   	getStatus(num,sizixian,zhuan24);
+			  }
+			}
+			// $('#sendmoney').focus(function(){
+			// 	getStatus();
+			// });
+
+			
+			function getStatus(num,sizixian,zhuan24){
+
+				var num = $('#sendnumber').val();
+				var val1=num.replace(/[^0-9]/ig,"X");
+				//alert(num);
+				//var val1=num.replace(/[^0-9.xX]/g, "");
+				//alert(val1);
+				// var val1=num.replace(/[^0-9]/ig,"X"); 
+				$('#sendnumber').val(val1); 
+				num =val1;
+					//var sizixian=$("#sendsizi :checked").val();
+					var sizixian=$('input[name="sendsizi"]:checked').val();
+				 // if($("#sendsizi").attr('checked') == 'checked'){
+				 //    var sizixian = 1; //四字现
+				 //  }
+				  if($("#sendqz").attr('checked') == 'checked'){
+				    var zhuan24 = 1;  //全转
+				  }
+				  if(num.length>1){
+
+				  var sendqz=$('input[name="sendqz"]:checked').val();//全转
+				  //alert(sizixian);
+				 $.ajax({
+			      type: "post",
+			      url: "__MODULE__/Index/ajax_odd",
+			      dataType: "json",
+			      data: {sendqz:sendqz,num:num,action:'ajax_odd',sizixian:sizixian,zhuan24:zhuan24},
+			      success: function(msg){
+			      		 console.log(msg);
+			        if(msg == -999){
+			          $(".frankmoney").hide();
+			          $("#aa").text('错误：信用额度不足！');
+			          return false;
+			        }else if(msg == -2){
+			          $(".frankmoney").hide();
+			          $("#aa").text('没有该号码(号码最多2个X号)！');
+			          return false;
+			        }else if(msg == -3){
+			          $(".frankmoney").hide();
+			          $("#aa").text('没有该号码没有赔率！');
+			          return false;
+			        }else if(msg == -4){
+			          $(".frankmoney").hide();
+			          $("#aa").text('没有该号码类型！');
+			          return false;
+			        }else if(msg == -19){
+			          $(".frankmoney").hide();
+			          $("#aa").text('管理员已关闭下注功能！');
+			          return false;
+			        }else if(msg == -5){
+			        	$("#aa").text('');
+			            $(".frankmoney").show();
+			            $("#smoney").text('0');//下注上限
+			            $("#sfrank").text('0');//赔率
+			             $("input[name='limit']").val('0');//上限
+			             $("input[name='moneys']").val('0');//下限
+			          // $(".frankmoney").hide();
+			          // $("#aa").text('该号码禁止销售！');
+			          return false;
+			        }else if(msg == -6){
+			          // $(".frankmoney").hide();
+			          // $("#aa").text('该号码销售已达上限！');
+			          $("#aa").text('');
+			            $(".frankmoney").show();
+			            $("#smoney").text('0');//下注上限
+			            $("#sfrank").text('0');//赔率
+			             $("input[name='limit']").val('0');//上限
+			             $("input[name='moneys']").val('0');//下限
+			          return false;
+			        }else{
+			    //赔率，每码上限，单注上限，最小下注上限，会员回水,号码
+			           $("#aa").text('');
+			           $(".frankmoney").show();
+			          $("#smoney").text(msg[2]);//下注上限
+			          $("#sfrank").text(msg[0]);//赔率
+
+			          $("input[name='limit']").val(msg[2]);//上限
+			          $("input[name='odds']").val(msg[0]);//赔率
+			          $("input[name='moneys']").val(msg[3]);//下限
+			          //下注金额上线和下线
+			        }
+			       
+			      }
+			    });
+
+				}
+			}
+		</script>
+		<!-- main_center end -->
+		<div class="main_right  main_right_kuaida">
+			<div class="main_right2">
+				<table class="table table-bordered table-condensed table-hover tablecenter">
+					<thead>
+						<tr class="xiazhukuang">
+							<th colspan="3">目前停押号码
+							<select name="s_issueon" id="s_issueon" class="chosen-select" data-placeholder="期号" style="width:100px;">
+							<volist name="getData" id="vo">
+								<option value="<{$vo.qishu}>"><{$vo.qishu}></option>
+							</volist>
+							</select>
+							</th>
+						</tr>
+						<tr class="xiazhukuang2">
+							<th>号码</th>
+							<th>金额</th>
+							<th><label class="checkbox">全选<input id="stopnumberBox" type="checkbox"></label></th>
+						</tr>
+					</thead>
+					<tbody id="sotpnumber" class="sotpnumber">
+						<tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td></tr>
+					
+					<tr><td colspan="3" class="heji">笔数:0  总金额:0</td></tr></tbody>
+
+				</table>
+				<div id="stopnumberPager" class="pagination" style="display: none;"></div><div class="clear"></div>
+				<div class="right_print">
+				<button class="btn" id="stopnumberBtnPrint" type="button">打印</button> <button class="btn" id="stopnumberBtnDel" type="button">删除</button>
+				</div>
+				<table class="table table-bordered table-condensed table-hover tablecenter">
+					<thead>
+						<tr class="xiazhukuang">
+							<th colspan="2">删除停押号码保留区</th>
+						</tr>
+						<tr class="xiazhukuang2">
+							<th>号码</th>
+							<th>金额</th>
+						</tr>
+					</thead>
+					<tbody id="sotpnumberdel" class="sotpnumberdel"><tr><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td></tr><tr><td colspan="2" class="heji">笔数:0  总金额:0</td></tr></tbody>
+				</table>
+				<div id="stopnumberdelPager" class="pagination" style="display: none;"></div><div class="clear"></div>
+			</div>
+			
+		</div>
+		<!-- main_right end -->
+		</li>
+		<li id="tab_kuaixuan" style="display:none">
+			<!-- 快选 start -->
+			<if condition="$status neq 1">
+			<div class="main_center select_stop">
+				<table class="table table-bordered table-condensed tablecenter">
+				<thead><tr class="xiazhukuang"><th>系统提示</th></tr></thead>
+				<tbody><tr><td style="height: 100px">已经关盘。</td></tr></tbody>
+				</table>
+			</div>
+			</if>
+			<if condition="$status eq 1">
+			<div class="main_center main_center_select main_center_kuaida">
+				<table class="table table-bordered table-condensed table-hover tablecenter">
+				<thead>
+					<tr class="xiazhukuang">
+						<th colspan="8">生成号码框</th>
+					</tr>
+				</thead>
+				<tbody id="showselectnumber"><tr><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr><tr><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr></tbody>
+				</table>
+				<div class="boltsoonselect" style="display:none">发送中断，请继续下注或者点（复位），才可以操作功能。</div>
+				<div class="xiazhu_main">
+					<ul class="xiazhu_title">
+						<li>发送框</li>
+					</ul>
+					<ul class="xiazhu_xia">
+						<li>金额</li>
+						<li><input type="text" id="selectmoney" name="selectmoney" pattern="\d" maxlength="5/"> </li>
+						<li><button id="sendsoonselect_buts" class="btn" type="button">下注</button></li>
+						<li class="soonselectBM">笔数:<span id="selectnumbertotal"></span><br>金额:<span id="selectnumbermoney">0</span></li>
+					</ul>
+				</div>
+			</div>
+			</if>

@@ -1,0 +1,559 @@
+[ 2018-07-19T10:46:01+08:00 ] 113.64.80.190 /Index/appprint
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000240s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000384s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `k_user` [ RunTime:0.0009s ]
+SQL: SELECT `usession` FROM `k_user` WHERE `uid` = 20 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `k_opentime` [ RunTime:0.0005s ]
+SQL: SELECT `m_status`,`fengpan`,`kaijiang` FROM `k_opentime` WHERE `qishu` = 18081 ORDER BY id desc LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: time2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+NOTIC: [8] Undefined variable: titles2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000067s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000088s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.004667s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.004690s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000097s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000112s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000306s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000326s ]
+
+[ 2018-07-19T10:46:02+08:00 ] 113.64.80.190 /Index/appindexajax?action=printrefresh&time=767
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000191s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000288s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000311s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `k_user` [ RunTime:0.0010s ]
+SQL: SELECT `usession` FROM `k_user` WHERE `uid` = 20 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `k_opentime` [ RunTime:0.0011s ]
+SQL: SELECT `m_status`,`fengpan`,`kaijiang` FROM `k_opentime` WHERE `qishu` = 18081 ORDER BY id desc LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: time2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+NOTIC: [8] Undefined variable: titles2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+SQL: SELECT * FROM `k_user` WHERE `uid` = 20 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `k_bet` [ RunTime:0.0005s ]
+SQL: SELECT `id`,`did`,`money`,`addtime`,`mingxi_1`,`mingxi_2`,`mingxi_3`,`odds`,`index_id` FROM `k_bet` WHERE `uid` = 20 AND `qishu` = '18081' AND `js` = 0 ORDER BY id asc  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined index: moneys1 /data/www/qxc/App/Home/Controller/IndexController.class.php 第 878 行.
+NOTIC: [8] Undefined variable: money /data/www/qxc/App/Home/Controller/IndexController.class.php 第 895 行.
+SQL: SELECT `money` FROM `k_user` WHERE `uid` = 20 LIMIT 1   [ RunTime:0.0002s ]
+
+[ 2018-07-19T10:46:02+08:00 ] 113.64.80.190 /Index/arrhaoma
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000230s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000295s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000318s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `k_user` [ RunTime:0.0009s ]
+SQL: SELECT `usession` FROM `k_user` WHERE `uid` = 20 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `k_opentime` [ RunTime:0.0005s ]
+SQL: SELECT `m_status`,`fengpan`,`kaijiang` FROM `k_opentime` WHERE `qishu` = 18081 ORDER BY id desc LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: time2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+NOTIC: [8] Undefined variable: titles2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+SQL: SHOW COLUMNS FROM `k_bet` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `k_bet` WHERE `uid` = 20 AND `qishu` = '18081' AND `js` = 4  [ RunTime:0.0003s ]
+
+[ 2018-07-19T10:46:02+08:00 ] 113.64.80.190 /Index/delsHaoma
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000242s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000273s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000296s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `k_user` [ RunTime:0.0008s ]
+SQL: SELECT `usession` FROM `k_user` WHERE `uid` = 20 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `k_opentime` [ RunTime:0.0005s ]
+SQL: SELECT `m_status`,`fengpan`,`kaijiang` FROM `k_opentime` WHERE `qishu` = 18081 ORDER BY id desc LIMIT 1   [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: time2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+NOTIC: [8] Undefined variable: titles2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+SQL: SHOW COLUMNS FROM `k_bet` [ RunTime:0.0005s ]
+SQL: SELECT * FROM `k_bet` WHERE `uid` = 20 AND `qishu` = '18081' AND `js` = 5  [ RunTime:0.0003s ]
+
+[ 2018-07-19T10:46:02+08:00 ] 113.64.80.190 /Index/xiazhukuang?action=soonorder&time=907
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000223s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000321s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000346s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+SQL: SHOW COLUMNS FROM `k_user` [ RunTime:0.0009s ]
+SQL: SELECT `usession` FROM `k_user` WHERE `uid` = 20 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `k_opentime` [ RunTime:0.0005s ]
+SQL: SELECT `m_status`,`fengpan`,`kaijiang` FROM `k_opentime` WHERE `qishu` = 18081 ORDER BY id desc LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: time2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+NOTIC: [8] Undefined variable: titles2 /data/www/qxc/App/Home/Common/function.php 第 51 行.
+SQL: SHOW COLUMNS FROM `k_bet` [ RunTime:0.0006s ]
+SQL: SELECT `js`,`id`,`addtime`,`money`,`did`,`mingxi_1`,`mingxi_2`,`mingxi_3`,`odds` FROM `k_bet` WHERE `uid` = 20 AND `qishu` = '18081' AND `js` NOT IN ('4','5') ORDER BY id desc LIMIT 10   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `k_opentime` WHERE `qishu` = 18081 LIMIT 1   [ RunTime:0.0003s ]
+
+[ 2018-07-19T21:14:05+08:00 ] 47.97.77.243 /
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005221s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.005373s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005401s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+
+[ 2018-07-19T21:14:08+08:00 ] 47.97.77.243 /Login/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000196s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000268s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000294s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000037s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000068s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014411s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014435s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000121s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000135s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002327s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002347s ]
+
+[ 2018-07-19T21:14:15+08:00 ] 47.97.77.243 /explicit_not_exist_path
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000201s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000281s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000312s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Explicit_not_exist_path
+
+[ 2018-07-19T21:14:21+08:00 ] 47.97.77.243 /index.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000199s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000269s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000292s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+
+[ 2018-07-19T21:14:28+08:00 ] 47.97.77.243 /Login/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000200s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000276s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000300s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000039s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000070s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019131s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.019155s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000119s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000144s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000286s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000303s ]
+
+[ 2018-07-19T21:14:36+08:00 ] 47.97.77.243 /index.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004281s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004350s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004395s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+
+[ 2018-07-19T21:14:44+08:00 ] 47.97.77.243 /Login/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000205s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000280s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000307s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.004068s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.004110s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.015036s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.015057s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000112s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000126s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000284s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000302s ]
+
+[ 2018-07-19T21:14:51+08:00 ] 47.97.77.243 /index.jsp
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000206s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000274s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000297s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+
+[ 2018-07-19T21:14:58+08:00 ] 47.97.77.243 /Login/index
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004289s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000297s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000329s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000043s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000080s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.024309s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.024341s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000136s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000151s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000324s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000341s ]
+
+[ 2018-07-19T21:15:05+08:00 ] 47.97.77.243 /admin/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000021s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004287s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004344s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004376s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Admin
+
+[ 2018-07-19T21:15:08+08:00 ] 47.97.77.243 /favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003686s ]
+
+[ 2018-07-19T21:15:13+08:00 ] 47.97.77.243 /404.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000226s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000279s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000307s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:404
+
+[ 2018-07-19T21:15:20+08:00 ] 47.97.77.243 /500.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000209s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000293s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000321s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:500
+
+[ 2018-07-19T21:15:27+08:00 ] 47.97.77.243 /README
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000215s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000279s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.003798s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:README
+
+[ 2018-07-19T21:15:32+08:00 ] 47.97.77.243 /robots.txt
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000230s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000287s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000319s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Robots
+
+[ 2018-07-19T21:15:34+08:00 ] 47.97.77.243 /static/.gitignore
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004264s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004373s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004407s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Static
+
+[ 2018-07-19T21:15:35+08:00 ] 47.97.77.243 /4e5e5d7364f443e28fbf0d3ae744a59a
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004249s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004330s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.004375s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+
+[ 2018-07-19T21:15:36+08:00 ] 47.97.77.243 /?c=4e5e5d7364f443e28fbf0d3ae744a59a
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004281s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.005351s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.005401s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+
+[ 2018-07-19T21:15:37+08:00 ] 47.97.77.243 /index.php/explicit_not_exist_path
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001226s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001325s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001349s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Index.php
+
+[ 2018-07-19T21:15:37+08:00 ] 47.97.77.243 /api.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000191s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000409s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000431s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:index
+
+[ 2018-07-19T21:15:37+08:00 ] 47.97.77.243 /checktable.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000201s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000267s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000293s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Checktable
+
+[ 2018-07-19T21:15:38+08:00 ] 47.97.77.243 /js/kindeditor/Makefile
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000196s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000272s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000304s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Js
+
+[ 2018-07-19T21:15:38+08:00 ] 47.97.77.243 /theme/zui/fonts/zenicon.eot
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000242s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000268s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000289s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Theme
+
+[ 2018-07-19T21:15:38+08:00 ] 47.97.77.243 /Login/favicon.ico
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000401s ]
+
+[ 2018-07-19T21:15:38+08:00 ] 47.97.77.243 /Login/explicit_not_exist_path
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000265s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001395s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001431s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:explicit_not_exist_path
+
+[ 2018-07-19T21:15:38+08:00 ] 47.97.77.243 /Login/404.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000274s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000339s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000363s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:404
+
+[ 2018-07-19T21:15:38+08:00 ] 47.97.77.243 /Login/500.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000235s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000295s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000317s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:500
+
+[ 2018-07-19T21:15:38+08:00 ] 47.97.77.243 /Login/README
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000214s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000253s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000275s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:README
+
+[ 2018-07-19T21:15:39+08:00 ] 47.97.77.243 /Login/robots.txt
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000246s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000318s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000342s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:robots
+
+[ 2018-07-19T21:15:39+08:00 ] 47.97.77.243 /Login/static/.gitignore
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000218s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000276s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000298s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:static
+
+[ 2018-07-19T21:15:39+08:00 ] 47.97.77.243 /Login/4e5e5d7364f443e28fbf0d3ae744a59a
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000244s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000254s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000276s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:4e5e5d7364f443e28fbf0d3ae744a59a
+
+[ 2018-07-19T21:15:39+08:00 ] 47.97.77.243 /Login/index?c=4e5e5d7364f443e28fbf0d3ae744a59a
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000008s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000266s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000396s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000419s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000045s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000078s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.009829s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.009848s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000107s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000120s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000283s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000312s ]
+
+[ 2018-07-19T21:15:39+08:00 ] 47.97.77.243 /Login/index.php/explicit_not_exist_path
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000185s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000279s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000302s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:index.php
+
+[ 2018-07-19T21:15:39+08:00 ] 47.97.77.243 /Login/api.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000221s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000295s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000320s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:api
+
+[ 2018-07-19T21:15:39+08:00 ] 47.97.77.243 /Login/checktable.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000230s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000295s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000321s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:checktable
+
+[ 2018-07-19T21:15:39+08:00 ] 47.97.77.243 /Login/js/kindeditor/Makefile
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000994s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000435s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000466s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:js
+
+[ 2018-07-19T21:15:40+08:00 ] 47.97.77.243 /Login/theme/zui/fonts/zenicon.eot
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000010s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000218s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000266s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000287s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 非法操作:theme
+
+[ 2018-07-19T21:15:40+08:00 ] 47.97.77.243 /phpMyAdmin/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000191s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000319s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000340s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:PhpMyAdmin
+
+[ 2018-07-19T21:15:40+08:00 ] 47.97.77.243 /phpmyadmin/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000243s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000292s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000314s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Phpmyadmin
+
+[ 2018-07-19T21:15:40+08:00 ] 47.97.77.243 /pma/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000268s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000326s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000353s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Pma
+
+[ 2018-07-19T21:15:40+08:00 ] 47.97.77.243 /solr/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000007s ]
+INFO: [ app_init ] --END-- [ RunTime:0.000236s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000380s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000404s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Solr
+
+[ 2018-07-19T21:15:40+08:00 ] 47.97.77.243 /wcm/
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000009s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001222s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.001281s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001305s ]
+NOTIC: [8] session_start(): A session had already been started - ignoring /data/www/qxc/ThinkPHP/Common/functions.php 第 1263 行.
+ERR: 无法加载控制器:Wcm
+

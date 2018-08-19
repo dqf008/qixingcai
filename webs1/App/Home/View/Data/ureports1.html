@@ -1,0 +1,358 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>报表列表</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 报表 <span class="c-gray en">&gt;</span> 月报表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+<!-- <if condition="$Think.session.autype neq 'agency'">
+  <form action="__MODULE__/Data/reports" method="get">
+    <div class="text-c">
+        <span class="select-box inline">
+          <select name="userid" class="select">
+            <option value="0">全部<{$titles}></option>
+            <volist name="user" id="vo">
+              <if condition="$userid eq $vo['au_id']">
+                 <option value="<{$vo.au_id}>" selected><{$vo.au_name}></option>
+              <else/>
+                <option value="<{$vo.au_id}>"><{$vo.au_name}></option>
+              </if>
+            </volist>
+          </select>
+        </span> 
+        <button class="btn btn-success" ><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+      <button name="" id="" class="btn btn-success" type="submit">下载</button>
+       <button name="" id="" class="btn btn-success" type="submit"> 打印</button> 
+    </div>
+  </form>
+</if> -->
+  <form action="__MODULE__/Data/ureports1" method="get">
+  <div class="text-c">
+    <!-- <button onclick="removeIframe()" class="btn btn-primary radius">关闭选项卡</button> -->
+   期号：
+   <span class="select-box inline">
+    <select name="qishu1" class="select">
+      <!-- <option value="0">全部开奖期号</option> -->
+      <volist name="qishu3" id="vo">
+        <if condition="$qishu1 eq $vo['qishu']">
+          <option value="<{$vo.qishu}>" selected><{$vo.qishu}></option>
+        <else/>
+          <option value="<{$vo.qishu}>"><{$vo.qishu}></option>
+        </if>
+      </volist>
+    </select>
+    </span>
+    ~
+    <span class="select-box inline">
+    <select name="qishu2" class="select">
+      <!-- <option value="0">全部开奖期号</option> -->
+      <volist name="qishu4" id="vo">
+        <if condition="$qishu2 eq $vo['qishu']">
+          <option value="<{$vo.qishu}>" selected><{$vo.qishu}></option>
+        <else/>
+          <option value="<{$vo.qishu}>"><{$vo.qishu}></option>
+        </if>
+      </volist>
+    </select>
+    </span>
+   <!-- 日期范围：
+
+    <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" name="stime" value="<{$stime}>" style="width:120px;">
+
+    -
+
+    <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate"  name="etime" value="<{$etime}>" style="width:120px;"> -->
+    <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+    <!-- <button name="" id="" class="btn btn-success" type="submit">下载</button> -->
+   <!--  <button name="" id="" class="btn btn-success" type="submit"> 打印</button> -->
+  </div>
+  </form>
+  <div class="cl pd-5 bg-1 bk-gray mt-20">
+    <span class="r"><button  class="btn btn-success" style="margin-right:10px"> 打印</button></span>
+  </div>
+  <div>
+  
+   <if condition="$Think.session.autype eq 'partner'">
+ 
+    <elseif condition="$Think.session.autype eq 'agencys'" />
+
+    <else/>
+
+    </if>
+
+
+
+    <table class="table table-border table-bordered table-bg table-hover table-sort"><thead>
+    <tr class="tc"> 
+    <td rowspan="2" class="bg2" width="150">日期</td> 
+  
+    <if condition="$Think.session.autype eq 'admin'">
+        <td colspan="3" class="bg-yellow">股东</td>
+    <elseif condition="$Think.session.autype eq 'partner'" />
+       <td colspan="4" class="bg-yellow">总代理</td> 
+       <td colspan="2" class="bg-orange">  股东  </td>
+       <td colspan="2" class="bg-pink">  超级管理员  </td>
+    <elseif condition="$Think.session.autype eq 'agencys'" />
+        <td colspan="4" class="bg-yellow">  代理  </td> 
+      <td colspan="4" class="bg-orange">  总代理  </td>  
+      <td colspan="2" class="bg-pink">  股东  </td>
+    <elseif condition="$Think.session.autype eq 'agency'" />
+       <td colspan="3" class="bg-yellow">  会员  </td> 
+      <td colspan="4" class="bg-orange">  代理  </td>  
+      <td colspan="2" class="bg-pink">  总代理  </td>
+    </if>
+      
+    <!-- <td colspan="4" class="bg-orange">  代理  </td>  
+    <td colspan="2" class="bg-pink">  总代理   </td>  -->
+    </tr> 
+     <if condition="$Think.session.autype eq 'admin'">
+        <tr class="tc"> 
+          <td class="bg-yellow">笔数</td> 
+          <td class="bg-yellow">总投</td> 
+          <td class="bg-yellow">盈亏</td>
+        </tr>
+    <elseif condition="$Think.session.autype eq 'partner'" />
+         <tr class="tc"> 
+          <td class="bg-yellow">笔数</td> 
+          <td class="bg-yellow">总投</td> 
+          <td class="bg-yellow">盈亏</td>
+          <td class="bg-yellow">赚水</td>
+          <td class="bg-orange">总投</td> 
+          <td class="bg-orange">盈亏</td>
+          <td class="bg-pink">总投</td> 
+          <td class="bg-pink">盈亏</td> 
+        </tr>
+    <elseif condition="$Think.session.autype eq 'agencys'" />
+      <tr class="tc"> 
+        <td class="bg-yellow">笔数</td> 
+        <td class="bg-yellow">总投</td> 
+        <td class="bg-yellow">盈亏</td>  
+        <td class="bg-yellow">赚水</td> 
+        <td class="bg-orange">  占成金额  </td> 
+        <td class="bg-orange">  占成盈亏  </td> 
+        <td class="bg-deeporg">   赚水   </td> 
+        <td class="bg-deeporg">总盈亏</td>  
+        <td class="bg-pink">总投</td> 
+        <td class="bg-pink">盈亏</td> 
+      </tr>
+    <elseif condition="$Think.session.autype eq 'agency'" />
+        <tr class="tc"> 
+        <td class="bg-yellow">笔数</td> 
+        <td class="bg-yellow">总投</td> 
+        <td class="bg-yellow">盈亏</td>   
+        <td class="bg-orange">  占成金额  </td> 
+        <td class="bg-orange">  占成盈亏  </td> 
+        <td class="bg-deeporg">   赚水   </td> 
+        <td class="bg-deeporg">总盈亏</td>  
+        <td class="bg-pink">总投</td> 
+        <td class="bg-pink">盈亏</td> 
+      </tr>
+    </if>
+    
+    </thead> 
+    <tbody class="fn-hover">  
+ 
+   
+  <if condition="($Think.session.autype eq 'admin') ">
+  
+    <volist name="data" id="vo" key="k">
+      <tr> 
+      <if condition="$vo.status eq '1'">
+        <td> <strong class="blue">[<{$k}>]</strong><a href="__MODULE__/Data/ureports?qishu=<{$vo.qishu}>" class="gray"><strong class="red"><{$vo.md}>(<{$vo.qishu}>)</strong></a></td>
+      <else/>
+        <td> <strong class="blue">[<{$k}>]</strong><a href="__MODULE__/Data/ureports?qishu=<{$vo.qishu}>" class="gray"><{$vo.md}>(<{$vo.qishu}>)</a></td>
+      </if>
+      <td class="bg-yellow">
+        <if condition="$vo.sum"><{$vo.sum}><else/>0</if>
+      </td> 
+      <!-- <td class="bg-yellow"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
+      <td class="bg-yellow"><if condition="$vo.yingkui"><{$vo.yingkui}><else/>0</if></td>  -->
+      <td class="bg-yellow"><if condition="$vo.money"><{$vo['money']}><else/>0</if></td>  
+      <td class="bg-yellow"><if condition="$vo.yingkui"><{$vo['yingkui']}><else/>0</if></td> 
+      </tr>
+    </volist>
+    <tr class="tfoot"> <td class="tc"><span class="fb">合计</span> </td>  <td class="fb"><if condition="$sum"><{$sum}><else/>0</if></td> 
+    <td class="fb"><if condition="$money"><{$money}><else/>0</if></td>  
+    <td class="fb"><if condition="$yingkui"><{$yingkui}><else/>0</if></td>  
+    </tr>
+
+    <elseif condition="$Think.session.autype eq 'partner'" />
+       <volist name="data" id="vo" key="k">
+        <tr> 
+        <if condition="$vo.status eq '1'">
+          <td> <strong class="blue">[<{$k}>]</strong><a href="__MODULE__/Data/ureports?qishu=<{$vo.qishu}>" class="gray"><strong class="red"><{$vo.md}>(<{$vo.qishu}>)</strong></a></td>
+        <else/>
+          <td> <strong class="blue">[<{$k}>]</strong><a href="__MODULE__/Data/ureports?qishu=<{$vo.qishu}>" class="gray"><{$vo.md}>(<{$vo.qishu}>)</a></td>
+        </if>
+        <td class="bg-yellow">
+          <if condition="$vo.sum"><{$vo.sum}><else/>0</if>
+        </td> 
+        <td class="bg-yellow"><if condition="$vo.money"><{$vo['money']}><else/>0</if></td>  
+        <td class="bg-yellow"><if condition="$vo.yingkuis"><{$vo['yingkuis']}><else/>0</if></td> 
+        <td class="bg-yellow"><if condition="$vo.huishui"><{$vo.huishui}><else/>0</if></td> 
+
+        <!-- <td class="bg-orange">0</td> <td class="bg-orange">0</td> <td class="bg-deeporg">0</td>   <td class="bg-deeporg">0</td>  -->  
+      <!--   <td class="bg-orange"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
+        <td class="bg-orange"><if condition="$vo.yingkui"><{$vo.yingkuis}><else/>0</if></td>  -->
+        <td class="bg-orange"><if condition="$vo.money"><{$vo['money']}><else/>0</if></td>  
+        <td class="bg-orange"><if condition="$vo.yingkuis"><{$vo['yingkuis']}><else/>0</if></td> 
+        <td class="bg-pink"><if condition="$vo.money"><{$vo['money']}><else/>0</if></td>  
+        <td class="bg-pink"><if condition="$vo.yingkui"><{$vo['yingkui']}><else/>0</if></td> 
+        <!-- <td class="bg-pink"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
+        <td class="bg-pink"><if condition="$vo.yingkui"><{$vo.yingkui}><else/>0</if></td>  -->
+      </volist>
+       <tr class="tfoot"> <td class="tc"><span class="fb">合计</span> </td>  
+       <td class="fb"><if condition="$sum"><{$sum}><else/>0</if></td> 
+
+       <!-- <td class="fb"><if condition="$money"><{$money}><else/>0</if></td> 
+        <td class="fb"><if condition="$yingkui"><{$yingkuis}><else/>0</if></td>   --> 
+        <td class="fb"><if condition="$money"><{$money-$umoney}><else/>0</if></td>  
+        <td class="fb"><if condition="$yingkuis"><{$yingkuis}><else/>0</if></td>
+        <td class="fb"><if condition="$huishui">--<else/>--</if></td>   
+          
+        <!-- <td class="fb">0</td> <td class="fb">0</td> <td class="fb">0</td>   <td class="fb">0</td> -->   
+        <td class="fb"><if condition="$money"><{$money}><else/>0</if></td>  
+        <td class="fb"><if condition="$yingkui"><{$yingkui}><else/>0</if></td>
+        <td class="fb"><if condition="$money"><{$money-$umoney}><else/>0</if></td>  
+        <td class="fb"><if condition="$yingkui"><{$yingkui}><else/>0</if></td>      
+    </tr>
+    <elseif condition="$Think.session.autype eq 'agencys'" />
+         <volist name="data" id="vo" key="k">
+        <tr> 
+        <if condition="$vo.status eq '1'">
+          <td> <strong class="blue">[<{$k}>]</strong><a href="__MODULE__/Data/ureports?qishu=<{$vo.qishu}>" class="gray"><strong class="red"><{$vo.md}>(<{$vo.qishu}>)</strong></a></td>
+        <else/>
+          <td> <strong class="blue">[<{$k}>]</strong><a href="__MODULE__/Data/ureports?qishu=<{$vo.qishu}>" class="gray"><{$vo.md}>(<{$vo.qishu}>)</a></td>
+        </if>
+        <td class="bg-yellow">
+          <if condition="$vo.sum"><{$vo.sum}><else/>0</if>
+        </td> 
+        <td class="bg-yellow"><if condition="$vo.money"><{$vo['money']}><else/>0</if></td>  
+        <td class="bg-yellow"><if condition="$vo.yingkuis"><{$vo['yingkuis']}><else/>0</if></td> 
+        <td class="bg-yellow"><if condition="$vo.huishui"><{$vo.huishui}><else/>0</if></td>
+
+        <!-- <td class="bg-orange">0</td> <td class="bg-orange">0</td>  -->
+        <td class="bg-orange"><if condition="$vo.money">0<else/>0</if></td>  
+        <td class="bg-orange"><if condition="$vo.yingkuis">0<else/>0</if></td> 
+
+        <td class="bg-deeporg"><if condition="$vo.huishui1"><{$vo.huishui1}><else/>0</if></td> 
+        <td class="bg-deeporg"><if condition="$vo.yingkuis"><{$vo['yingkuis']}><else/>0</if></td>  
+        <!-- <td class="bg-deeporg"><if condition="$vo.yingkui"><{$vo.yingkuis}><else/>0</if></td>    -->
+        <td class="bg-pink"><if condition="$vo.money"><{$vo['money']}><else/>0</if></td>  
+        <td class="bg-pink"><if condition="$vo.yingkui"><{$vo['yingkui']}><else/>0</if></td> 
+      </volist>
+       <tr class="tfoot"> <td class="tc"><span class="fb">合计</span> </td>  
+       <td class="fb"><if condition="$sum"><{$sum}><else/>0</if></td> 
+       <td class="fb"><if condition="$money"><{$money}><else/>0</if></td>  
+        <td class="fb"><if condition="$yingkuis"><{$yingkuis}><else/>0</if></td>
+        <td class="fb">--</td>
+        <td class="fb"><if condition="$money">0<else/>0</if></td>  
+        <td class="fb"><if condition="$yingkuis">0<else/>0</if></td>
+         <td class="fb">--</td>   
+         <td class="fb"><if condition="$yingkuis"><{$yingkuis}><else/>0</if></td>   
+        <td class="fb"><if condition="$money"><{$money}><else/>0</if></td>  
+        <td class="fb"><if condition="$yingkui"><{$yingkui}><else/>0</if></td>      
+    </tr>
+    <elseif condition="$Think.session.autype eq 'agency'" />
+         <volist name="data" id="vo" key="k">
+        <tr> 
+        <if condition="$vo.status eq '1'">
+          <td> <strong class="blue">[<{$k}>]</strong><a href="__MODULE__/Data/ureports?qishu=<{$vo.qishu}>" class="gray"><strong class="red"><{$vo.md}>(<{$vo.qishu}>)</strong></a></td>
+        <else/>
+          <td> <strong class="blue">[<{$k}>]</strong><a href="__MODULE__/Data/ureports?qishu=<{$vo.qishu}>" class="gray"><{$vo.md}>(<{$vo.qishu}>)</a></td>
+        </if>
+        <td class="bg-yellow">
+          <if condition="$vo.sum"><{$vo.sum}><else/>0</if>
+        </td> 
+        <td class="bg-yellow"><if condition="$vo.money"><{$vo['money']}><else/>0</if></td>  
+        <td class="bg-yellow"><if condition="$vo.yingkuis"><{$vo['yingkuis']}><else/>0</if></td> 
+
+        <td class="bg-orange"><if condition="$vo.umoney"><{$vo['umoney']}><else/>0</if></td>  
+        <td class="bg-orange"><if condition="$vo.uyingkui"><{$vo['uyingkui']}><else/>0</if></td> 
+     
+      <td class="bg-deeporg"><if condition="$vo.huishui"><{$vo.huishui}><else/>0</if></td>   
+     <td class="bg-deeporg"><if condition="$vo.uyingkui"><{$vo['uyingkui']}><else/>0</if></td>    
+      <td class="bg-pink"><if condition="$vo.money"><{$vo['money']-$vo['umoney']}><else/>0</if></td>  
+      <td class="bg-pink"><if condition="$vo.yingkui"><{$vo['yingkui']-$vo['uyingkui']}><else/>0</if></td> 
+      <tr>
+      </volist>
+
+  
+       <tr class="tfoot"> <td class="tc"><span class="fb">合计</span> </td>  
+        <td class="fb"><if condition="$sum"><{$sum}><else/>0</if></td> 
+        <td class="fb"><if condition="$money"><{$money}><else/>0</if></td>  
+        <td class="fb"><if condition="$yingkuis"><{$yingkuis}><else/>0</if></td>   
+        <td class="fb"><if condition="$umoney"><{$umoney}><else/>0</if></td>  
+        <td class="fb"><if condition="$uyingkuis"><{$uyingkui}><else/>0</if></td> 
+        <td class="fb">--</td>   
+         <td class="fb"><if condition="$uyingkuis"><{$uyingkui}><else/>0</if></td>    
+        <td class="fb"><if condition="$money"><{$money-$umoney}><else/>0</if></td>  
+        <td class="fb"><if condition="$yingkui"><{$yingkui-$uyingkui}><else/>0</if></td>  
+    </tr> 
+    </if>
+
+
+
+  </tbody>  
+  </table>
+
+
+
+  </div>
+</div>
+<style>
+.red{
+  color:red;
+}
+.tfoot td {
+    background: #CEFFE7;
+}
+.table tr,.table td{
+    text-align: center;
+}
+.bg-yellow{
+  background: #FFCC66;
+}
+ .bg-orange{
+    background: #FFDDAA
+ }     
+.bg-deeporg{
+  background: #FFC184;
+}
+.bg-pink{
+      background: #FFD7EB;
+}
+.blue{
+  color:blue;
+}
+</style>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__PUBLIC__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__PUBLIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+</body>
+</html>

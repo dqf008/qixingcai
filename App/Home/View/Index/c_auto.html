@@ -1,0 +1,55 @@
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" id="css" href="__PUBLIC__/css/members.css">
+<style>html{overflow-y:scroll;}</style>
+
+</head>
+<body style="margin: 0px">
+
+
+<table width="99%" border="0" cellpadding="0" cellspacing="0" align="center">
+<tbody><tr>
+<td style="padding:0px">
+      <script src="__PUBLIC__/js/common.js" type="text/javascript"></script>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="soon_b">
+  <tbody><tr class="header_left_b"><td colspan="17">开奖号码</td></tr>
+  <tr class="soon_head">
+    <td width="*">开奖时间</td>
+    <td width="10%">期号</td>
+    <td width="10%">仟</td>
+    <td width="10%">佰</td>
+    <td width="10%">拾</td>
+    <td width="10%">个</td>
+    <td width="10%">球5</td>
+    <td width="10%">球6</td>
+    <td width="10%">球7</td>
+
+  </tr>
+
+<tr onmouseover="hover1(this);" onmouseout="hover2(this);" align="center" class="hover"><td class="altbg2">--</td>
+<td class="altbg2"><{$smarty.session.qishu}></td>
+<td class="altbg2"><div class="periodImg periodImg_5"></div></td><td class="altbg1"><div class="periodImg periodImg_5"></div></td><td class="altbg1"><div class="periodImg periodImg_5"></div></td><td class="altbg1"><div class="periodImg periodImg_5"></div></td><td class="altbg1"><div class="periodImg periodImg_0"></div></td><td class="altbg1"><div class="periodImg periodImg_0"></div></td><td class="altbg1"><div class="periodImg periodImg_0"></div></td>
+</tr>
+
+<{foreach from=$num item=v key=k}>
+<tr onmouseover="hover1(this);" onmouseout="hover2(this);" align="center" class="hover"><td class="altbg2"><{$v['datetime']}></td>
+<td class="altbg2"><{$v['qishu']}></td>
+<td class="altbg2"><div class="periodImg periodImg_1"><{$v['ball_1']}></div></td>
+<td class="altbg1"><div class="periodImg periodImg_1"><{$v['ball_2']}></div></td>
+<td class="altbg1"><div class="periodImg periodImg_1"><{$v['ball_3']}></div></td>
+<td class="altbg1"><div class="periodImg periodImg_1"><{$v['ball_4']}></div></td>
+<td class="altbg1"><div class="periodImg periodImg_0"><{$v['ball_5']}></div></td>
+<td class="altbg1"><div class="periodImg periodImg_0"><{$v['ball_6']}></div></td>
+<td class="altbg1"><div class="periodImg periodImg_0"><{$v['ball_7']}></div></td>
+</tr>
+<{/foreach}>
+
+  </tbody></table><br>
+  </td>
+</tr><tr>
+</tr></tbody></table>
+<noscript><iframe src=*.html></iframe></noscript>
+
+
+</body></html>

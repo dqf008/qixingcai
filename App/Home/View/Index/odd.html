@@ -1,0 +1,58 @@
+
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" id="css" href="__PUBLIC__/css/members.css">
+<style>
+html{overflow-y:scroll;}
+.red{color: #f00;}
+</style>
+</head>
+<body style="margin: 0px;">
+
+
+
+<table width="99%" border="0" cellpadding="0" cellspacing="0" align="center">
+<tbody><tr>
+<td style="padding:0px">
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="soon_b">
+  <tbody><tr class="header_left_b">
+  <td colspan="10">赔率变动表
+  <a href="index.php?a=odd&va=2字定" <{if $va == '2字定'}>class="red"<{/if}>>2字定</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="index.php?a=odd&va=3字定" <{if $va == '3字定'}>class="red"<{/if}>>3字定</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="index.php?a=odd&va=4字定" <{if $va == '4字定'}>class="red"<{/if}>>4字定</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="index.php?a=odd&va=2字现" <{if $va == '2字现'}>class="red"<{/if}>>2字现</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="index.php?a=odd&va=3字现" <{if $va == '3字现'}>class="red"<{/if}>>3字现</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="index.php?a=odd&va=4字现" <{if $va == '4字现'}>class="red"<{/if}>>4字现</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  </td>
+  </tr>
+  <tr class="soon_head"><td colspan="10"><b></b></td></tr>
+
+<tr class="soon_head">
+  <td>号码</td>
+  <td>赔率</td>
+  <td class="soon_hot1">号码</td>
+  <td class="soon_hot1">赔率</td>
+  <td>号码</td>
+  <td>赔率</td>
+  <td class="soon_hot1">号码</td>
+  <td class="soon_hot1">赔率</td>
+  <td>号码</td><td>赔率</td>
+</tr>
+
+<tr>
+<{foreach from=$list item=v key=k}>
+
+<td><{$v['name']}></td>
+<td><{$v['value']}></td>
+
+<{if ($k+1)%5 == 0}> <tr></tr> <{/if}>
+<{/foreach}>
+</tr>
+
+
+<tr>
+</tr></tbody></table>
+
+<noscript><iframe src=*.html></iframe></noscript>
+
+</td></tr></tbody></table></body></html>

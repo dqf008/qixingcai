@@ -1,0 +1,265 @@
+<html><head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <title>print</title>
+    <link rel="stylesheet" type="text/css" id="css" href="__PUBLIC__/css/orderprint.css?id=199">
+    <style type="text/css">
+        @media print {.Noprint {display:none; visibility:hidden;} }
+        html{overflow-y:scroll;}
+        body {top:0px; left:0px;bottom:0px; right:0px; height:100%;}
+        .main_left_print{width: 180px;margin:0 auto;  }
+        .left_userinfo{display:block;background:#FFF;list-style:none;padding:0;}
+        .left_userinfo li{text-decoration:none;padding:3px 4px;margin:0;line-height:20px;}
+        .main_left_print ul {background:#FFF;margin-left:1px;margin-right:1px;display:block;}
+        .title{font-weight:bold;color:#fff;padding:3px 0;}
+        .title_center{text-align:center;}
+        .left_print{display:block;list-style:none;margin-top:10px;padding-left:0px;*padding-left:0;}
+
+    </style>
+    <script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/orderprint.js"></script>
+    <link type="text/css" rel="stylesheet" href="__PUBLIC__/css/mystyle7.css"></head>
+<body marginwidth="0" marginheight="0">
+<table width="180" border="0" cellpadding="0" cellspacing="0" align="center"><tbody><tr> <td>
+    <div class="main_left_print">
+        <ul class="left_userinfo Noprint">
+            <li class="title title_center Noprint">会员信息</li>
+            <li class="Noprint">账号:<span id="username"><{$Think.session.unames}></span></li>
+            <li class="Noprint">信用:<span id="credits"><{$Think.session.umoneys}></span></li>
+            <li class="Noprint">已用:<span id="credits_use">0</span></li>
+            <li class="Noprint">可用:<span id="credits_remaining"><{$Think.session.umoneys}></span></li>
+            <li class="Noprint">期号:<span id="issueno_now"><{$Think.session.qishu}></span></li>
+        </ul>
+        <ul id="sendmode0" style="display:none" class="left_userinfo Noprint"><li class="title title_center">正在使用</li><li class="title_center"></li></ul>
+        <ul id="sendmode1" style="" class="left_print">
+            <div id="orderprint">
+                <table id="JOPTab" width="178" border="0" style="text-align: left;  background: #FFFFFF;" cellpadding="0" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td><input type="button" value="设置图示" name="printpre" id="printpre" class="printbut Noprint" /><input type="hidden" name="printstat" id="printstat" class="Noprint" /><input type="hidden" name="sorderid" id="sorderid" class="Noprint" /><input type="hidden" name="_oidstr" id="_oidstr" class="Noprint" />
+                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tbody>
+                                <tr>
+                                    <td style="text-align:right;font-size:15px;">单位：元</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table align="center" width="178" cellpadding="0" cellspacing="0" class="tablebprint4" style="margin-bottom: 2px !important;">
+                                <tbody>
+                                <tr>
+                                    <td colspan="3" class="print2" style="text-align:center;color:red;font-size:18px;">七星彩</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" class="print3">时间:<span id="_datetime"></span><br />会员:<span id="_user"><{$Think.session.unames}></span><br />编号:<span id="_orderid"></span></td>
+                                </tr>
+                                <tr class="print2">
+                                    <td style="text-align:center;">号码</td>
+                                    <td style="text-align:center;">赔率</td>
+                                    <td style="text-align:center;">金额</td>
+                                </tr>
+                                </tbody>
+                                <tbody id="orderlist"></tbody>
+                                <tbody>
+                                <tr class="print5">
+                                    <td colspan="3">笔数<span id="_bscount">0</span> 总金额<span id="_allmoney">0</span></td>
+                                </tr>
+                                <tr>
+                                    <td align="center" style="text-align:center;" class="Noprint" colspan="3"> <input class="printbut Noprint" type="button" name="numClear" id="numClear" value="清 空" /> &nbsp;&nbsp;&nbsp;&nbsp; <input class="printbut Noprint" type="button" name="numprint" id="numprint" value="打 印" onclick="printpage()" /></td>
+                                </tr>
+                                </tbody>
+                            </table><span>第 <span id="_issueno_now"><{$Think.session.qishu}></span> 期,3天內有效!!</span> </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    </tbody>
+                    <tbody id="orderpage" style="display:none;">
+                    <tr class="Noprint">
+                        <td style="font-size:15px;" colspan="3"><b>总笔数<font color="red"><span id="_z_bscount"></span></font> 总金额<font color="red"><span id="_z_allmoney"></span></font><b></b></b></td>
+                    </tr>
+                    <tr></tr>
+                    <tr class="Noprint">
+                        <td style="font-size:15px;" colspan="3"><span id="_z_page"></span></td>
+                    </tr>
+                    <tr></tr>
+                    </tbody>
+                </table>
+                <br />
+                <span id="testdate" class="Noprint" style="display:none;"></span>
+            </div>
+        </ul>
+    </div>
+
+</td></tr><tr></tr></tbody></table>
+<div id="leftprints" ></div>
+
+<script type="text/javascript">
+
+    function printpage(){
+        if((window.print())==true){
+            //alert('打印成功');
+            $.ajax({
+                type: "post",
+                url: "__URL__/dataEmpty",
+                dataType: "json",
+                data: {action:'dataEmpty',},
+                success: function(msg){
+                    //leftprint.location.reload();
+                    window.location.reload();
+                }
+            });
+        }else{
+            //alert('打印失败');
+        }
+        //window.print();
+        // $.ajax({
+        //        type: "post",
+        //        url: "__URL__/dataEmpty",
+        //        dataType: "json",
+        //        data: {action:'dataEmpty',},
+        //        success: function(msg){
+        //        	//leftprint.location.reload();
+        //        	 window.location.reload();
+        //        }
+        //   	});
+    }
+    function jAlert(str){
+
+    }
+    function jsonAjax(url,types , param, datat, callback) {
+        $.ajax({
+            type: types,
+            url: url,
+            data: param,
+            dataType: datat,
+            success: callback,
+            error: function () {
+                return ;
+            }
+        });
+    }
+    var cgPrint={
+        sid:"",
+        caizhongselect:1
+        ,GetPrint:function (data) {
+            //积分
+            //已用积分
+            //时间
+            //编号
+            //笔数
+            //总金额
+            console.log(data);
+            var json = eval(data);
+            if(json.code==400){
+                $('#credits').html(json.moneys);//总金额积分
+                $('#credits_use').html(json.moneys1);//已用积分
+                $('#credits_remaining').html(json.moneys2);//可用金额
+                return ;
+            }else if(json.code==200){
+                $('#credits').html(json.moneys);//总金额积分
+                $('#credits_use').html(json.moneys1);//已用积分
+                $('#_bscount').html(json.count);//笔数
+                $('#_allmoney').html(json.money);//
+                $('#credits_remaining').html(json.moneys2);//可用金额
+                $('#_datetime').html(json.time);//时间
+                $('#_orderid').html(json.did);//下注编号
+                var data=json.data;
+                var html='';
+                for(var i=0;i<data.length;i++){
+                    if(data[i]['mingxi_1']=='4现'){
+                        data[i]['mingxi_3']='现';
+                    }else{
+                        data[i]['mingxi_3']='';
+                    }
+                    html+='<tr id="o_'+data[i]['id']+'" bgcolor="#ffffff" class="print2" style="height:28px;line-height:19px;"><td style="text-align:center;">'+data[i]['mingxi_2']+'<span class="soon_b_f3" style="FONT-SIZE:15px;color:red;">'+data[i]['mingxi_3']+'</span></td><td style="text-align:center;">1:'+data[i]['odds']+'</td><td style="text-align:center;">'+data[i]['money']+'<dd>44649101714445409</dd><dd>'+data[i]['addtime']+'</dd></td></tr>';
+                }
+                $('#orderlist').html(html);
+            }else{
+
+            }
+
+            // var s = json.s;
+            // if(s>9000) {
+            // 	return ;
+            // }else if(s>8000) {
+            // 	return ;
+            // }else if(s==200){
+            // 	$('#orderprint').empty();
+            // 	cgPrint.sid=json.gsid;
+            // 	$('#username').html(json.username);
+            // 	$('#issueno_now').html(json.issueno_now);
+            // 	$('#credits').html(json.credits);//积分
+            // 	var get_credits_use = json.credits_use-0;
+            // 	var get_credits_use = Number(get_credits_use.toFixed(2));
+            // 	$('#credits_use').html(get_credits_use);//已用积分
+            // 	$('#credits_remaining').html(json.credits_remaining);
+
+            // 	cgPrint.caizhongselect = json.caizhongselect;
+
+            // 	cgPrint.addCssFile(cgPrint.caizhongselect);
+
+            // 	if(json.sendmode==1){
+            // 		$.JOP.printnum=0;
+            // 		var getIsPC=$.JOP.IsPC();
+            // 		$("#orderprint").JOP({data : {"p":json.printitem},caizhong:cgPrint.caizhongselect,IN_WAPCG:9,getIsPC:getIsPC});
+            // 	}
+
+            // 	//0是掩藏打印小票
+            // 	if(json.sendmode==1){
+            // 		$('#sendmode0').hide();
+            // 		$('#sendmode1').show();
+            // 	}else{
+            // 		$('#sendmode0').show();
+            // 		$('#sendmode1').hide();
+            // 		cgPrint.showsendmode0();
+            // 	}
+            // }else{
+
+            // }
+        }
+        ,addCssFile:function(s){
+            var czs = (s == 2 ? "mystyle5.css":"mystyle7.css");
+            var css_href = './admincg/css/'+czs;
+            var styleTag = document.createElement("link");
+            styleTag.setAttribute('type', 'text/css');
+            styleTag.setAttribute('rel', 'stylesheet');
+            styleTag.setAttribute('href', css_href);
+            $("head")[0].appendChild(styleTag);
+        }
+        ,showsendmode0:function(){
+            if(cgPrint.caizhongselect==2){
+                $('#sendmode0 li:eq(1)').html('<img src="./admincg/images/sevencolor5.gif">');
+            }else{
+                $('#sendmode0 li:eq(1)').html('<img src="./admincg/images/sevencolor.gif">');
+            }
+        }
+
+    }
+    //{"s":200,"m":"","caizhongselect":1,"pages":0,"printitem":{"n":["1","1"],"j":[{"id":"503469","orderid":"44649101711009825","frank":"8.6","number":"58","money":"1","hotstat":"0","classid":"6","stattuima":0,"statsizi":0,"datetime":"2017-10-17 11:00"}],"o":"44649101711009825","oid":503469,"d":"2017-10-17 11:00","u":"f1323","s":"6e7D5L","i":17122,"t":0,"m":1,"ps":0},"issueno_now":"17122","sendmode":"1","username":"f1323","credits":"5000","credits_use":"3","credits_remaining":4997}
+    //退码 {"s":200,"m":"","credits_use":2,"credits_remaining":4998,"printdata":null,"printorders":""}
+    $(window).load(function(){
+        jsonAjax("__MODULE__/Index/appindexajax","get", "action=printrefresh"+ "&time=" + new Date().getMilliseconds(), "json", cgPrint.GetPrint);
+    });
+    //清空操作
+    $('#numClear').click(function(){
+        $.ajax({
+            type: "post",
+            url: "__URL__/dataEmpty",
+            dataType: "json",
+            data: {action:'dataEmpty',},
+            success: function(msg){
+                //leftprint.location.reload();
+                window.location.reload();
+            }
+        });
+    });
+    window.onload=function (){
+        $('html,body').animate({scrollTop: '1000000px'}, 800);
+    }
+</script>
+<style>
+    td {
+        font-size: 12px;
+    }
+</style>
+<div id="Expo_box2" style="position: fixed;bottom: 0;height: 10px;width: 100px;"></div>
+</body></html>

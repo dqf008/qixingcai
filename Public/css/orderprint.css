@@ -1,0 +1,68 @@
+body, td{
+	margin: 0px;
+	font-size: 12px;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+td.print2, .print2 td {
+	font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;
+	height:28px;line-height:19px;background: #FFFFFF;text-align:center;
+}
+td.print3, .print3 td {
+	font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;
+}
+td.print5, .print5 td {
+	font-family:Verdana, Arial, Helvetica, sans-serif;font-size:12px;
+	height:28px;line-height:19px;background: #FFFFFF;text-align:left;
+}
+.tablebprint4 { 
+	outline: 1px solid #660000;
+	border: 0px !important;
+	> border: 1px solid #660000 !important;
+	border: 1px solid #660000;
+	empty-cells: show;
+	border-collapse: separate !important;
+	> border-collapse: collapse !important;
+	border-collapse: collapse;
+}
+.tablebprint4 td { 
+	border-bottom: 1px solid #660000;
+	border-right: 1px solid #660000;
+	line-height: 22px;
+	height: 22px;
+	padding: 1px;
+	background: #FFFFFF;
+	
+}
+
+#orderprint{
+ height:auto;
+ width:100%;
+ margin:0px;
+ padding:0;
+} 
+
+
+.printbut{
+	display: inline-block;
+    margin-bottom: 0;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+	*padding:1px 1px;
+	*height: 22px;
+	*width: 65px;
+	font-size:14px;font-weight:normal;line-height:20px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+
+
+#orderlist tr td dd{
+	display:none;
+}
+
+
+.meunpage:link {
+    color: #0033cc;
+    font-weight: bold;
+}

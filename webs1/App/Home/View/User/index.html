@@ -1,0 +1,523 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>下级管理列表</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 下级管理 <span class="c-gray en">&gt;</span> 下级管理列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+  <div class="mt-20">
+
+  <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper no-footer">
+
+  <div class="cl pd-5 bg-1 bk-gray">
+  <span class="l">
+  <if condition="$utype eq 'admin'">
+    <a href="javascript:void(0);" onclick="admin_role_add('添加<{$utype1}>','__MODULE__/User/addUser','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont"></i> 添加<{$utype1}></a> &nbsp;<a href="javascript:void(0);" onclick="article_del()" class="btn btn-primary radius"><i class="Hui-iconfont"></i>批量删除<{$utype1}></a>
+  <elseif condition="$utype" />
+    <a href="javascript:void(0);" onclick="admin_role_add('添加<{$utype1}>','__MODULE__/User/addUser','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont"></i> 添加<{$utype1}></a> &nbsp;
+    <!-- <a href="javascript:void(0);" onclick="article_del()" class="btn btn-primary radius"><i class="Hui-iconfont"></i>批量删除<{$utype1}></a> -->
+    <a class="btn btn-primary radius" title="批量添加信用积分" href="javascript:void(0);" onclick="dataAudit()" style="text-decoration:none"><i class="Hui-iconfont"></i> 批量添加信用积分</a>&nbsp;<a class="btn btn-primary radius" title="积分批量清零" href="javascript:void(0);" onclick="dataAudit1()" style="text-decoration:none"><i class="Hui-iconfont"></i> 积分批量清零</a>
+  </if>
+
+  </span> 
+  <if condition="($utype eq 'agencys') OR ($utype eq 'agency')  ">
+    &nbsp;&nbsp;总信用额度：<{$user['au_money']-0}>；     可分配信用额度：<{$user['au_money']-$user['au_moneys']-0}>；     已分配信用额度：<{$user['au_moneys']-0}>； 
+  </if>
+  <span class="r">共有数据：<strong><{$count}></strong> 条</span> 
+  </div>
+  
+  <if condition="$user['au_type'] neq 'agency'">
+    <table class="table table-border table-bordered table-bg table-hover table-sort">
+      <thead>
+        <tr class="text-c">
+        <if condition="$utype">
+          <th width="25"><input type="checkbox" name="" value=""></th>
+        </if>
+          <th width="80">名称</th>
+          <th width="80">用户类型</th>
+          <if condition="$user['au_type'] neq 'admin'">
+            <th width="80">可用信用额度</th>
+          </if>
+          <if condition="$utype eq 'admin'">
+            <th width="60">占成</th>
+          </if>
+          <if condition="$utype eq 'agencys'">
+            <th width="60">拦货占成</th>
+          </if>
+          <th width="120">联系电话</th>
+          <th width="60">创建时间</th>
+          <if condition="$user['au_type'] neq 'agency'">
+          <th width="60">下级</th>
+          </if>
+          <th width="60">状态</th>
+          <if condition="$utype">
+          <th width="120">操作</th>
+          </if>
+        </tr>
+      </thead>
+      <tbody>
+      <if condition="$data">
+      <volist name="data" id="vo">
+        <tr class="text-c">
+        <if condition="$utype">
+          <td><input type="checkbox" value="<{$vo.au_id}>" name="userid"></td>
+        </if>
+          <td><a href="javascript:void(0);" onclick="getUser('<{$vo['au_id']}>')" class="btn btn-primary radius"><{$vo.au_name}></a></td>
+           <td>
+          <if condition="$vo.au_type eq 'partner'">
+            股东
+          <elseif condition="$vo.au_type eq 'agencys'" />
+            总代理
+          <elseif condition="$vo.au_type eq 'agency'" />
+            代理
+          <else/>
+            会员
+          </if>
+        
+          </td>
+          <if condition="$user['au_type'] neq 'admin'">
+          <td><{$vo['au_money']-$vo['au_moneys']}></td>
+          </if>
+          <if condition="$utype eq 'admin'">
+            <td><{$vo['au_proportion']}>%</td>
+          </if>
+          <if condition="$utype eq 'agency'">
+            <td width="60">
+            <a class="btn btn-primary radius" title="占成配置" href="javascript:void(0);" onclick="addConfig('<{$vo['au_id']}>')">占成配置</a>
+            </td>
+          <elseif condition="$utype eq 'agencys'"/>
+              <td><{$vo['au_proportion']}>%</td>
+          </if>
+          <td><{$vo.au_phone}></td>
+          <td><{$vo.au_time}></td>
+          <if condition="$user['au_type'] neq 'agency'">
+          <td><{$vo.au_sum}></td>
+          </if>
+          <td class="td-status">
+              <if condition="$vo.au_status eq '1'">
+                <span class="label label-success radius">启用</span>
+              <elseif condition="$vo.au_status eq '2'" />
+                <span class="label label-success radius">停用</span>
+              </if>
+          </td> 
+          <if condition="$utype">
+          <td class="f-14 td-manage">
+            <if condition="$vo.au_status eq '2'">
+              <a style="text-decoration:none" onclick="member_start(this,'<{$vo.au_id}>')" href="javascript:void(0);" title="启用"><i class="Hui-iconfont"></i></a>
+            <elseif condition="$vo.au_status eq '1'" />
+              <a style="text-decoration:none" onclick="member_starts(this,'<{$vo.au_id}>')" href="javascript:void(0);" title="停用"><i class="Hui-iconfont"></i></a>
+            </if>
+           <a style="text-decoration:none" class="ml-5" onclick="admin_role_add('编辑操作','__MODULE__/User/addUser?uid=<{$vo.au_id}>','800','500')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> 
+           <!-- <a style="text-decoration:none" class="ml-5" onClick="article_del(this,'<{$vo.au_id}>')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a> -->
+           </td>
+          </if>
+        </tr>
+      </volist>
+      <else/>
+        <tr><td  colspan="10" style="text-align: center;">没有数据</td></tr>
+      </if>
+      </tbody>
+    </table>
+    <else/>
+      <table class="table table-border table-bordered table-bg table-hover table-sort">
+      <thead>
+        <tr class="text-c">
+          <th width="80">名称</th>
+          <th width="80">用户类型</th>
+          <th width="80">可用信用额度</th>
+          <th width="120">联系电话</th>
+          <th width="60">创建时间</th>
+          <th width="60">状态</th>
+        </tr>
+      </thead>
+      <tbody>
+      <if condition="$data">
+      <volist name="data" id="vo">
+       <tr class="text-c">
+          <td><{$vo.username}></td>
+           <td>会员</td>
+          <td><{$vo.money}></td>
+          <td><{$vo.mobile}></td>
+          <td><{$vo.reg_date}></td>
+          <td class="td-status">
+              <if condition="$vo.status eq '1'">
+                <span class="label label-success radius">启用</span>
+              <elseif condition="$vo.status eq '2'" />
+                <span class="label label-success radius">停用</span>
+              </if>
+          </td> 
+        </tr>
+      </volist>
+      <else/>
+        <tr><td  colspan="6" style="text-align: center;">没有数据</td></tr>
+      </if>
+      </tbody>
+    </table>
+
+    </if>
+    <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">共 <{$count}> 条</div><div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate"><{$show}></div>
+  </div>
+</div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__PUBLIC__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<!-- <script type="text/javascript" src="__PUBLIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>  -->
+<!-- <script type="text/javascript" src="__PUBLIC__/lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/lib/layp__PUBLIC__/ge/1.2/laypage.js"></script> -->
+<script type="text/javascript">
+// $('.table-sort').dataTable({
+//   "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+//   "bStateSave": true,//状态保存
+//   "aoColumnDefs": [
+//     //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+//     {"orderable":false,"aTargets":[0,8]}// 不参与排序的列
+//   ]
+// });
+function addConfig(uid){
+  // var obj = document.getElementsByName("userid");
+  // var check_val = [];
+  // var uid = '';
+  // for(k in obj){
+  //     if(obj[k].checked)
+  //       // check_val.push(obj[k].value);
+  //       uid+=obj[k].value+',';
+  // }
+  // //var uid=check_val;
+  if(uid.length==''){
+    alert('参数错误！');
+    return false;
+  }else{
+    var title='代理添加分成拦货配置';
+    var url='__MODULE__/User/addConfig?uid='+uid;
+    var w=800;
+    var h=500;
+     layer_show(title,url,w,h);
+  }
+  
+}
+function getUser(e){
+  if(e.length!=''){
+    window.location.href="__MODULE__/User/index?uid="+e;
+  }
+}
+function dataAudit(){
+  var obj = document.getElementsByName("userid");
+  var check_val = [];
+  var uid = '';
+  for(k in obj){
+      if(obj[k].checked)
+        // check_val.push(obj[k].value);
+        uid+=obj[k].value+',';
+  }
+  //var uid=check_val;
+  if(uid.length==''){
+    alert('请选择你要添加信用积分账号');
+    return false;
+  }else{
+    var title='添加信用积分';
+    var url='__MODULE__/User/addMoenys?uid='+uid;
+    var w=800;
+    var h=500;
+     layer_show(title,url,w,300);
+  }
+  
+}
+function dataAudit1(){
+  var obj = document.getElementsByName("userid");
+  var check_val = [];
+  var uid = '';
+  for(k in obj){
+      if(obj[k].checked)
+        // check_val.push(obj[k].value);
+        uid+=obj[k].value+',';
+  }
+  //var uid=check_val;
+  if(uid.length==''){
+    alert('请选择你要清零信用积分账号');
+    return false;
+  }else{
+    // var title='清零信用积分';
+    // var url='__MODULE__/User/addMoenys1?uid='+uid;
+    // var w=800;
+    // var h=500;
+    //  layer_show(title,url,w,h);
+    layer.confirm('确认要清零信用积分吗？',function(index){
+        var urls='__MODULE__/User/delsMoenys';
+        //alert(id)
+        $.ajax({
+            type: 'POST',
+            url: urls,
+            data:{
+            'uid':uid,
+            },
+            dataType: 'json',
+            success: function(data){
+                if(data.code==true){
+                  $(".notic").html(data.titles);
+                  $(".notic").fadeIn().delay(1000).fadeOut(); 
+                }else{
+                  $(".notic").html(data.titles);
+                  $(".notic").fadeIn().delay(1000).fadeOut();     
+                }
+                //location.replace(location.href);
+                setTimeout('location.replace(location.href)',3000);
+            },
+            error:function(data) {
+                console.log(data.msg);
+            },
+        });     
+    });
+  }
+  
+}
+/*-删除*/
+function article_del(obj,id){
+  var obj = document.getElementsByName("userid");
+  var check_val = [];
+  var uid = '';
+  for(k in obj){
+      if(obj[k].checked)
+        // check_val.push(obj[k].value);
+        uid+=obj[k].value+',';
+  }
+  //var uid=check_val;
+  //alert(uid);
+  if(uid.length==''){
+    alert('请选择账号');
+    return false;
+  }else{
+    layer.confirm('确认要删除吗？',function(index){
+        var urls='__MODULE__/User/delsUser';
+        //alert(id)
+        $.ajax({
+            type: 'POST',
+            url: urls,
+            data:{
+            'uid':uid,
+            'status':1,
+            },
+            dataType: 'json',
+            success: function(data){
+               if(data.code==200){
+                    $(".notic").html('删除成功！');
+                    $(".notic").fadeIn().delay(1000).fadeOut(); 
+                }else{
+                  $(".notic").html('删除失败！');
+                  $(".notic").fadeIn().delay(1000).fadeOut(); 
+                }
+                  setTimeout('window.location.href="__MODULE__/User/index";',3000);
+                // $(obj).parents("tr").remove();
+                // layer.msg('已删除!',{icon:1,time:1000});
+            },
+            error:function(data) {
+                console.log(data.msg);
+            },
+        });     
+    });
+  }
+}
+/*用户-启用*/
+
+function member_start(obj,id){
+
+  layer.confirm('确认要启用吗？',function(index){
+    var urls='__MODULE__/User/auditUser';
+    $.ajax({
+      type: 'POST',
+      url: urls,
+      data:{
+        'inID':id,
+        'status':1,
+
+      },
+      dataType: 'json',
+      success: function(data){
+        //$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_starts(this,'+id+')" href="javascript:void(0);" title="停用"><i class="Hui-iconfont"></i></a>');
+        $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onclick="member_starts(this,'+id+')" href="javascript:void(0);" title="停用"><i class="Hui-iconfont"></i></a>');
+
+        $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">启用</span>');
+
+        $(obj).remove();
+
+        layer.msg('启用!',{icon: 6,time:1000});
+
+      },
+
+      error:function(data) {
+        console.log(data.msg);
+
+      },
+
+    });
+
+  });
+
+}
+
+/*用户-启用*/
+
+function member_starts(obj,id){
+  layer.confirm('确认要停用吗？',function(index){
+    var urls='__MODULE__/User/auditUser';
+    $.ajax({
+      type: 'POST',
+      url: urls,
+      data:{
+        'inID':id,
+        'status':2,
+      },
+      dataType: 'json',
+      success: function(data){
+         //$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="member_start(this,'+id+')" href="javascript:void(0);" title="启用"><i class="Hui-iconfont"></i></a>');
+         $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onclick="member_start(this,'+id+')" href="javascript:void(0);" title="启用"><i class="Hui-iconfont"></i></a>');
+         
+        $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">停用</span>');
+        $(obj).remove();
+        layer.msg('停用!',{icon: 6,time:1000});
+      },
+      error:function(data) {
+        console.log(data.msg);
+      },
+
+    });
+
+  });
+
+}
+function admin_role_add(title,url,w,h){
+
+  layer_show(title,url,w,h);
+
+}
+
+
+/*资讯-添加*/
+// function article_add(title,url,w,h){
+//   var index = layer.open({
+//     type: 2,
+//     title: title,
+//     content: url
+//   });
+//   layer.full(index);
+// }
+/*资讯-编辑*/
+function article_edit(title,url,id,w,h){
+  var index = layer.open({
+    type: 2,
+    title: title,
+    content: url
+  });
+  layer.full(index);
+}
+/*资讯-删除*/
+// function article_del(obj,id){
+//   layer.confirm('确认要删除吗？',function(index){
+//     $.ajax({
+//       type: 'POST',
+//       url: '',
+//       dataType: 'json',
+//       success: function(data){
+//         $(obj).parents("tr").remove();
+//         layer.msg('已删除!',{icon:1,time:1000});
+//       },
+//       error:function(data) {
+//         console.log(data.msg);
+//       },
+//     });   
+//   });
+// }
+
+// /*资讯-审核*/
+// function article_shenhe(obj,id){
+//   layer.confirm('审核文章？', {
+//     btn: ['通过','不通过','取消'], 
+//     shade: false,
+//     closeBtn: 0
+//   },
+//   function(){
+//     $(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_start(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
+//     $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
+//     $(obj).remove();
+//     layer.msg('已发布', {icon:6,time:1000});
+//   },
+//   function(){
+//     $(obj).parents("tr").find(".td-manage").prepend('<a class="c-primary" onClick="article_shenqing(this,id)" href="javascript:;" title="申请上线">申请上线</a>');
+//     $(obj).parents("tr").find(".td-status").html('<span class="label label-danger radius">未通过</span>');
+//     $(obj).remove();
+//       layer.msg('未通过', {icon:5,time:1000});
+//   }); 
+// }
+// /*资讯-下架*/
+// function article_stop(obj,id){
+//   layer.confirm('确认要下架吗？',function(index){
+//     $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_start(this,id)" href="javascript:;" title="发布"><i class="Hui-iconfont">&#xe603;</i></a>');
+//     $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已下架</span>');
+//     $(obj).remove();
+//     layer.msg('已下架!',{icon: 5,time:1000});
+//   });
+// }
+
+// /*资讯-发布*/
+// function article_start(obj,id){
+//   layer.confirm('确认要发布吗？',function(index){
+//     $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" onClick="article_stop(this,id)" href="javascript:;" title="下架"><i class="Hui-iconfont">&#xe6de;</i></a>');
+//     $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已发布</span>');
+//     $(obj).remove();
+//     layer.msg('已发布!',{icon: 6,time:1000});
+//   });
+// }
+// /*资讯-申请上线*/
+// function article_shenqing(obj,id){
+//   $(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">待审核</span>');
+//   $(obj).parents("tr").find(".td-manage").html("");
+//   layer.msg('已提交申请，耐心等待审核!', {icon: 1,time:2000});
+// }
+
+</script> 
+
+<div class="notic"></div>
+<style>
+.notic {
+    position: fixed;
+    top: 40%;
+    left: 30%;
+    width: 40%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #000;
+    color: #fff;
+    padding: 30px;
+    opacity: 0.6;
+    border-radius: 10px;
+    display: none;
+    z-index: 29891015;
+}
+</style>
+</body>
+</html>

@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* 你自己的样式 */
+
+td.add-gif {
+    background: url(../images/menu_reduce.png) 1px 10px no-repeat;
+    background-color: #fff;
+    padding-left: 15px;
+}
+td.reduce-gif {
+    background: url(../images/menu_add.png) 1px 10px no-repeat;
+    background-color: #fff;
+    padding-left: 15px;
+}

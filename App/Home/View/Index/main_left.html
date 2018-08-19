@@ -1,0 +1,385 @@
+
+<html><head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" id="css" href="__PUBLIC__/css/members.css">
+<style>html{overflow-y:scroll;}</style>
+
+<!-- <script src="__PUBLIC__/js/common.js" type="text/javascript"></script> -->
+<!-- <script src="__PUBLIC__/js/showorderhtml.js" type="text/javascript"></script>
+
+<script src="__PUBLIC__/js/layer/layer.js" type="text/javascript"></script> -->
+</head>
+<body>
+
+<!--   <{if strtotime($now_time) > strtotime($o_state) && strtotime($now_time) < strtotime($f_state)}>
+
+
+ -->
+
+<!-- 开盘 -->
+<table width="99%" border="0" cellpadding="0" cellspacing="0" align="center">
+<tbody><tr>
+<td style="padding:0px">
+    <script language="JavaScript">
+
+    function checkempty(form, prefix, checkall) {
+      var checkall = checkall ? checkall : 'chkall';
+      for(var i = 0; i < form.elements.length; i++) {
+        var e = form.elements[i];
+        if(e.name && e.name != checkall && (!prefix || (prefix && e.name.match(prefix)))) {
+          if(e.checked ){return true;break; }
+        }
+      }
+      return false;
+    }
+
+  </script>
+
+
+  <audio id="tipsmusic" preload="auto">
+    <source src="__PUBLIC__/images/tipsmusic.ogg" type="audio/ogg">
+    <source src="__PUBLIC__/images/tipsmusic.mp3" type="audio/mpeg">
+  </audio> 
+
+
+    <table id="tablehtml" width="100%" border="0" cellpadding="0" cellspacing="0" class="soon_b">
+    <tbody><tr class="header_left_b">
+    <td colspan="7" width="88%" align="center" style="border-right: 0px;">下注框</td>
+    </tr>
+    <tr>
+    <td colspan="7">
+    <div id="showorderhtml">
+    <form method="get" name="datamembers" action="./index.php">
+        <input type="hidden" name="a" value="main_left">
+        <input type="hidden" name="action" value="tuima">
+
+
+    <table width="100%" style="border:none" border="0" cellpadding="0" cellspacing="0" class="soon_b_no">
+    <tbody>
+
+    <tr class="soon_head" style="height:100%;line-height:23px;">
+    <td width="8%">彩种</td>
+    <!-- <td width="8%">用户</td> -->
+    <td width="18%">注单编号</td>
+    <td width="16%">号码</td>
+    <td width="15%">赔率</td>
+    <td width="13%">金额</td>
+    <td width="10%">状态</td>
+    <td width="12%">
+    全选
+    <input type="checkbox" name="chkall"  id="chkall" class="checkbox">
+    <input class="button" style="padding: 0 1px;line-height: 22px;;height: 22px;height: 22px !important;" type="submit" name="ordertuima_del_button" onClick="if(checkempty(this.form, 'idarray')){window.parent.parent._OldOrderPrint=[];this.disabled=true;datamembers.ordertuima_del.value='ordertuima_del';datamembers.submit();}" value="退码">
+    </td>
+    </tr>
+
+<!--   <{foreach from=$betlist item=v key=k}>
+  <{if $v['id']}> -->
+  <if condition="$data">
+  <volist name="data" id="v">
+    <!-- <tr class="soon_tuima" style="height:28px;line-height:19px;"> -->
+    <tr class="soon_hot" style="height:28px;line-height:19px;">
+    <td>七星彩</td>
+    <td><{$v.or_numbers}></td>
+    <td><{$v.or_number}></td>
+    <td class="soon_b_B soon_b_f2"><{$v.or_loss}> 
+    <if condition="$v.or_type eq 1">
+    <span class="soon_b_f3">现</span>
+    </if>
+    </td>
+    <td class="soon_b_B soon_b_f1"><{$v['or_money']}></td>
+    <td>成功</td>
+    <td>
+    <input type="hidden" name="money_<{$v['or_id']}>" value="<{$v['or_money']}>" class="checkbox">
+      <input type="hidden" name="wanfa_<{$v['or_id']}>" value="" class="checkbox">
+      <input type="hidden" name="odds_<{$v['or_id']}>" value="" class="checkbox">
+          <input type="hidden" name="odds_<{$v['or_id']}>" value="" class="checkbox">
+  <input type="checkbox" name="ma[]" value="<{$v['or_id']}>" class="checkbox" cd='ma'></td>
+    </tr>
+    </volist>
+  <else/>
+<!--   <{else}> -->
+   <tr style="height:28px;line-height:19px;">
+    <td></td>
+    <td>--</td>
+    <td>--</td>
+    <td class="soon_b_B soon_b_f2">--</td>
+    <td class="soon_b_B">--</td>
+    <td class="soon_b_B soon_b_f1">--</td>
+    <td>--</td>
+    <td>--</td>
+    </tr>
+  </if>
+<!--   <{/if}>
+  <{/foreach}> -->
+
+
+    </tbody></table>
+    </form></div></td></tr>
+  <script>
+     
+     
+     //全选
+      $("#chkall").click(function () {//全选
+        if($(this).attr("checked")== 'checked'){
+          $("input[type='checkbox'][cd='ma']").attr("checked", true);
+        }else{
+          $("input[type='checkbox'][cd='ma']").attr("checked", false);
+        }
+      });
+  </script>
+    </tbody></table>
+
+
+<form  id="hform" >
+  <table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td height="6"></td></tr><tr></tr></tbody></table>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+
+  <tbody><tr>
+  <td width="100%">
+    <table width="100%" border="0" height="80" cellpadding="0" cellspacing="0" class="left_b">
+    <tbody><tr class="header_left_b">
+    <td colspan="7">
+    四字现<input type="checkbox" name="xuanxiang" value="1" onclick="ab()" />
+    全转<input type="checkbox"  name="xuanxiang" value="2" onclick="ab()" />
+    </td>
+    </tr><tr>
+
+    </tr><tr>
+      <td width="45" class="number_web">号码</td>
+      <td width="90">
+      <input type="text" onpaste="return false" name="number" id="number" class="number" maxlength="4" >
+
+      </td>
+      <td width="15" class="number_web">
+      <span id="showsizixian" style="display:none;color: red;"><b>现</b></span></td>
+      <td width="45" class="number_web">金额</td>
+      <td width="90">
+
+
+      <input type="text" name="money" id="money" class="number check_input" maxlength="8" ></td>
+      <td width="90"><button type="button" onclick="checks()" class="number_w"><span id="soonsendstr">确认下注</span></button></td>
+            <td width="*" style="font-size:16px;font-weight: bold;">
+            <div id="showamt"><b>赔率</b>:<font color="#0000FF" id="odds"></font>&nbsp;&nbsp;<b>可下</b>:<font color="red" id="kexia"></font></div>
+            <div id="aa"></div>
+      <span id="countnum" style="display:none"></span><span id="countmoney" style="display:none"></span></td>
+      <input type="hidden" name="odds" value="">
+      <input type="hidden" name="limit" value="">
+          </tr><tr>
+    </tr></tbody></table>
+  </td>
+    </tr><tr>
+  </tr></tbody></table>
+
+</form>
+<script>
+    function checks(){
+      var number=$('input[name="number"]').val();
+      var money=$('input[name="money"]').val();
+      var odds=$('input[name="odds"]').val();
+      var limit=$('input[name="limit"]').val();
+      var r=document.getElementsByName("xuanxiang"); 
+        for(var i=0;i<r.length;i++){
+             if(r[i].checked){
+             //alert(r[i].value+","+r[i].nextSibling.nodeValue);
+             var types=r[i].value;
+           }
+        }   
+      if(number==''){
+          $(".notic").html('号码只允许数字和X号！');
+          $(".notic").fadeIn().delay(1000).fadeOut();
+          return false;
+      }else if(number.length==1){
+          $(".notic").html('没有该号码！');
+          $(".notic").fadeIn().delay(1000).fadeOut();
+          return false;
+      }else{
+        var dataStatus=findOrders(number,types);
+        if(dataStatus==true){
+          $(".notic").html("没有该号码！");
+          $(".notic").fadeIn().delay(1000).fadeOut();
+          return false; 
+        } 
+      } 
+      if(money==''){
+          $(".notic").html('金额必须为数字！');
+          $(".notic").fadeIn().delay(1000).fadeOut();
+          return false;
+      }else if(money<'0.5'){
+          $(".notic").html('下注金额不能低于0.5！');
+          $(".notic").fadeIn().delay(1000).fadeOut();
+          return false;
+      }else if(money>'2000'){
+          $(".notic").html('不能超出单注上限2000！');
+          $(".notic").fadeIn().delay(1000).fadeOut();
+          return false;
+      }
+       var urls="/index.php/Index/addOrder1";
+        $.ajax({
+            url: urls,
+            type:"POST",
+            data:{
+                'money':money,
+                'number':number,
+                'types':types,
+                'odds':odds,
+            },
+            async: false,
+            dataType:'json',
+          success: function (data) {
+              if(data.code==true){
+                $(".notic").html(data.titles);
+                $(".notic").fadeIn().delay(1000).fadeOut();
+              }else{
+                $(".notic").html(data.titles);
+                $(".notic").fadeIn().delay(1000).fadeOut();
+
+              }
+              //setTimeout('window.location.href="/index.php/Index";',3000);
+              window.parent.menu.location.reload();
+              window.parent.soonorder.location.reload();
+            }
+
+          });
+
+
+
+
+    }
+    $('#money').click(function(){
+      var number=$('input[name="number"]').val();
+      var r=document.getElementsByName("xuanxiang"); 
+        for(var i=0;i<r.length;i++){
+             if(r[i].checked){
+             //alert(r[i].value+","+r[i].nextSibling.nodeValue);
+             var types=r[i].value;
+           }
+        }
+      findOrders(number,types);
+    });
+    //检查号码是否符合规矩
+    function findOrders(number,types){
+        var returns=false;
+        var urls="/index.php/Index/findOrder1";
+        $.ajax({
+            url: urls,
+            type:"POST",
+            data:{
+                'haoma':number,
+                'types':types,
+            },
+            async: false,
+            dataType:'json',
+          success: function (data) {
+              if(data.code==true){
+                returns=true;
+              }else{
+                returns=false;
+                $('#odds').text(data.datas.co_loss1);
+                $('#kexia').text(data.datas.co_limit);
+                $('input[name="odds"]').val(data.datas.co_loss1);
+                $('input[name="limit"]').val(data.datas.co_limit);
+
+              }
+            }
+
+          });
+        return returns;
+    }
+
+</script>
+
+
+  <object id="Player" type="application/x-ms-wmp" width="0" height="0"><param name="autoStart" value="false"><param name="url" value="msg2.wav"></object>
+
+
+</td>
+</tr><tr>
+</tr></tbody></table>
+
+
+
+ <!-- 封盘 -->
+<!-- <{else}>
+    
+<br><br><br>
+  <table width="50%" border="0" align="center" cellpadding="0" cellspacing="0" class="left_b" style="table-layout: fixed">
+  <tbody><tr class="header_left_b">
+  <td>系统提示</td>
+  </tr><tr>
+  </tr><tr><td style="height:100px;text-align:center;font-size:18px">正在开盘中，请等待...
+  </td></tr><tr>
+  </tr></tbody></table>
+<{/if}> -->
+
+
+
+<script type="text/javascript">  
+    $(function () {  
+        $("#number").keyup(function () {  
+            //如果输入非数字，则替换为''，如果输入数字，则在每4位之后添加一个空格分隔  
+            this.value = this.value.replace(/[^\d]/g, 'x');  
+        }) 
+        $("#money").keyup(function () {  
+            //如果输入非数字，则替换为''，如果输入数字，则在每4位之后添加一个空格分隔  
+            this.value = this.value.replace(/[^\d]/g, '.');  
+        })  
+    });  
+</script> 
+<script type="text/javascript"> 
+  $(function(){ 
+    $(":checkbox").click(function(){ 
+    if($(this).attr("checked")!=undefined) 
+    { 
+    $(this).siblings().attr("checked",false); 
+    $(this).attr("checked",true); 
+    } 
+    var values=$(this).val();
+    if(values==1){
+      $('#showsizixian').show();
+    }else{
+      $('#showsizixian').hide(); 
+    }
+  }); 
+  }); 
+
+</script>
+<div class="notic"></div>
+
+<style>
+
+.notic {
+
+    position: fixed;
+
+    top: 40%;
+
+    left: 30%;
+
+    width: 40%;
+
+    box-sizing: border-box;
+
+    margin: 0 auto;
+
+    text-align: center;
+
+    background-color: #000;
+
+    color: #fff;
+
+    padding: 30px;
+
+    opacity: 0.6;
+
+    border-radius: 10px;
+
+    display: none;
+
+    z-index: 999;
+
+}
+
+</style>
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+</body></html>

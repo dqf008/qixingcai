@@ -1,0 +1,756 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>后台管理</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+</head>
+<body>
+<header class="navbar-wrapper">
+<div style="width:100%;background:#373b43;height:50px">
+<div class="middle" style="margin:0px 100px">
+        <!-- <strong class="red f16">七星彩</strong> -->
+       <!--  <marquee scrollamount="2" class="marquee"><span>本公司新增包牌功能,敬请留意！抄数助手请登陆xxxxx.com注册账号，登陆之后选择抄数功能-7星抄数助手，下载抄数助手，再点击启用.欢迎光临. 管理本公司星期一，三，六上午12:00开盘。开奖日当天20:20分封盘！
+【提示】本公司提供转换赔率功能,请各会员在【会员资料】里设置使用。        
+●●●【温馨提示】各位会员在下注确定后请到“下注明细”里确认注单，一切注单结算以下注明细里资料为准！</span></marquee> -->
+ <marquee scrollamount="2" class="marquee" style="margin-top:10px"><span><{$data['n_content']}></span></marquee>
+    </div>
+    <div class="right white" id="systime" style="position: absolute;right: 125px;top: 5px;color:#fff">
+    	 <if condition="$status eq 1">
+	            <span id="TimeLabel1">离封盘时间还有：&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+	            <span id="TimeLabel2">8小时48分38秒</span>
+	            <else/>
+	            <div id="jnkc"></div>
+					<script>setInterval("jnkc.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+ 
+					</script>
+	            </if>
+    </div>
+</div>
+<div class="navbar navbar-black">
+		<div class="container cl">
+			<!-- <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui前端框架</a> -->
+			<!-- <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">&nbsp;&nbsp;</a> -->
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs" style="margin-left:0px"> <strong class="red f16">七星彩</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<!-- <a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a> -->
+			<nav class="nav navbar-nav nav-collapse" role="navigation" id="Hui-navbar">
+				<ul class="cl">
+					<li><a id="msg"  data-href="__MODULE__/Index/mission" data-title="期号管理" onclick="Hui_admin_tab(this)" href="javascript:;" title="期号管理">期号管理</a></li>	
+					<li><a id="msg"  data-href="__MODULE__/Index/odds" data-title="号码赔率" onclick="Hui_admin_tab(this)" href="javascript:;" title="号码赔率">号码赔率</a></li>	
+					<!-- <li class="current"><a href="__MODULE__/Data">总货明细</a></li> -->
+					<!-- <li><a id="msg"  data-href="__MODULE__/Data/index" data-title="总货明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="总货明细">总货明细</a></li> -->
+					<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">总货明细 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a id="msg"  data-href="__MODULE__/Data/index" data-title="总货明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="总货明细">总货明细</a></li>
+							<li><a id="msg"  data-href="__MODULE__/Data/lotteryOrder" data-title="中奖明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="中奖明细">中奖明细</a></li> 
+							<!-- <li><a id="msg"  data-href="__MODULE__/Data/canvassOrder" data-title="拦货明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="拦货明细">拦货明细</a></li>
+							<li><a id="msg"  data-href="__MODULE__/Data" data-title="打包拦货白单数据" onclick="Hui_admin_tab(this)" href="javascript:;" title="打包拦货白单数据">打包拦货白单数据</a></li> -->
+						</ul>
+					</li>
+
+					<!-- <li><a id="msg"  data-href="__MODULE__/Datas/index" data-title="分类账" onclick="Hui_admin_tab(this)" href="javascript:;" title="分类账">分类账</a></li> -->
+					<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">分类账管理 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a id="msg"  data-href="__MODULE__/Datas/index" data-title="期数分类账" onclick="Hui_admin_tab(this)" href="javascript:;" title="期数分类账">期数分类账</a></li>
+							<!-- <li><a id="msg"  data-href="__MODULE__/Datas/index" data-title="日分类账" onclick="Hui_admin_tab(this)" href="javascript:;" title="日分类账">日分类账</a></li>
+							<li><a id="msg"  data-href="__MODULE__/Datas/contribute" data-title="月分类账" onclick="Hui_admin_tab(this)" href="javascript:;" title="月分类账">月分类账</a></li> -->
+							<li><a id="msg"  data-href="__MODULE__/Datas/contribute" data-title="贡献度" onclick="Hui_admin_tab(this)" href="javascript:;" title="贡献度">贡献度</a></li>
+							<!-- <li><a data-href="member-list.html" data-title="贡献度" href="javascript:;" onclick="Hui_admin_tab(this)">贡献度</a></li> -->
+							<!-- <li><a href="#">二级导航<i class="arrow Hui-iconfont">&#xe6d7;</i></a>
+								<ul class="menu">
+									<li><a href="javascript:;">三级菜单<i class="arrow Hui-iconfont">&#xe6d7;</i></a>
+										<ul class="menu">
+											<li><a href="javascript:;">四级菜单</a></li>
+											<li><a href="javascript:;">四级菜单</a></li>
+											<li><a href="javascript:;">四级菜单</a></li>
+										</ul>
+									</li>
+									<li><a href="#">三级导航</a></li>
+								</ul>
+							</li>
+							<li><a href="#">二级导航</a></li>
+							<li class="disabled"><a href="javascript:;">二级菜单</a></li> -->
+						</ul>
+					</li>
+					<!-- <li><a id="msg"  data-href="__MODULE__/Data/reports" data-title="报表" onclick="Hui_admin_tab(this)" href="javascript:;" title="报表">报表</a></li> -->
+					<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">报表 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a id="msg"  data-href="__MODULE__/Data/reports" data-title="日报表" onclick="Hui_admin_tab(this)" href="javascript:;" title="日报表">日报表</a></li>
+							<li><a id="msg"  data-href="__MODULE__/Data/reports1" data-title="月报表" onclick="Hui_admin_tab(this)" href="javascript:;" title="月报表">月报表</a></li>
+						</ul>
+					</li>
+					<li><a id="msg"  data-href="__MODULE__/Data/lists" data-title="开奖号码" onclick="Hui_admin_tab(this)" href="javascript:;" title="开奖号码">开奖号码</a></li>
+					<if condition="$Think.session.utype eq 'agency'">
+						<li><a id="msg"  data-href="__MODULE__/Data/user1" data-title="下级管理" onclick="Hui_admin_tab(this)" href="javascript:;" title="下级管理">下级管理</a></li>
+					<else/>
+						<li><a id="msg"  data-href="__MODULE__/Data/user" data-title="下级管理" onclick="Hui_admin_tab(this)" href="javascript:;" title="下级管理">下级管理</a></li>
+					</if>
+					
+
+					<li><a id="msg"  data-href="__MODULE__/Log/index" data-title="日志管理" onclick="Hui_admin_tab(this)" href="javascript:;" title="日志管理">日志管理</a></li>
+					<!-- <li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">日志管理 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a id="msg"  data-href="__MODULE__/Log/index" data-title="越级操作日志" onclick="Hui_admin_tab(this)" href="javascript:;" title="越级操作日志">越级操作日志</a></li>
+							<li><a id="msg"  data-href="__MODULE__/Log/index" data-title="自己操作日志" onclick="Hui_admin_tab(this)" href="javascript:;" title="自己操作日志">自己操作日志</a></li>
+							<li><a id="msg"  data-href="__MODULE__/Log/order" data-title="拦货金额日志" onclick="Hui_admin_tab(this)" href="javascript:;" title="拦货金额日志">拦货金额日志</a></li>
+							<li><a id="msg"  data-href="__MODULE__/Log/user" data-title="会员快选日志" onclick="Hui_admin_tab(this)" href="javascript:;" title="会员快选日志">会员快选日志</a></li>
+							<li><a id="msg"  data-href="__MODULE__/Log/users" data-title="会员二定包牌汇总表日志" onclick="Hui_admin_tab(this)" href="javascript:;" title="会员二定包牌汇总表日志">会员二定包牌汇总表日志</a></li>
+							<li><a data-href="member-list.html" data-title="贡献度" href="javascript:;" onclick="Hui_admin_tab(this)">贡献度</a></li>
+							<li><a href="#">二级导航<i class="arrow Hui-iconfont">&#xe6d7;</i></a>
+								<ul class="menu">
+									<li><a href="javascript:;">三级菜单<i class="arrow Hui-iconfont">&#xe6d7;</i></a>
+										<ul class="menu">
+											<li><a href="javascript:;">四级菜单</a></li>
+											<li><a href="javascript:;">四级菜单</a></li>
+											<li><a href="javascript:;">四级菜单</a></li>
+										</ul>
+									</li>
+									<li><a href="#">三级导航</a></li>
+								</ul>
+							</li>
+							<li><a href="#">二级导航</a></li>
+							<li class="disabled"><a href="javascript:;">二级菜单</a></li>
+						</ul>
+					</li> -->
+					<li><a id="msg"  data-href="__MODULE__/Data/explain" data-title="规则说明" onclick="Hui_admin_tab(this)" href="javascript:;" title="规则说明">规则说明</a></li>
+					<li><a id="msg"  data-href="__MODULE__/Index/mission" data-title="通知公告" onclick="Hui_admin_tab(this)" href="javascript:;" title="通知公告">通知公告</a></li>
+					<li><a id="msg"  data-href="__MODULE__/Index/" data-title="销售统计" onclick="Hui_admin_tab(this)" href="javascript:;" title="销售统计">销售统计</a></li>
+					<!-- <li><a id="msg"  data-href="__MODULE__/Data/deploy" data-title="设置" onclick="Hui_admin_tab(this)" href="javascript:;" title="设置">设置</a></li> -->
+					<!-- <li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">资讯管理</a></li> -->
+					<!-- <li><a href="#">扩展</a></li> -->
+					<!-- <li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">一级导航 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="#">二级导航</a></li>
+							<li><a data-href="member-list.html" data-title="会员列表" href="javascript:;" onclick="Hui_admin_tab(this)">会员列表</a></li>
+							<li><a href="#">二级导航<i class="arrow Hui-iconfont">&#xe6d7;</i></a>
+								<ul class="menu">
+									<li><a href="javascript:;">三级菜单<i class="arrow Hui-iconfont">&#xe6d7;</i></a>
+										<ul class="menu">
+											<li><a href="javascript:;">四级菜单</a></li>
+											<li><a href="javascript:;">四级菜单</a></li>
+											<li><a href="javascript:;">四级菜单</a></li>
+										</ul>
+									</li>
+									<li><a href="#">三级导航</a></li>
+								</ul>
+							</li>
+							<li><a href="#">二级导航</a></li>
+							<li class="disabled"><a href="javascript:;">二级菜单</a></li>
+						</ul>
+					</li>
+					<li><a href="#">联系我们</a></li> -->
+				</ul>
+			</nav>
+			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+				<ul class="cl">
+					<if condition="$Think.session.utype eq 'partner'">
+					<li>股东管理员</li>
+					<elseif condition="$Think.session.utype eq 'agencys'" />
+					<li>总代理管理员</li>
+					<elseif condition="$Think.session.utype eq 'agency'" />
+					<li>代理管理员</li>
+					<elseif condition="$Think.session.utype eq 'admin'" />
+					<li>超级管理员</li>
+					</if>
+					<li class="dropDown dropDown_hover">
+						<a href="#" class="dropDown_A"><{$Think.session.uname}><i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
+							<!-- <li><a href="#">切换账户</a></li> -->
+							<li><a href="__MODULE__/Login/logout">退出</a></li>
+					</ul>
+				</li>
+					<!-- <li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+					<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+							<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+							<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+							<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+							<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+							<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
+					</ul>
+				</li> -->
+			</ul>
+		</nav>
+			<nav class="navbar-userbar hidden-xs">
+				
+			</nav>
+		</div>
+	</div>
+	<!-- <div class="navbar navbar-fixed-top">
+		<div class="container-fluid cl"> <a class="logo navbar-logo f-l mr-10 hidden-xs" href="/aboutHui.shtml">H-ui.admin</a> <a class="logo navbar-logo-m f-l mr-10 visible-xs" href="/aboutHui.shtml">H-ui</a> 
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs">3.0</span> 
+			<a aria-hidden="false" class="nav-toggle Hui-iconfont visible-xs" href="javascript:;">&#xe667;</a>
+			<nav class="nav navbar-nav">
+				<ul class="cl">
+					<li class="dropDown dropDown_hover"><a href="javascript:;" class="dropDown_A"><i class="Hui-iconfont">&#xe600;</i> 新增 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;" onclick="article_add('添加资讯','article-add.html')"><i class="Hui-iconfont">&#xe616;</i> 资讯</a></li>
+							<li><a href="javascript:;" onclick="picture_add('添加资讯','picture-add.html')"><i class="Hui-iconfont">&#xe613;</i> 图片</a></li>
+							<li><a href="javascript:;" onclick="product_add('添加资讯','product-add.html')"><i class="Hui-iconfont">&#xe620;</i> 产品</a></li>
+							<li><a href="javascript:;" onclick="member_add('添加用户','member-add.html','','510')"><i class="Hui-iconfont">&#xe60d;</i> 用户</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+				<ul class="cl">
+					<li>超级管理员</li>
+					<li class="dropDown dropDown_hover">
+						<a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
+							<li><a href="#">切换账户</a></li>
+							<li><a href="#">退出</a></li>
+					</ul>
+				</li>
+					<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+					<li id="Hui-skin" class="dropDown right dropDown_hover"> <a href="javascript:;" class="dropDown_A" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+							<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+							<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+							<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+							<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+							<li><a href="javascript:;" data-val="orange" title="橙色">橙色</a></li>
+					</ul>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div> -->
+</header>
+
+<!-- <aside class="Hui-aside">
+	<div class="menu_dropdown bk_2">
+		<dl id="menu-article">
+			<dt><i class="Hui-iconfont">&#xe616;</i> 资讯管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="article-list.html" data-title="资讯管理" href="javascript:void(0)">资讯管理</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-picture">
+			<dt><i class="Hui-iconfont">&#xe613;</i> 图片管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="picture-list.html" data-title="图片管理" href="javascript:void(0)">图片管理</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-product">
+			<dt><i class="Hui-iconfont">&#xe620;</i> 产品管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="product-brand.html" data-title="品牌管理" href="javascript:void(0)">品牌管理</a></li>
+					<li><a data-href="product-category.html" data-title="分类管理" href="javascript:void(0)">分类管理</a></li>
+					<li><a data-href="product-list.html" data-title="产品管理" href="javascript:void(0)">产品管理</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-comments">
+			<dt><i class="Hui-iconfont">&#xe622;</i> 评论管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="http://h-ui.duoshuo.com/admin/" data-title="评论列表" href="javascript:;">评论列表</a></li>
+					<li><a data-href="feedback-list.html" data-title="意见反馈" href="javascript:void(0)">意见反馈</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-member">
+			<dt><i class="Hui-iconfont">&#xe60d;</i> 会员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="member-list.html" data-title="会员列表" href="javascript:;">会员列表</a></li>
+					<li><a data-href="member-del.html" data-title="删除的会员" href="javascript:;">删除的会员</a></li>
+					<li><a data-href="member-level.html" data-title="等级管理" href="javascript:;">等级管理</a></li>
+					<li><a data-href="member-scoreoperation.html" data-title="积分管理" href="javascript:;">积分管理</a></li>
+					<li><a data-href="member-record-browse.html" data-title="浏览记录" href="javascript:void(0)">浏览记录</a></li>
+					<li><a data-href="member-record-download.html" data-title="下载记录" href="javascript:void(0)">下载记录</a></li>
+					<li><a data-href="member-record-share.html" data-title="分享记录" href="javascript:void(0)">分享记录</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-admin">
+			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="admin-role.html" data-title="角色管理" href="javascript:void(0)">角色管理</a></li>
+					<li><a data-href="admin-permission.html" data-title="权限管理" href="javascript:void(0)">权限管理</a></li>
+					<li><a data-href="admin-list.html" data-title="管理员列表" href="javascript:void(0)">管理员列表</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-tongji">
+			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="charts-1.html" data-title="折线图" href="javascript:void(0)">折线图</a></li>
+					<li><a data-href="charts-2.html" data-title="时间轴折线图" href="javascript:void(0)">时间轴折线图</a></li>
+					<li><a data-href="charts-3.html" data-title="区域图" href="javascript:void(0)">区域图</a></li>
+					<li><a data-href="charts-4.html" data-title="柱状图" href="javascript:void(0)">柱状图</a></li>
+					<li><a data-href="charts-5.html" data-title="饼状图" href="javascript:void(0)">饼状图</a></li>
+					<li><a data-href="charts-6.html" data-title="3D柱状图" href="javascript:void(0)">3D柱状图</a></li>
+					<li><a data-href="charts-7.html" data-title="3D饼状图" href="javascript:void(0)">3D饼状图</a></li>
+			</ul>
+		</dd>
+	</dl>
+		<dl id="menu-system">
+			<dt><i class="Hui-iconfont">&#xe62e;</i> 系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a data-href="system-base.html" data-title="系统设置" href="javascript:void(0)">系统设置</a></li>
+					<li><a data-href="system-category.html" data-title="栏目管理" href="javascript:void(0)">栏目管理</a></li>
+					<li><a data-href="system-data.html" data-title="数据字典" href="javascript:void(0)">数据字典</a></li>
+					<li><a data-href="system-shielding.html" data-title="屏蔽词" href="javascript:void(0)">屏蔽词</a></li>
+					<li><a data-href="system-log.html" data-title="系统日志" href="javascript:void(0)">系统日志</a></li>
+			</ul>
+		</dd>
+	</dl>
+</div>
+</aside> -->
+<!-- <div class="dislpayArrow hidden-xs"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div> -->
+<section class="Hui-article-box" style="left:2px;top: 95px;">
+	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+		<div class="Hui-tabNav-wp">
+			<ul id="min_title_list" class="acrossTab cl">
+				<li class="active">
+					<span title="我的桌面" data-href="welcome.html">我的桌面</span>
+					<em></em></li>
+		</ul>
+	</div>
+		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+</div>
+	<div id="iframe_box" class="Hui-article">
+		<div class="show_iframe">
+			<div style="display:none" class="loading"></div>
+			<div class="page-container">
+	<!-- <p class="f-20 text-success">欢迎使用H-ui.admin <span class="f-14">3.0</span>后台模版！</p> -->
+	<p>登录次数：18 </p>
+	<p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>
+
+</div>
+	</div>
+</div>
+</section>
+
+<div class="contextMenu" id="Huiadminmenu">
+	<ul>
+		<li id="closethis">关闭当前 </li>
+		<li id="closeall">关闭全部 </li>
+</ul>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__PUBLIC__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__PUBLIC__/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script language="javascript">
+//alert(<{$status}>);
+if(<{$status}> ==1){
+ 	var nCount = <{$time}>;
+ }
+  var nCounts = <{$time1}>;
+  var t2='<{$titles1}>';
+  console.log(t2);
+
+
+
+
+// function FreshTime()
+// {
+	nCount = nCount-1;
+	
+	var nTime = nCount;
+
+	
+	var nDay = parseInt(nTime/(60*60*24));
+	nTime = nTime%(60*60*24);
+	
+	var nHour = parseInt(nTime/(60*60));
+	nTime = nTime%(60*60);
+	
+	var nMinute = parseInt(nTime/60);
+	nSecond = nTime%60;
+	
+	var strTime;
+	if(nDay>0)
+	{
+		strTime = nDay + "天";
+		strTime = strTime + nHour + "小时";
+		if(nMinute>9)
+			strTime = strTime + nMinute + "分";
+		else
+			strTime = strTime + "0" + nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else if(nHour>0)
+	{
+		strTime = nHour + "小时";
+		if(nMinute>9)
+			strTime = strTime + nMinute + "分";
+		else
+			strTime = strTime + "0" + nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else if(nMinute>0)
+	{
+		strTime = nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else
+	{
+		strTime = nSecond + "秒";
+	}
+	if(nCount<1){
+	 nCount = nCounts;
+	 t1=t2;
+	setTimeout("FreshTime()", 1000);
+}else{
+	setTimeout("FreshTime()", 1000);
+	var t1='<{$titles}>';
+	
+}
+
+	
+	document.getElementById('TimeLabel1').innerHTML = t1;//"离封盘时间还有:"
+	document.getElementById('TimeLabel2').innerHTML = strTime;
+//}
+ function FreshTime()
+ {
+ 	
+	nCount = nCount-1;
+	
+	var nTime = nCount;
+	
+	var nDay = parseInt(nTime/(60*60*24));
+	nTime = nTime%(60*60*24);
+	
+	var nHour = parseInt(nTime/(60*60));
+	nTime = nTime%(60*60);
+	
+	var nMinute = parseInt(nTime/60);
+	nSecond = nTime%60;
+	
+	var strTime;
+	if(nDay>0)
+	{
+		strTime = nDay + "天";
+		strTime = strTime + nHour + "小时";
+		if(nMinute>9)
+			strTime = strTime + nMinute + "分";
+		else
+			strTime = strTime + "0" + nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else if(nHour>0)
+	{
+		strTime = nHour + "小时";
+		if(nMinute>9)
+			strTime = strTime + nMinute + "分";
+		else
+			strTime = strTime + "0" + nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else if(nMinute>0)
+	{
+		strTime = nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else
+	{
+		strTime = nSecond + "秒";
+	}
+	
+  // var nCounts = <{$time1}>;
+  // var t2='<{$titles1}>';
+if(nCount<1){
+	 nCount = nCounts;
+	 t1=t2;
+	setTimeout("FreshTime()", 1000);
+}else{
+	setTimeout("FreshTime()", 1000);
+	//var t1='<{$titles}>';
+	
+}
+	
+	document.getElementById('TimeLabel1').innerHTML = t1;//"离封盘时间还有:"
+	document.getElementById('TimeLabel2').innerHTML = strTime;
+}
+</script>
+<script language="javascript">
+// //alert(<{$status}>);
+// if(<{$status}> ==1){
+// 	var nCount = <{$time}>
+// }
+
+
+// // function FreshTime()
+// // {
+// 	nCount = nCount-1;
+	
+// 	var nTime = nCount;
+	
+// 	var nDay = parseInt(nTime/(60*60*24));
+// 	nTime = nTime%(60*60*24);
+	
+// 	var nHour = parseInt(nTime/(60*60));
+// 	nTime = nTime%(60*60);
+	
+// 	var nMinute = parseInt(nTime/60);
+// 	nSecond = nTime%60;
+	
+// 	var strTime;
+// 	if(nDay>0)
+// 	{
+// 		strTime = nDay + "天";
+// 		strTime = strTime + nHour + "小时";
+// 		if(nMinute>9)
+// 			strTime = strTime + nMinute + "分";
+// 		else
+// 			strTime = strTime + "0" + nMinute + "分";
+// 		if(nSecond>9)
+// 			strTime = strTime + nSecond + "秒";
+// 		else
+// 			strTime = strTime + "0" + nSecond + "秒";
+// 	}
+// 	else if(nHour>0)
+// 	{
+// 		strTime = nHour + "小时";
+// 		if(nMinute>9)
+// 			strTime = strTime + nMinute + "分";
+// 		else
+// 			strTime = strTime + "0" + nMinute + "分";
+// 		if(nSecond>9)
+// 			strTime = strTime + nSecond + "秒";
+// 		else
+// 			strTime = strTime + "0" + nSecond + "秒";
+// 	}
+// 	else if(nMinute>0)
+// 	{
+// 		strTime = nMinute + "分";
+// 		if(nSecond>9)
+// 			strTime = strTime + nSecond + "秒";
+// 		else
+// 			strTime = strTime + "0" + nSecond + "秒";
+// 	}
+// 	else
+// 	{
+// 		strTime = nSecond + "秒";
+// 	}
+	
+// 	document.getElementById('TimeLabel1').innerHTML = "离封盘时间还有：&nbsp;&nbsp;&nbsp;&nbsp;";
+// 	document.getElementById('TimeLabel2').innerHTML = strTime;
+	
+// 	setTimeout("FreshTime()", 1000);
+// //}
+//  function FreshTime()
+//  {
+// 	nCount = nCount-1;
+	
+// 	var nTime = nCount;
+	
+// 	var nDay = parseInt(nTime/(60*60*24));
+// 	nTime = nTime%(60*60*24);
+	
+// 	var nHour = parseInt(nTime/(60*60));
+// 	nTime = nTime%(60*60);
+	
+// 	var nMinute = parseInt(nTime/60);
+// 	nSecond = nTime%60;
+	
+// 	var strTime;
+// 	if(nDay>0)
+// 	{
+// 		strTime = nDay + "天";
+// 		strTime = strTime + nHour + "小时";
+// 		if(nMinute>9)
+// 			strTime = strTime + nMinute + "分";
+// 		else
+// 			strTime = strTime + "0" + nMinute + "分";
+// 		if(nSecond>9)
+// 			strTime = strTime + nSecond + "秒";
+// 		else
+// 			strTime = strTime + "0" + nSecond + "秒";
+// 	}
+// 	else if(nHour>0)
+// 	{
+// 		strTime = nHour + "小时";
+// 		if(nMinute>9)
+// 			strTime = strTime + nMinute + "分";
+// 		else
+// 			strTime = strTime + "0" + nMinute + "分";
+// 		if(nSecond>9)
+// 			strTime = strTime + nSecond + "秒";
+// 		else
+// 			strTime = strTime + "0" + nSecond + "秒";
+// 	}
+// 	else if(nMinute>0)
+// 	{
+// 		strTime = nMinute + "分";
+// 		if(nSecond>9)
+// 			strTime = strTime + nSecond + "秒";
+// 		else
+// 			strTime = strTime + "0" + nSecond + "秒";
+// 	}
+// 	else
+// 	{
+// 		strTime = nSecond + "秒";
+// 	}
+	
+// 	document.getElementById('TimeLabel1').innerHTML = "离封盘时间还有：&nbsp;&nbsp;&nbsp;&nbsp;";
+// 	document.getElementById('TimeLabel2').innerHTML = strTime;
+	
+// 	setTimeout("FreshTime()", 1000);
+// }
+</script>
+<script type="text/javascript">
+$(function(){
+	/*$("#min_title_list li").contextMenu('Huiadminmenu', {
+		bindings: {
+			'closethis': function(t) {
+				console.log(t);
+				if(t.find("i")){
+					t.find("i").trigger("click");
+				}		
+			},
+			'closeall': function(t) {
+				alert('Trigger was '+t.id+'\nAction was Email');
+			},
+		}
+	});*/
+});
+/*个人信息*/
+function myselfinfo(){
+	// layer.open({
+	// 	type: 1,
+	// 	area: ['300px','200px'],
+	// 	fix: false, //不固定
+	// 	maxmin: true,
+	// 	shade:0.4,
+	// 	title: '查看信息',
+	// 	content: '<div>管理员信息</div>'
+	// });
+	var title='查看信息';
+    var url='http://lanren329.a72.cnaaa6.com/webs1/index.php/Data/findAdmins';
+    var w=500;
+    var h=300;
+     layer_show(title,url,w,h);
+}
+
+/*资讯-添加*/
+function article_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*图片-添加*/
+function picture_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*产品-添加*/
+function product_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+
+</script> 
+<style>
+.current{
+
+	background:#008763;border-radius: 5px
+}
+.navbar {
+    background:#373b43;
+}
+.middle{
+	    background: #373b43;
+	    width:600px;
+	    height:25px;
+	    color:#fff
+}
+.nav>ul>li>a {
+    padding: 0 15px;
+}
+.header .middle {
+
+    position: absolute;
+    left: 140px;
+    top: 2px;
+}
+.red {
+    color: red;
+}
+.header .middle .marquee {
+    display: inline-block;
+    width: 760px;
+    padding: 3px 0 0;
+    vertical-align: top;
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+}
+</style>
+</body>
+</html>

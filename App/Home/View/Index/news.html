@@ -1,0 +1,36 @@
+<{config_load file="public.conf" section="public"}>
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" id="css" href="./<{#css#}>/members.css">
+<title>欢迎光临</title>
+</head>
+<body>
+<style type="text/css">
+/* 通用 */
+html, body, ul, li, p, h1, h2, h3, h4, h5, h6, form, fieldset, table, td, img {margin: 0;padding: 0;border: 0;}
+ul{list-style-type:none;}
+select,input{vertical-align:middle;}
+body {background:#fff;color:#333;font-family:"宋体";font-size:12px;padding:0px 0;}
+td,p,li,select,input,textarea {font-size:12px;}
+a {text-decoration: none;}
+a:link {color: #333;}
+a:visited {color: #333;}
+a:hover, a:active, a:focus {color: #f00;text-decoration:underline;}
+
+
+.BR_conts{padding:6px 10px;font-size:13px;line-height:16px}
+
+.blogrecommend{width:260px;height:190px;background:url('./<{#images#}>/tc_bj.gif') no-repeat left top;overflow:hidden;}
+.blogrecommend .BR_title{height:30px;}
+
+.blogrecommend p{line-height:20px;padding-left:10px;}
+
+
+</style>
+<div class="blogrecommend">
+  <div class="BR_title"></div>
+  <div class="BR_conts">
+<{$tanchuang_notice}> </div>
+</div>
+
+</body></html>

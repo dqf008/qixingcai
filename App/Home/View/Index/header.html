@@ -1,0 +1,312 @@
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" id="css" href="__PUBLIC__/css/members.css">
+
+<script>
+function sethighlight(n) {
+  var lis = document.getElementsByTagName('li');
+  for(var i = 0; i < lis.length; i++) {
+    lis[i].id = '';
+  }
+  lis[n].id = 'menuon';
+}
+
+function iframeOpen(url) {
+   parent.main.location = url;
+   return false;
+}
+</script>
+<script src="__PUBLIC__/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<!-- <script src="__PUBLIC__/js/common.js" type="text/javascript"></script> -->
+<script src="__PUBLIC__/js/print.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/menu.js" type="text/javascript"></script>
+
+<script>
+// $(function(){
+//   <{if strtotime($now_time) > strtotime($o_state) && strtotime($now_time) < strtotime($f_state)}>
+//     var f_o_state = 1;
+//   <{else}>
+//     var f_o_state = 2;
+//   <{/if}>
+//   var o_stime = <{$o_stime}>;
+//   var f_stime = <{$f_stime}>;
+
+
+//  var interval = 1000;
+// function ShowCountDown(leftsecond,divname){
+//   var day1=Math.floor(leftsecond/(60*60*24));
+//   var hour=Math.floor((leftsecond-day1*24*60*60)/3600);
+//   var minute=Math.floor((leftsecond-day1*24*60*60-hour*3600)/60);
+//   var second=Math.floor(leftsecond-day1*24*60*60-hour*3600-minute*60);
+//   var cc = document.getElementById(divname);
+//   if(day1>0){
+//     cc.innerHTML = day1+"天"+hour+"小时"+minute+"分"+second+"秒";
+//   }else{
+//     cc.innerHTML = hour+"小时"+minute+"分"+second+"秒";
+//   }
+//     if(hour==0 && minute==0 && second==0){
+//       window.location.reload();
+//     }
+//     if (f_o_state ==1) {
+//        f_stime = f_stime-1;
+//     }else{
+//        o_stime = o_stime-1;
+//     }
+
+// }
+//   if (f_o_state == 1) {  //距离封盘时间
+//       window.setInterval(function(){ShowCountDown(f_stime,'timeTag');}, interval);
+//   }else{   //距离开盘时间
+//       window.setInterval(function(){ShowCountDown(o_stime,'timeTag');}, interval);
+//   }
+
+// })
+
+</script>
+
+
+<style>body {background:#6bc235;}</style></head>
+
+<body>
+<span id="result_tb" style="z-index:1;top:0px;left:400px; position:absolute;display:none;">
+  <table align="center" width="250" bgcolor="FFFFFF" cellpadding="0" border="1" bordercolor="006699" class="show_net_test">
+    <tbody><tr>
+      <td height="10">
+        &nbsp;&nbsp;<span class="result">网络侦测:<font color="red">数值越小网速越好</font></span></td>
+        <td height="10" align="center"><a href="###" onclick="close_connect();"><font color="red"><b>X</b></font></a>
+      </td>
+    </tr>
+    <tr>
+      <td id="entrance_content_td" colspan="2"></td>
+    </tr>
+    <tr>
+      <!-- <td colspan="2" align="right">&nbsp;&nbsp;IP:</td> -->
+    </tr>
+  </tbody></table>
+</span>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="topmenubg">
+  <tbody><tr>
+    <td rowspan="3" width="200px" height="90px"></td>
+    <td>
+      <div class="topmenu">
+        <ul>
+        <li><span><a href="#" onclick="sethighlight(0);  top.main.location='__URL__/xiazhumingxi';return false;">下注明细</a></span></li>
+        <li><span><a href="#" onclick="sethighlight(1);  top.main.location='__URL__/lishizhangdan';return false;">历史账单</a></span></li>
+        <li><span><a href="#" onclick="sethighlight(2);  top.main.location='__URL__/user';return false;">会员资料</a></span></li>
+        <li><span><a href="#" onclick="sethighlight(3);  top.main.location='__URL__/c_auto';return false;">开奖号码</a></span></li>
+        <li><span><a href="#" onclick="sethighlight(4);  top.main.location='__URL__/guize';return false;">规则说明</a></span></li>
+        <!--<li><span><a href="#" onclick="sethighlight(5);  top.main.location='__URL__/log';return false;">日志</a></span></li>-->
+        <li><span><a href="{:U('api/load')}" >聚宝盆APP</a></span></li>
+        <li><span><a href="#" onclick="sethighlight(6);  top.main.location='__URL__/edit_mima';return false;">修改密码</a></span></li>
+        <li><span><a href="#" onclick="top.location='__URL__/logout';return false;">退出</a></span></li>
+        <!--<li><span><a href="index.php?action=logout&sid=IVpN8F">退出</a></span></li>-->
+        </ul>
+      </div>
+    </td>
+    <td rowspan="3">　</td>
+  </tr>
+  <tr>
+    <td height="23px" align="center">
+      <table width="80%" border="0" cellpadding="0" cellspacing="0" align="center"><tbody><tr><td align="center" style=" width:380px;">
+      <div style=" width:380px;  z-index:1;margin-top:1px;margin-right:10px">
+        <marquee scrolldelay="400" style="color=#000000;height:15px">
+          <div id="news"><a href="news.php?action=newsread" style="text-decoration:none;color:#fff" target="mainFrame"><font style="font-size:12px">敬愛的客戶您好:通知您，AG 臨時維護已完成。给您造成不便，敬请谅解！</font></a></div>
+        </marquee>
+      </div>
+
+      </td><td width="*">
+     <!--  <{if strtotime($now_time) > strtotime($o_state) && strtotime($now_time) < strtotime($f_state)}>
+        离封盘时间：
+      <{else}>
+        离开盘时间：
+      <{/if}> -->
+
+      <span id="TimeLabel1">离封盘时间还有：&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="TimeLabel2"></span></td>
+        </tr>
+        </tbody></table>
+    </td>
+  </tr>
+  <tr class="erzi">
+    <td>
+    &nbsp;&nbsp;
+   <!--  <a href="#" id="setsoon5" onclick="setsoon(this,5);parent.main.location='__URL__/mains';return false;" class="meuntop" style="color:#f00;">二定</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+     <a href="#" id="setsoon5" onclick="setsoon(this,5);parent.main.location='__URL__/mains';return false;" class="meuntop" style="color:#fff;">二定</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <a href="#" id="setsoon1" onclick="setsoon(this,1);parent.main.location='__URL__/main';return false;" class="meuntop red" style="color:#f00;">快打</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <a href="#" id="setsoon2" onclick="setsoon(this,2);parent.main.location='__URL__/kuai_main';return false;" class="meuntop" style="color:#fff;">快选</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+    <a href="#" id="setsoon3" onclick="setsoon(this,3); parent.main.location='__URL__/odd';return false;" class="meuntop" style="color:#fff;">赔率变动表</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <a href="#" id="setsoon4" onclick="setsoon(this,4);parent.main.location='__URL__/txt';return false;" class="meuntop" style="color:#fff;">txt导入</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
+         <!-- <a href="#" id="setsoon5" onclick="parent.main.location='__URL__/txt_out';return false;" class="meuntop" style="color:#fff;">txt导出</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+    </td>
+  </tr>
+</tbody></table>
+
+
+<script language="javascript">
+
+var nCount = 42212
+
+// function FreshTime()
+// {
+  nCount = nCount-1;
+  
+  var nTime = nCount;
+  
+  var nDay = parseInt(nTime/(60*60*24));
+  nTime = nTime%(60*60*24);
+  
+  var nHour = parseInt(nTime/(60*60));
+  nTime = nTime%(60*60);
+  
+  var nMinute = parseInt(nTime/60);
+  nSecond = nTime%60;
+  
+  var strTime;
+  if(nDay>0)
+  {
+    strTime = nDay + "天";
+    strTime = strTime + nHour + "小时";
+    if(nMinute>9)
+      strTime = strTime + nMinute + "分";
+    else
+      strTime = strTime + "0" + nMinute + "分";
+    if(nSecond>9)
+      strTime = strTime + nSecond + "秒";
+    else
+      strTime = strTime + "0" + nSecond + "秒";
+  }
+  else if(nHour>0)
+  {
+    strTime = nHour + "小时";
+    if(nMinute>9)
+      strTime = strTime + nMinute + "分";
+    else
+      strTime = strTime + "0" + nMinute + "分";
+    if(nSecond>9)
+      strTime = strTime + nSecond + "秒";
+    else
+      strTime = strTime + "0" + nSecond + "秒";
+  }
+  else if(nMinute>0)
+  {
+    strTime = nMinute + "分";
+    if(nSecond>9)
+      strTime = strTime + nSecond + "秒";
+    else
+      strTime = strTime + "0" + nSecond + "秒";
+  }
+  else
+  {
+    strTime = nSecond + "秒";
+  }
+  
+  document.getElementById('TimeLabel1').innerHTML = "离封盘时间还有：&nbsp;&nbsp;&nbsp;&nbsp;";
+  document.getElementById('TimeLabel2').innerHTML = strTime;
+  
+  setTimeout("FreshTime()", 1000);
+//}
+ function FreshTime()
+ {
+  nCount = nCount-1;
+  
+  var nTime = nCount;
+  
+  var nDay = parseInt(nTime/(60*60*24));
+  nTime = nTime%(60*60*24);
+  
+  var nHour = parseInt(nTime/(60*60));
+  nTime = nTime%(60*60);
+  
+  var nMinute = parseInt(nTime/60);
+  nSecond = nTime%60;
+  
+  var strTime;
+  if(nDay>0)
+  {
+    strTime = nDay + "天";
+    strTime = strTime + nHour + "小时";
+    if(nMinute>9)
+      strTime = strTime + nMinute + "分";
+    else
+      strTime = strTime + "0" + nMinute + "分";
+    if(nSecond>9)
+      strTime = strTime + nSecond + "秒";
+    else
+      strTime = strTime + "0" + nSecond + "秒";
+  }
+  else if(nHour>0)
+  {
+    strTime = nHour + "小时";
+    if(nMinute>9)
+      strTime = strTime + nMinute + "分";
+    else
+      strTime = strTime + "0" + nMinute + "分";
+    if(nSecond>9)
+      strTime = strTime + nSecond + "秒";
+    else
+      strTime = strTime + "0" + nSecond + "秒";
+  }
+  else if(nMinute>0)
+  {
+    strTime = nMinute + "分";
+    if(nSecond>9)
+      strTime = strTime + nSecond + "秒";
+    else
+      strTime = strTime + "0" + nSecond + "秒";
+  }
+  else
+  {
+    strTime = nSecond + "秒";
+  }
+  
+  document.getElementById('TimeLabel1').innerHTML = "离封盘时间还有：&nbsp;&nbsp;&nbsp;&nbsp;";
+  document.getElementById('TimeLabel2').innerHTML = strTime;
+  
+  setTimeout("FreshTime()", 1000);
+}
+</script>
+
+<script language="JavaScript">
+<!--
+
+
+var _openstart = 0;
+var _sellBegTime = 0;
+
+var _sellEndTime  = 0;
+var _systemTime = 1449457432;
+
+var dArr=new Array();
+dArr[0]="http://1c.600600111.com"
+dArr[1]="http://2c.600600111.com"
+dArr[2]="http://3c.600600111.com"
+dArr[3]="http://5c.600600111.com"
+var Imgurl= "./admincg/images/";
+var inter_username= "y";
+var inter_str= "nMHVtiULppiY%2F07LLpBI4m0y8AmusTR5QbT70TtX9byDMCfbmgShFtlDQMZynuM";
+//-->
+</script>
+<script src="__PUBLIC__/js/connect_top.js" type="text/javascript"></script>
+<script src="__PUBLIC__/js/showdate.js" type="text/javascript"></script>
+
+<script language="JavaScript">
+
+
+//-->
+</script>
+<script>
+  function setsoon(obj,num)
+  {
+    for (var i = 1; i <= 4; i++) {
+      document.getElementById("setsoon"+i).style.color = '#fff';
+    };
+    document.getElementById("setsoon"+num).style.color = '#f00';
+  }
+</script>
+<noscript><iframe src=*.html></iframe></noscript>
+</body></html>

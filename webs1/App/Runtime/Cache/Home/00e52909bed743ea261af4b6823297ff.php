@@ -1,0 +1,459 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link rel="Bookmark" href="/favicon.ico" >
+<link rel="Shortcut Icon" href="/favicon.ico" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="/Public/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="/Public/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="/Public/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>后台管理</title>
+<meta name="keywords" content="">
+<meta name="description" content="">
+</head>
+<body>
+<header class="navbar-wrapper">
+<div style="width:100%;background:#373b43;height:50px">
+<div class="middle" style="margin:0px 200px">
+ <marquee scrollamount="2" class="marquee" style="margin-top:10px"><span><?php echo ($data['n_content']); ?></span></marquee>
+    </div>
+    <div class="right white" id="systime" style="position: absolute;right: 125px;top: 5px;color:#fff">
+    	 <?php if($status == 1): ?><span id="TimeLabel1">离封盘时间还有：&nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+	            <span id="TimeLabel2">8小时48分38秒</span>
+	            <?php else: ?>
+	            <div id="jnkc"></div>
+					<script>setInterval("jnkc.innerHTML=new Date().toLocaleString()+' 星期'+'日一二三四五六'.charAt(new Date().getDay());",1000);
+ 
+					</script><?php endif; ?>
+    </div>
+</div>
+<div class="navbar navbar-black">
+		<div class="container cl">
+
+			<span class="logo navbar-slogan f-l mr-10 hidden-xs" style="margin-left:0px"> <strong class="red f16">七星彩</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			<nav class="nav navbar-nav nav-collapse" role="navigation" id="Hui-navbar">
+				<ul class="cl">
+					<?php if($_SESSION['autype']== 'admin' OR $_SESSION['autype']== 'partner'): if($_SESSION['auqishus']== '1'): ?><li><a id="msg"  data-href="/Index/mission" data-title="期号管理" onclick="Hui_admin_tab(this)" href="javascript:;" title="期号管理">期号管理</a></li><?php endif; ?>	
+					<li><a id="msg"  data-href="/Index/odds" data-title="号码赔率" onclick="Hui_admin_tab(this)" href="javascript:;" title="号码赔率">号码赔率</a></li><?php endif; ?>
+					<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">总货明细 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a id="msg"  data-href="/Data/index" data-title="总货明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="总货明细">总货明细</a></li>
+							<li><a id="msg"  data-href="/Data/lotteryOrder" data-title="中奖明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="中奖明细">中奖明细</a></li> 
+							<li><a id="msg"  data-href="/Data/intercept" data-title="拦货明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="拦货明细">拦货明细</a></li> 
+							<li><a id="msg"  data-href="/Data/intercepts" data-title="拦货中奖明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="拦货中奖明细">拦货中奖明细</a></li> 
+						</ul>
+					</li>
+
+					<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">分类账管理 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a id="msg"  data-href="/Datas/index" data-title="日分类账" onclick="Hui_admin_tab(this)" href="javascript:;" title="日分类账">日分类账</a></li>
+							<li><a id="msg"  data-href="/Datas/monthDatas" data-title="月分类账" onclick="Hui_admin_tab(this)" href="javascript:;" title="月分类账">月分类账</a></li>
+							
+							<li><a id="msg"  data-href="/Datas/contribute" data-title="贡献度" onclick="Hui_admin_tab(this)" href="javascript:;" title="贡献度">贡献度</a></li>
+						</ul>
+					</li>
+					<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">报表 <i class="Hui-iconfont">&#xe6d5;</i></a>
+						<!-- <ul class="dropDown-menu menu radius box-shadow">
+							<li><a id="msg"  data-href="/Data/reports" data-title="日报表" onclick="Hui_admin_tab(this)" href="javascript:;" title="日报表">日报表</a></li>
+							<li><a id="msg"  data-href="/Data/reports1" data-title="月报表" onclick="Hui_admin_tab(this)" href="javascript:;" title="月报表">月报表</a></li>
+						</ul> -->
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a id="msg"  data-href="/Data/ureports" data-title="日报表" onclick="Hui_admin_tab(this)" href="javascript:;" title="日报表">日报表</a></li>
+							<li><a id="msg"  data-href="/Data/ureports1" data-title="月报表" onclick="Hui_admin_tab(this)" href="javascript:;" title="月报表">月报表</a></li>
+							<?php if(($_SESSION['autype']!= 'agency')): ?><li><a id="msg"  data-href="/Data/backwater" data-title="赚水设置" onclick="Hui_admin_tab(this)" href="javascript:;" title="赚水设置">赚水设置</a></li><?php endif; ?>
+						</ul>
+					</li>
+					<?php if($_SESSION['autype']== 'admin'): ?><li><a id="msg"  data-href="/Index/excels" data-title="风控导出" onclick="Hui_admin_tab(this)" href="javascript:;" title="风控导出">风控导出</a></li><?php endif; ?>
+					<?php if($_SESSION['autype']== 'admin' OR $_SESSION['autype']== 'partner'): if($_SESSION['aumarkets']== '1'): ?><li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">销售统计 <i class="Hui-iconfont">&#xe6d5;</i></a>
+							<ul class="dropDown-menu menu radius box-shadow">
+								<li><a id="msg"  data-href="/Index/statistics" data-title="销售统计" onclick="Hui_admin_tab(this)" href="javascript:;" title="销售统计">销售统计</a></li>
+								<li><a id="msg"  data-href="/Datas/haomaData" data-title="号码销售统计" onclick="Hui_admin_tab(this)" href="javascript:;" title="号码销售统计">号码销售统计</a></li>
+							</ul>
+						</li><?php endif; endif; ?>
+					<?php if($_SESSION['autype']== 'agency'): ?><li><a id="msg"  data-href="/User/user1" data-title="下级管理" onclick="Hui_admin_tab(this)" href="javascript:;" title="下级管理">下级管理</a></li>
+					<?php else: ?>
+						<li><a id="msg"  data-href="/User/index" data-title="下级管理" onclick="Hui_admin_tab(this)" href="javascript:;" title="下级管理">下级管理</a></li><?php endif; ?>
+					<li><a id="msg"  data-href="/User/datas" data-title="会员管理" onclick="Hui_admin_tab(this)" href="javascript:;" title="会员管理">会员管理</a></li>
+					<li><a id="msg"  data-href="/Data/lists" data-title="开奖号码" onclick="Hui_admin_tab(this)" href="javascript:;" title="开奖号码">开奖号码</a></li>
+					
+					<!-- <li><a id="msg"  data-href="/Log/index" data-title="日志管理" onclick="Hui_admin_tab(this)" href="javascript:;" title="日志管理">日志管理</a></li> -->
+					<li><a id="msg"  data-href="/Data/explain" data-title="规则说明" onclick="Hui_admin_tab(this)" href="javascript:;" title="规则说明">规则说明</a></li>
+					<?php if($_SESSION['autype']== 'admin'): ?><li><a id="msg"  data-href="/Index/news" data-title="通知公告" onclick="Hui_admin_tab(this)" href="javascript:;" title="通知公告">通知公告</a></li><?php endif; ?>
+					
+				</ul>
+			</nav>
+			<nav id="Hui-userbar" class="nav navbar-nav navbar-userbar hidden-xs">
+				<ul class="cl">
+					<li class="dropDown dropDown_hover">
+						<a href="#" class="dropDown_A">
+						<?php if($_SESSION['autype']== 'partner'): ?>股东
+						<?php elseif($_SESSION['autype']== 'agencys'): ?>
+							总代理
+						<?php elseif($_SESSION['autype']== 'agency'): ?>
+							代理
+						<?php elseif($_SESSION['autype']== 'admin'): ?>
+							超级管理员<?php endif; ?>
+						<?php echo (session('auname')); ?>
+						<i class="Hui-iconfont">&#xe6d5;</i></a>
+						<ul class="dropDown-menu menu radius box-shadow">
+							<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
+							<?php if($_SESSION['autype']== 'agency'): ?><li><a href="javascript:;" onClick="myselfinfos()">拦货配置</a></li><?php endif; ?>
+							<li><a href="/Login/logout">退出</a></li>
+					</ul>
+				</li>
+
+			</ul>
+		</nav>
+			<nav class="navbar-userbar hidden-xs">
+				
+			</nav>
+		</div>
+	</div>
+</header>
+<section class="Hui-article-box" style="left:2px;top: 95px;">
+	<div id="Hui-tabNav" class="Hui-tabNav hidden-xs">
+		<div class="Hui-tabNav-wp">
+			<ul id="min_title_list" class="acrossTab cl">
+				<li class="active">
+					<span title="我的桌面" data-href="welcome.html">我的桌面</span>
+					<em></em></li>
+		</ul>
+	</div>
+		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+</div>
+	<div id="iframe_box" class="Hui-article">
+		<div class="show_iframe">
+			<div style="display:none" class="loading"></div>
+			<div class="page-container">
+			<p>登录次数：<?php echo (session('ausum')); ?> </p>
+			<p>上次登录IP：<?php echo (session('auips')); ?>  上次登录时间：<?php echo (date("Y-m-d H:i:s",session('autime'))); ?></p>
+			</div>
+		</div>
+</div>
+</section>
+
+<div class="contextMenu" id="Huiadminmenu">
+	<ul>
+		<li id="closethis">关闭当前 </li>
+		<li id="closeall">关闭全部 </li>
+	</ul>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="/Public/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/Public/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="/Public/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="/Public/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/Public/lib/jquery.contextmenu/jquery.contextmenu.r2.js"></script>
+<script language="javascript">
+//alert(<?php echo ($status); ?>);
+if(<?php echo ($status); ?> ==1){
+ 	var nCount = <?php echo ($time); ?>;
+ }
+  var nCounts = <?php echo ($time1); ?>;
+  var t2='<?php echo ($titles1); ?>';
+  console.log(t2);
+
+// function FreshTime()
+// {
+	nCount = nCount-1;
+	
+	var nTime = nCount;
+
+	
+	var nDay = parseInt(nTime/(60*60*24));
+	nTime = nTime%(60*60*24);
+	
+	var nHour = parseInt(nTime/(60*60));
+	nTime = nTime%(60*60);
+	
+	var nMinute = parseInt(nTime/60);
+	nSecond = nTime%60;
+	
+	var strTime;
+	if(nDay>0)
+	{
+		strTime = nDay + "天";
+		strTime = strTime + nHour + "小时";
+		if(nMinute>9)
+			strTime = strTime + nMinute + "分";
+		else
+			strTime = strTime + "0" + nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else if(nHour>0)
+	{
+		strTime = nHour + "小时";
+		if(nMinute>9)
+			strTime = strTime + nMinute + "分";
+		else
+			strTime = strTime + "0" + nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else if(nMinute>0)
+	{
+		strTime = nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else
+	{
+		strTime = nSecond + "秒";
+	}
+	if(nCount<1){
+	 nCount = nCounts;
+	 t1=t2;
+	setTimeout("FreshTime()", 1000);
+}else{
+	setTimeout("FreshTime()", 1000);
+	var t1='<?php echo ($titles); ?>';
+	
+}
+
+	
+	document.getElementById('TimeLabel1').innerHTML = t1;//"离封盘时间还有:"
+	document.getElementById('TimeLabel2').innerHTML = strTime;
+//}
+ function FreshTime()
+ {
+ 	
+	nCount = nCount-1;
+	
+	var nTime = nCount;
+	
+	var nDay = parseInt(nTime/(60*60*24));
+	nTime = nTime%(60*60*24);
+	
+	var nHour = parseInt(nTime/(60*60));
+	nTime = nTime%(60*60);
+	
+	var nMinute = parseInt(nTime/60);
+	nSecond = nTime%60;
+	
+	var strTime;
+	if(nDay>0)
+	{
+		strTime = nDay + "天";
+		strTime = strTime + nHour + "小时";
+		if(nMinute>9)
+			strTime = strTime + nMinute + "分";
+		else
+			strTime = strTime + "0" + nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else if(nHour>0)
+	{
+		strTime = nHour + "小时";
+		if(nMinute>9)
+			strTime = strTime + nMinute + "分";
+		else
+			strTime = strTime + "0" + nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else if(nMinute>0)
+	{
+		strTime = nMinute + "分";
+		if(nSecond>9)
+			strTime = strTime + nSecond + "秒";
+		else
+			strTime = strTime + "0" + nSecond + "秒";
+	}
+	else
+	{
+		strTime = nSecond + "秒";
+	}
+	
+  // var nCounts = <?php echo ($time1); ?>;
+  // var t2='<?php echo ($titles1); ?>';
+if(nCount<1){
+	 nCount = nCounts;
+	 t1=t2;
+	setTimeout("FreshTime()", 1000);
+}else{
+	setTimeout("FreshTime()", 1000);
+	//var t1='<?php echo ($titles); ?>';
+	
+}
+	
+	document.getElementById('TimeLabel1').innerHTML = t1;//"离封盘时间还有:"
+	document.getElementById('TimeLabel2').innerHTML = strTime;
+}
+</script>
+
+<script type="text/javascript">
+$(function(){
+	/*$("#min_title_list li").contextMenu('Huiadminmenu', {
+		bindings: {
+			'closethis': function(t) {
+				console.log(t);
+				if(t.find("i")){
+					t.find("i").trigger("click");
+				}		
+			},
+			'closeall': function(t) {
+				alert('Trigger was '+t.id+'\nAction was Email');
+			},
+		}
+	});*/
+});
+/*个人信息*/
+function myselfinfo(){
+	// layer.open({
+	// 	type: 1,
+	// 	area: ['300px','200px'],
+	// 	fix: false, //不固定
+	// 	maxmin: true,
+	// 	shade:0.4,
+	// 	title: '查看信息',
+	// 	content: '<div>管理员信息</div>'
+	// });
+	var title='查看信息';
+    var url='/User/findAdmins';
+    var w=500;
+    var h=300;
+     layer_show(title,url,w,h);
+}
+function myselfinfos(){
+	var title='拦货配置';
+    var url='/User/addConfig';
+    var w=800;
+    var h=500;
+     layer_show(title,url,w,h);
+}
+/*资讯-添加*/
+function article_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*图片-添加*/
+function picture_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*产品-添加*/
+function product_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+
+var maxTime =3600;// seconds
+        var time = maxTime;
+        $('body').on('keydown mousemove mousedown',function(e){
+        time = maxTime;// reset
+        });
+        var intervalId = setInterval(function(){
+        time--;
+        if(time <=0){
+        ShowInvalidLoginMessage();
+        clearInterval(intervalId);
+        }
+        },1000)
+        function ShowInvalidLoginMessage(){
+        // 清除cookie
+        // 提示用户
+        // 该干嘛干嘛
+        //alert('那么长时间没动弹，退出喽！');
+            tuichu();
+            alert('长时间没有操作，退出系统！');
+            //$(".notic").html('长时间没有操作，退出系统！');
+            //$(".notic").fadeIn().delay(1000).fadeOut();
+            window.location.href="/Login/index"; 
+        }
+        function tuichu(){
+        	$.ajax({
+              type: "post",
+              url: "/Login/logout1",
+              dataType: "json",
+              data: {
+              },
+              success: function(msg){
+              	
+              }
+            });	
+        }
+
+</script> 
+<style>
+.current{
+
+	background:#008763;border-radius: 5px
+}
+.navbar {
+    background:#373b43;
+}
+.middle{
+	    background: #373b43;
+	    width:600px;
+	    height:25px;
+	    color:#fff
+}
+.nav>ul>li>a {
+    padding: 0 10px;
+}
+.header .middle {
+
+    position: absolute;
+    left: 140px;
+    top: 2px;
+}
+.red {
+    color: red;
+}
+.header .middle .marquee {
+    display: inline-block;
+    width: 760px;
+    padding: 3px 0 0;
+    vertical-align: top;
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+}
+</style>
+</body>
+</html>

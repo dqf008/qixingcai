@@ -1,0 +1,550 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<!--[if lt IE 9]>
+<script type="text/javascript" src="lib/html5shiv.js"></script>
+<script type="text/javascript" src="lib/respond.min.js"></script>
+<![endif]-->
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui/css/H-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/H-ui.admin.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/lib/Hui-iconfont/1.0.8/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/skin/default/skin.css" id="skin" />
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/static/h-ui.admin/css/style.css" />
+<!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+<title>分类账管理</title>
+</head>
+<body>
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 分类账管理 <span class="c-gray en">&gt;</span> 月分类账 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+<div class="page-container">
+<form action="__MODULE__/Datas/monthDatas" method="get">
+  <div class="text-c">
+    <!-- <button onclick="removeIframe()" class="btn btn-primary radius">关闭选项卡</button> -->
+   期号：
+   <span class="select-box inline">
+    <select name="qishu1" class="select">
+      <!-- <option value="0">全部开奖期号</option> -->
+      <volist name="qishu3" id="vo">
+        <if condition="$qishu1 eq $vo['qishu']">
+          <option value="<{$vo.qishu}>" selected><{$vo.qishu}></option>
+        <else/>
+          <option value="<{$vo.qishu}>"><{$vo.qishu}></option>
+        </if>
+      </volist>
+    </select>
+    </span>
+    ~
+    <span class="select-box inline">
+    <select name="qishu2" class="select">
+      <!-- <option value="0">全部开奖期号</option> -->
+      <volist name="qishu4" id="vo">
+        <if condition="$qishu2 eq $vo['qishu']">
+          <option value="<{$vo.qishu}>" selected><{$vo.qishu}></option>
+        <else/>
+          <option value="<{$vo.qishu}>"><{$vo.qishu}></option>
+        </if>
+      </volist>
+    </select>
+    </span>
+    <input type="hidden" name="uid" value="<{$userID}>" />
+    <if condition="$Think.session.autype neq 'agency' AND $userID eq ''">
+      <span class="select-box inline">
+        <select name="userid" class="select">
+          <option value="0">全部<{$titles}></option>
+          <volist name="user" id="vo">
+            <if condition="$userid eq $vo['au_id']">
+               <option value="<{$vo.au_id}>" selected><{$vo.au_name}></option>
+            <else/>
+              <option value="<{$vo.au_id}>"><{$vo.au_name}></option>
+            </if>
+          </volist>
+        </select>
+      </span> 
+     
+    </if>
+   <!-- 日期范围：
+
+    <input type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" name="stime" value="<{$stime}>" style="width:120px;">
+
+    -
+
+    <input type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate"  name="etime" value="<{$etime}>" style="width:120px;"> -->
+    <button name="" id="" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜索</button>
+    <!-- <button name="" id="" class="btn btn-success" type="submit">下载</button> -->
+   <!--  <button name="" id="" class="btn btn-success" type="submit"> 打印</button> -->
+  </div>
+  </form>
+  <div class="cl pd-5 bg-1 bk-gray mt-20" style="height:20px"><!--  <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a class="btn btn-primary radius" data-title="添加资讯" data-href="article-add.html" onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i> 添加资讯</a></span>  --><!-- <span class="r">共有数据：<strong>54</strong> 条</span> --> </div>
+  <div>
+
+    <table class="table table-border table-bordered table-bg table-hover table-sort">
+    <thead> 
+    <tr class="bg2 tc">  
+    <td width="14%">日期</td> 
+    <td width="14%">类别</td> 
+    <td width="14%">笔数</td> 
+    <td width="14%">下注金额</td> 
+    <!-- <td width="14%">回水</td>  -->
+    <td width="14%">中奖</td> 
+    <td width="14%">盈亏</td> 
+
+    </tr> </thead> 
+    <tbody id="tbody"> 
+    <if condition="$data">
+ <tr>
+        <td width="14%" class="bg6">总合计</td>
+        <td style="cursor: pointer; color: #FF6600;" width="14%" class="displays">总货合计</td>
+        <td width="14%" class="bg3 f14 bold"><if condition="$data2['sum']"><{$data2['sum']}><else/>0</if></td>
+        <td width="14%" class="f14 bold"><if condition="$data2['money']"><{$data2['money']}><else/>0</if></td>
+        <!-- <td data-bind="text:Math.ceil(TotalBackComm)"><if condition="$win"><{$win}><else/>0</if></td> -->
+        <td width="14%" class="bg3 f14 bold"><if condition="$data2['money1']"><{$data2['money1']}><else/>0</if></td>
+        <td width="14%" class="f14 bold"><if condition="$data2['money']"><?php echo intval($data2['money']-$data2['money1']-$data2['win']); ?><else/>0</if></td>
+    </tr>
+    <tr class="tables" style="display:none"> 
+    <td colspan="6" style="padding:0px;border:0px"> 
+    <table class="t-1">
+    <tbody class="fn-hover">     
+    <tr class=""> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">二定位</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2['ding23']"><{$data2['ding23']}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2['ding21']"><{$data2['ding21']}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2['ding24']"><{$data2['ding24']}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2['ding23']"><?php echo intval($data2['ding21']-$data2['ding24']-$data2['ding22']); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+    </tr> 
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">口口XX</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[1][2]"><{$data2[1][2]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[1][0]"><{$data2[1][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[1][3]"><{$data2[1][3]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[1][0]"><?php echo intval($data2[1][0]-$data2[1][3]-$data2[1][1]); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+    </tr>   
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">口X口X</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[2][2]"><{$data2[2][2]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[2][0]"><{$data2[2][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[2][3]"><{$data2[2][3]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[2][0]"><?php echo intval($data2[2][0]-$data2[2][3]-$data2[2][1]); ?><else/>0</if></td>  
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+    </tr>  
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">口XX口</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[3][2]"><{$data2[3][2]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[3][0]"><{$data2[3][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[3][3]"><{$data2[3][3]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[3][0]"><?php echo intval($data2[3][0]-$data2[3][3]-$data2[3][1]); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+    </tr> 
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">X口X口</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[4][2]"><{$data2[4][2]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[4][0]"><{$data2[4][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[4][3]"><{$data2[4][3]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[4][0]"><?php echo intval($data2[4][0]-$data2[4][3]-$data2[4][1]); ?><else/>0</if></td>  
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+    </tr> 
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">X口口X</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[5][2]"><{$data2[5][2]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[5][0]"><{$data2[5][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[5][3]"><{$data2[5][3]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[5][0]"><?php echo intval($data2[5][0]-$data2[5][3]-$data2[5][1]); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+    </tr>  
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">XX口口</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[6][2]"><{$data2[6][2]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[6][0]"><{$data2[6][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[6][3]"><{$data2[6][3]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[6][0]"><?php echo intval($data2[6][0]-$data2[6][3]-$data2[6][1]); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+    </tr>  
+    <tr class=""> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">三定位</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2['ding33']"><{$data2['ding33']}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2['ding31']"><{$data2['ding31']}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2['ding34']"><{$data2['ding34']}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2['ding31']"><?php echo intval($data2['ding31']-$data2['ding34']-$data2['ding32']); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+    </tr>  
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td>
+    <td width="14%">口口口X</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[7][2]"><{$data2[7][2]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[7][0]"><{$data2[7][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[7][3]"><{$data2[7][3]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[7][0]"><?php echo intval($data2[7][0]-$data2[7][3]-$data2[7][1]); ?><else/>0</if></td>
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+    </tr>  
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">口口X口</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[8][2]"><{$data2[8][2]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[8][0]"><{$data2[8][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[8][3]"><{$data2[8][3]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[8][0]"><?php echo intval($data2[8][0]-$data2[8][3]-$data2[8][1]); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+    </tr>  
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">口X口口</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[9][2]"><{$data2[9][2]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[9][0]"><{$data2[9][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[9][3]"><{$data2[9][3]}><else/>0</if></td> 
+    <td width="14%" class="f14 bold"><if condition="$data2[9][0]"><?php echo intval($data2[9][0]-$data2[9][3]-$data2[9][1]); ?><else/>0</if></td>  
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+    </tr> 
+    <tr class="bg5"> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">X口口口</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[10][2]"><{$data2[10][2]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[10][0]"><{$data2[10][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[10][3]"><{$data2[10][3]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[10][0]"><?php echo intval($data2[10][0]-$data2[10][3]-$data2[10][1]); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+    </tr>  
+    <tr class=""> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">四定位</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[11][2]"><{$data2[11][2]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[11][0]"><{$data2[11][0]}><else/>0</if></td>
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[11][3]"><{$data2[11][3]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[11][0]"><?php echo intval($data2[11][0]-$data2[11][3]-$data2[11][1]); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+    </tr>  
+    <tr class=""> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">二字现</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[12][2]"><{$data2[12][2]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[12][0]"><{$data2[12][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[12][3]"><{$data2[12][3]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[12][0]"><?php echo intval($data2[12][0]-$data2[12][3]-$data2[12][1]); ?><else/>0</if></td>
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+     </tr> 
+    <tr class=""> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">三字现</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[13][2]"><{$data2[13][2]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[13][0]"><{$data2[13][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[13][3]"><{$data2[13][3]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[13][0]"><?php echo intval($data2[13][0]-$data2[13][3]-$data2[13][1]); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+    </tr>   
+    <tr class=""> 
+    <td width="14%" class="bg6"></td> 
+    <td width="14%">四字现</td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[14][2]"><{$data2[14][2]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[14][0]"><{$data2[14][0]}><else/>0</if></td> 
+    <td width="14%" class="bg3 f14 bold"><if condition="$data2[14][3]"><{$data2[14][3]}><else/>0</if></td>
+    <td width="14%" class="f14 bold"><if condition="$data2[14][0]"><?php echo intval($data2[14][0]-$data2[14][3]-$data2[14][1]); ?><else/>0</if></td> 
+    <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+    </tr> 
+    </tbody> </table> </td> </tr>
+    <volist name="data" id="vo" key="k">
+     <tr>
+        <if condition="$vo['status'] eq '3'">
+            <td width="14%" class="bg6"><a href="__MODULE__/Datas/index?qishu=<{$vo.qishu}>" style="color:blue"><strong class="blue"><{$vo.name}></strong></a></td>
+        <else/>
+             <td width="14%" class="bg6"><a href="__MODULE__/Datas/index?qishu=<{$vo.qishu}>" style="color:red"><strong class="red"><{$vo.name}></strong></a></td>   
+        </if>
+            
+            <td style="cursor: pointer; color: #FF6600;" width="14%" onclick="display('<{$vo.qishu}>')">总货合计</td>
+            <td width="14%" class="bg3 f14 bold"><if condition="$vo['sum']"><{$vo['sum']}><else/>0</if></td>
+            <td width="14%" class="f14 bold"><if condition="$vo['money']"><{$vo['money']}><else/>0</if></td>
+            <!-- <td data-bind="text:Math.ceil(TotalBackComm)"><if condition="$win"><{$win}><else/>0</if></td> -->
+
+            <td width="14%" class="bg3 f14 bold"><if condition="$vo['money1']"><{$vo['money1']}><else/>0</if></td>
+            <if condition="$vo['status'] eq '3'">
+                <td width="14%" class="f14 bold"><if condition="$vo['money']"><{$vo['money']-$vo['money1']-$vo['win']}><else/>0</if></td>
+                
+            <else/>
+                <td width="14%" class="f14 bold">0</td>
+            </if>
+            
+        </tr>
+        <tr class="tables<{$vo.qishu}>" style="display:none"> 
+        <td colspan="6" style="padding:0px;border:0px"> 
+        <table class="t-1">
+        <tbody class="fn-hover">     
+        <tr class=""> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">二定位</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo['ding23']"><{$vo['ding23']}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo['ding21']"><{$vo['ding21']}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo['ding24']"><{$vo['ding24']}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo['ding23']"><{$vo['ding21']-$vo['ding24']-$vo['ding22']}><else/>0</if></td>  
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if>
+        
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+        </tr> 
+        <tr class="bg5"> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">口口XX</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[1][2]"><{$vo[1][2]}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo[1][0]"><{$vo[1][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[1][3]"><{$vo[1][3]}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[1][0]"><{$vo[1][0]-$vo[1][1]-$vo[1][3]}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if>
+        
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+        </tr>   
+        <tr class="bg5"> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">口X口X</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[2][2]"><{$vo[2][2]}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo[2][0]"><{$vo[2][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[2][3]"><{$vo[2][3]}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[2][0]"><{$vo[2][0]-$vo[2][1]-$vo[2][3]}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if>
+         
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+        </tr>  
+        <tr class="bg5"> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">口XX口</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[3][2]"><{$vo[3][2]}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo[3][0]"><{$vo[3][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[3][3]"><{$vo[3][3]}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[3][0]"><{$vo[3][0]-$vo[3][1]-$vo[3][3]}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if>
+        
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+        </tr> 
+        <tr class="bg5"> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">X口X口</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[4][2]"><{$vo[4][2]}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo[4][0]"><{$vo[4][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[4][3]"><{$vo[4][3]}><else/>0</if></td>
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[4][0]"><{$vo[4][0]-$vo[4][1]-$vo[4][3]}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+          
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+        </tr> 
+        <tr class="bg5"> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">X口口X</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[5][2]"><{$vo[5][2]}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo[5][0]"><{$vo[5][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[5][3]"><{$vo[5][3]}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[5][0]"><{$vo[5][0]-$vo[5][1]-$vo[5][3]}><else/>0</if></td>  
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+        
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+        </tr>  
+        <tr class="bg5"> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">XX口口</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[6][2]"><{$vo[6][2]}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo[6][0]"><{$vo[6][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[6][3]"><{$vo[6][3]}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[6][0]"><{$vo[6][0]-$vo[6][1]-$vo[6][3]}><else/>0</if></td>
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+         
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+        </tr>  
+        <tr class=""> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">三定位</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo['ding33']"><{$vo['ding33']}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo['ding31']"><{$vo['ding31']}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo['ding34']"><{$vo['ding34']}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo['ding31']"><{$vo['ding31']-$vo[ding34]-$vo['ding32']}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+        
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+        </tr>  
+       <tr class="bg5"> 
+        <td width="14%" class="bg6"></td>
+        <td width="14%">口口口X</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[10][2]"><{$vo[10][2]}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo[10][0]"><{$vo[10][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[10][3]"><{$vo[10][3]}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[10][0]"><{$vo[10][0]-$vo[10][1]-$vo[10][3]}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+        
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+        </tr>  
+        <tr class="bg5"> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">口口X口</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[9][2]"><{$vo[9][2]}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo[9][0]"><{$vo[9][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[9][3]"><{$vo[9][3]}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[9][0]"><{$vo[9][0]-$vo[9][1]-$vo[9][3]}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+         
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+        </tr>  
+        <tr class="bg5"> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">口X口口</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[8][2]"><{$vo[8][2]}><else/>0</if></td> 
+        <td width="14%" class="f14 bold"><if condition="$vo[8][0]"><{$vo[8][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[8][3]"><{$vo[8][3]}><else/>0</if></td> 
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[8][0]"><{$vo[8][0]-$vo[8][1]-$vo[8][3]}><else/>0</if></td>  
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+         
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+        </tr> 
+        <tr class="bg5"> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">X口口口</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[7][2]"><{$vo[7][2]}><else/>0</if></td>
+        <td width="14%" class="f14 bold"><if condition="$vo[7][0]"><{$vo[7][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[7][3]"><{$vo[7][3]}><else/>0</if></td>
+        <if condition="$vo['status'] eq '3'">  
+             <td width="14%" class="f14 bold"><if condition="$vo[7][0]"><{$vo[7][0]-$vo[10][1]-$vo[7][3]}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+       
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+        </tr>    
+        <tr class=""> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">四定位</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[11][2]"><{$vo[11][2]}><else/>0</if></td>
+        <td width="14%" class="f14 bold"><if condition="$vo[11][0]"><{$vo[11][0]}><else/>0</if></td>
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[11][3]"><{$vo[11][3]}><else/>0</if></td>
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[11][0]"><{$vo[11][0]-$vo[11][1]-$vo[11][3]}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+        
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  --> 
+        </tr>  
+        <tr class=""> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">二字现</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[12][2]"><{$vo[12][2]}><else/>0</if></td>
+        <td width="14%" class="f14 bold"><if condition="$vo[12][0]"><{$vo[12][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[12][3]"><{$vo[12][3]}><else/>0</if></td>
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[12][0]"><{$vo[12][0]-$vo[12][1]-$vo[12][3]}><else/>0</if></td> 
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+        
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+         </tr> 
+        <tr class=""> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">三字现</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[13][2]"><{$vo[13][2]}><else/>0</if></td>
+        <td width="14%" class="f14 bold"><if condition="$vo[13][0]"><{$vo[13][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[13][3]"><{$vo[13][3]}><else/>0</if></td>
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[13][0]"><{$vo[13][0]-$vo[13][1]-$vo[13][3]}><else/>0</if></td>  
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+        
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+        </tr>   
+        <tr class=""> 
+        <td width="14%" class="bg6"></td> 
+        <td width="14%">四字现</td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[14][2]"><{$vo[14][2]}><else/>0</if></td>
+        <td width="14%" class="f14 bold"><if condition="$vo[14][0]"><{$vo[14][0]}><else/>0</if></td> 
+        <td width="14%" class="bg3 f14 bold"><if condition="$vo[14][3]"><{$vo[14][3]}><else/>0</if></td>
+        <if condition="$vo['status'] eq '3'">  
+            <td width="14%" class="f14 bold"><if condition="$vo[14][0]"><{$vo[14][0]-$vo[14][1]-$vo[14][3]}><else/>0</if></td>  
+        <else/>
+            <td width="14%" class="f14 bold">0</td>
+        </if> 
+         
+        <!-- <td width="14%" class="bg3 f14 bold">--</td>  -->
+        </tr> 
+        </tbody> </table> </td> </tr>
+
+
+    </volist>
+    <else/>
+    <tr><td>没有数据</td></tr>
+    </if>
+       </tbody> </table>
+  </div>
+</div>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="__PUBLIC__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="__PUBLIC__/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="__PUBLIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.displays').click(function(){
+            var t=$('.tables').css('display');
+            if(t=='none'){
+                $('.tables').show();
+            }else{
+                $('.tables').hide();   
+            }
+          
+        });
+    });
+    function display(e){
+      var t=$('.tables'+e).css('display');
+       if(t=='none'){
+            $('.tables'+e).show();
+        }else{
+            $('.tables'+e).hide();   
+        }
+    }
+</script>  
+</body>
+</html>
