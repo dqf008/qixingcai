@@ -1673,7 +1673,7 @@ public function delsMoenys(){
               $admin=$admins->field('au_type,top_uid,au_name,au_money,au_moneys')->where($where)->find();
               if($admin){
                 
-                $data['au_money']=''; 
+                $data['au_money']=0; 
                 $data['au_moneys']=''; 
                 $admin1=$admins->where($where)->save($data); 
                 if($admin['au_type']!='admin' && $admin['au_type']!='partner'){
