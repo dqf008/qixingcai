@@ -84,7 +84,8 @@ class UserController extends CommonController
         //修改操作
         $where['au_id']=I('get.uid');
         $admins=M('admin');
-        $user=$admins->field('au_id,au_name,au_money,au_moneys,au_phone,au_remark,au_proportion,au_qishu,au_market')->where($where)->find();
+        $user=$admins->field('au_id,au_name,au_money,au_moneys,au_phone,au_remark,au_proportion,au_qishu,au_market,m_loss')->where($where)->find();
+        $user_loss_m=json_decode($user['m_loss']);
         //上级的账号积分
         $utype=session('autype');
         if($utype == 'admin')
@@ -93,20 +94,34 @@ class UserController extends CommonController
             $users=$admins->where($where1)->sum('au_proportion');
             //$status1=true;
         }
-        else if($utype != 'admin' || $utype != 'partner')
+        else if($utype == 'partner')
         {
             $where1['au_id']=session('auid');
             $where1['au_type']=session('autype');
             $status=true;
             $user1=$admins->field('au_id,au_money,au_moneys')->where($where1)->find();
+            $qi=qishus();
+            $qishu['qishu']=$qi[0]['qishu'];
+            $opentimes = M('opentime')->where($qishu)->find();
+            $loss = json_decode($opentimes['m_loss']);
+        }else if($utype == 'agencys')
+        {
+            $where1['au_id']=session('auid');
+            $where1['au_type']=session('autype');
+            $status=true;
+            $user1=$admins->field('au_id,au_money,au_moneys,m_loss')->where($where1)->find();
+            $admin_loss=$admins->where($where1)->find();
+            $loss = json_decode($admin_loss['m_loss']);
         }
-        //dump($users);
+
 
         $this->assign('users', $users);
         $this->assign('data', $user);
         $this->assign('data1', $user1);
         $this->assign('status', $status);
         $this->assign('status1', $status1);
+        $this->assign('loss', $loss);
+        $this->assign("user_loss_m", $user_loss_m);
         $this->display();
     }
 
@@ -124,7 +139,20 @@ class UserController extends CommonController
         $qishu=I('post.qishu');
         $market=I('post.market');
         $zancheng=I('post.zancheng');
-
+        //赔率操作
+        $ding41=I('post.ding41');
+        $tong211=I('post.tong211');
+        $tong221=I('post.tong221');
+        $tong311=I('post.tong311');
+        $tong321=I('post.tong321');
+        $tong331=I('post.tong331');
+        $tong411=I('post.tong411');
+        $tong421=I('post.tong421');
+        $tong431=I('post.tong431');
+        $tong441=I('post.tong441');
+        $tong451=I('post.tong451');
+        $ding21=I('post.ding21');
+        $ding31=I('post.ding31');
         $admins=M('admin');
         $utype=session('autype');
         if(empty($uname))
@@ -142,7 +170,67 @@ class UserController extends CommonController
         $data['au_proportion']=$proportion;
         $data['au_market']=$market;
         $data['au_qishu']=$qishu;
+        $qi=qishus();
+        $qishu['qishu']=$qi[0]['qishu'];
+        $opentimes = M('opentime')->where($qishu)->find();
+        $m_loss['m_loss'] = json_decode($opentimes['m_loss']);
+        //赔率 1初始赔率2赔率下降阀值3销售增量4赔率下调步长
+        $loss['ding41']=$ding41;
+        $loss['ding42']=$m_loss['m_loss']->ding42;
+        $loss['ding43']=$m_loss['m_loss']->ding43;
+        $loss['ding44']=$m_loss['m_loss']->ding44;//四定
 
+        $loss['tong211']=$tong211;
+        $loss['tong212']=$m_loss['m_loss']->tong212;
+        $loss['tong213']=$m_loss['m_loss']->tong213;
+        $loss['tong214']=$m_loss['m_loss']->tong214;
+        $loss['tong221']=$tong221;
+        $loss['tong222']=$m_loss['m_loss']->tong222;
+        $loss['tong223']=$m_loss['m_loss']->tong223;
+        $loss['tong224']=$m_loss['m_loss']->tong224;//二同
+
+        $loss['tong311']=$tong311;
+        $loss['tong312']=$m_loss['m_loss']->tong312;
+        $loss['tong313']=$m_loss['m_loss']->tong313;
+        $loss['tong314']=$m_loss['m_loss']->tong314;
+        $loss['tong321']=$tong321;
+        $loss['tong322']=$m_loss['m_loss']->tong322;
+        $loss['tong323']=$m_loss['m_loss']->tong323;
+        $loss['tong324']=$m_loss['m_loss']->tong324;
+        $loss['tong331']=$tong331;
+        $loss['tong332']=$m_loss['m_loss']->tong332;
+        $loss['tong333']=$m_loss['m_loss']->tong333;
+        $loss['tong334']=$m_loss['m_loss']->tong334;//三同
+
+        $loss['tong411']=$tong411;
+        $loss['tong412']=$m_loss['m_loss']->tong412;
+        $loss['tong413']=$m_loss['m_loss']->tong413;
+        $loss['tong414']=$m_loss['m_loss']->tong414;
+        $loss['tong421']=$tong421;
+        $loss['tong422']=$m_loss['m_loss']->tong422;
+        $loss['tong423']=$m_loss['m_loss']->tong423;
+        $loss['tong424']=$m_loss['m_loss']->tong424;
+        $loss['tong431']=$tong431;
+        $loss['tong432']=$m_loss['m_loss']->tong432;
+        $loss['tong433']=$m_loss['m_loss']->tong433;
+        $loss['tong434']=$m_loss['m_loss']->tong434;
+        $loss['tong441']=$tong441;
+        $loss['tong442']=$m_loss['m_loss']->tong442;
+        $loss['tong443']=$m_loss['m_loss']->tong443;
+        $loss['tong444']=$m_loss['m_loss']->tong444;
+        $loss['tong451']=$tong451;
+        $loss['tong452']=$m_loss['m_loss']->tong452;
+        $loss['tong453']=$m_loss['m_loss']->tong453;
+        $loss['tong454']=$m_loss['m_loss']->tong454;//四同
+
+        $loss['ding21']=$ding21;
+        $loss['ding22']=$m_loss['m_loss']->ding22;
+        $loss['ding23']=$m_loss['m_loss']->ding23;
+        $loss['ding24']=$m_loss['m_loss']->ding24;//二定
+        $loss['ding31']=$ding31;
+        $loss['ding32']=$m_loss['m_loss']->ding32;
+        $loss['ding33']=$m_loss['m_loss']->ding33;
+        $loss['ding34']=$m_loss['m_loss']->ding34;//三定
         if($utype == 'admin')
         {//添加股东
             $data['au_type']='partner';
@@ -229,6 +317,8 @@ class UserController extends CommonController
                     $data3['au_moneys']=$user1['au_moneys'] + ($moeny - $moneys11);
                     $dd=$admins->where($where1)->save($data3);
                 }
+                $data_loss['m_loss']=json_encode($loss);
+                $admins->where($where)->save($data_loss);
                 //dump($where1);exit;
                 //操作日志
                 $data2['log_ip']=get_client_ip();
@@ -255,6 +345,7 @@ class UserController extends CommonController
             $data['au_random']=$random;
             $data['password']=MD5(MD5($password.$random));//密码
             $data['top_uid']=$auid;
+            $data['m_loss']=json_encode($loss);
             //$data['au_time']=time();
             $ip=get_client_ip();
             $data['au_ip']=$ip;

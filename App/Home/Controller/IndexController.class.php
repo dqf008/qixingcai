@@ -29,6 +29,7 @@ class IndexController extends CommonController {
         $qishu = session('qishu');
         $uid = session('userid');
 		$user=M('user')->where(array('uid'=>$uid))->find();
+        $user_loss_m = json_decode($user['loss']);
         $this->assign('news1', $news1);
         $this->assign('news2', $news2);
 		$this->assign('about', $user['about']);
@@ -41,7 +42,7 @@ class IndexController extends CommonController {
         $data2 = $opentimes->order('id desc')->limit(10)->select();
         //会员资料
         //赔率和单注上限（1直码/2两同/3三同/4四同/5两定/6三定）
-        $data_time['m_loss']=$user['loss'];
+        $data_time['m_loss']=$user['m_loss'];
         if ($data_time['m_loss']) {
             $loss = json_decode($data_time['m_loss']);
             $market = json_decode($data_time['m_sales']);
@@ -836,6 +837,7 @@ class IndexController extends CommonController {
         $this->assign('data', $data); //禁止下注号码
         $this->assign('market2', $market2); //下注上限
         $this->assign('market3', $market3); //下注下限
+        $this->assign("user_loss_m", $user_loss_m);
         $this->display();
     }
     //会员资料
@@ -5701,65 +5703,101 @@ class IndexController extends CommonController {
     //赔率保存
     public function user1() {
         //同时修改当前用户的赔率
-        $ding41 = explode('/', I('post.hs_1'));
-        $tong21 = explode('/', I('post.hs_2'));
-        $tong22 = explode('/', I('post.hs_3'));
-        $tong31 = explode('/', I('post.hs_4'));
-        $tong32 = explode('/', I('post.hs_5'));
-        $tong33 = explode('/', I('post.hs_6'));
-        $tong41 = explode('/', I('post.hs_7'));
-        $tong42 = explode('/', I('post.hs_8'));
-        $tong43 = explode('/', I('post.hs_9'));
-        $tong44 = explode('/', I('post.hs_10'));
-        $tong45 = explode('/', I('post.hs_11'));
-        $ding21 = explode('/', I('post.hs_12'));
-        $ding31 = explode('/', I('post.hs_13'));
-        $data2[0]['loss4'] = $ding41[0];
-        $data2[0]['ding4'] = $ding41[1];
-        $data2[1]['loss21'] = $tong21[0];
-        $data2[1]['loss22'] = $tong22[0];
-        $data2[1]['tong21'] = $tong21[1];
-        $data2[1]['tong22'] = $tong22[1];
-        $data2[2]['loss31'] = $tong31[0];
-        $data2[2]['loss32'] = $tong32[0];
-        $data2[2]['loss33'] = $tong33[0];
-        $data2[2]['tong31'] = $tong31[1];
-        $data2[2]['tong32'] = $tong32[1];
-        $data2[2]['tong33'] = $tong33[1];
-        $data2[3]['loss41'] = $tong41[0];
-        $data2[3]['loss42'] = $tong42[0];
-        $data2[3]['loss43'] = $tong43[0];
-        $data2[3]['loss44'] = $tong44[0];
-        $data2[3]['loss45'] = $tong45[0];
-        $data2[3]['tong41'] = $tong41[1];
-        $data2[3]['tong42'] = $tong42[1];
-        $data2[3]['tong43'] = $tong43[1];
-        $data2[3]['tong44'] = $tong44[1];
-        $data2[3]['tong45'] = $tong45[1];
-        $data2[4]['loss2'] = $ding21[0];
-        $data2[5]['loss3'] = $ding31[0];
-        $data2[4]['ding2'] = $ding21[1];
-        $data2[5]['ding3'] = $ding31[1];
-        $data3['loss'] = json_encode($data2);
-        // var_dump($data3);exit;
+        $ding41=I('post.ding41');
+        $tong211=I('post.tong211');
+        $tong221=I('post.tong221');
+        $tong311=I('post.tong311');
+        $tong321=I('post.tong321');
+        $tong331=I('post.tong331');
+        $tong411=I('post.tong411');
+        $tong421=I('post.tong421');
+        $tong431=I('post.tong431');
+        $tong441=I('post.tong441');
+        $tong451=I('post.tong451');
+        $ding21=I('post.ding21');
+        $ding31=I('post.ding31');
+
         $uid = session('userid');
         $where['uid'] = $uid;
         $user = M('user')->field('lock')->where($where)->find();
 		$about = I('post.about');
         $udata['about']=$about;
         $dd1=M('user')->where($where)->save($udata);
-		
+        $qishu=session('qishu');
+        $datas=M('opentime')->where($qishu)->limit(1)->find();
+        $m_loss['m_loss'] = json_decode($datas['m_loss']);
+        //赔率 1初始赔率2赔率下降阀值3销售增量4赔率下调步长
+        $loss['ding41']=$ding41;
+        $loss['ding42']=$m_loss['m_loss']->ding42;
+        $loss['ding43']=$m_loss['m_loss']->ding43;
+        $loss['ding44']=$m_loss['m_loss']->ding44;//四定
+
+        $loss['tong211']=$tong211;
+        $loss['tong212']=$m_loss['m_loss']->tong212;
+        $loss['tong213']=$m_loss['m_loss']->tong213;
+        $loss['tong214']=$m_loss['m_loss']->tong214;
+        $loss['tong221']=$tong221;
+        $loss['tong222']=$m_loss['m_loss']->tong222;
+        $loss['tong223']=$m_loss['m_loss']->tong223;
+        $loss['tong224']=$m_loss['m_loss']->tong224;//二同
+
+        $loss['tong311']=$tong311;
+        $loss['tong312']=$m_loss['m_loss']->tong312;
+        $loss['tong313']=$m_loss['m_loss']->tong313;
+        $loss['tong314']=$m_loss['m_loss']->tong314;
+        $loss['tong321']=$tong321;
+        $loss['tong322']=$m_loss['m_loss']->tong322;
+        $loss['tong323']=$m_loss['m_loss']->tong323;
+        $loss['tong324']=$m_loss['m_loss']->tong324;
+        $loss['tong331']=$tong331;
+        $loss['tong332']=$m_loss['m_loss']->tong332;
+        $loss['tong333']=$m_loss['m_loss']->tong333;
+        $loss['tong334']=$m_loss['m_loss']->tong334;//三同
+
+        $loss['tong411']=$tong411;
+        $loss['tong412']=$m_loss['m_loss']->tong412;
+        $loss['tong413']=$m_loss['m_loss']->tong413;
+        $loss['tong414']=$m_loss['m_loss']->tong414;
+        $loss['tong421']=$tong421;
+        $loss['tong422']=$m_loss['m_loss']->tong422;
+        $loss['tong423']=$m_loss['m_loss']->tong423;
+        $loss['tong424']=$m_loss['m_loss']->tong424;
+        $loss['tong431']=$tong431;
+        $loss['tong432']=$m_loss['m_loss']->tong432;
+        $loss['tong433']=$m_loss['m_loss']->tong433;
+        $loss['tong434']=$m_loss['m_loss']->tong434;
+        $loss['tong441']=$tong441;
+        $loss['tong442']=$m_loss['m_loss']->tong442;
+        $loss['tong443']=$m_loss['m_loss']->tong443;
+        $loss['tong444']=$m_loss['m_loss']->tong444;
+        $loss['tong451']=$tong451;
+        $loss['tong452']=$m_loss['m_loss']->tong452;
+        $loss['tong453']=$m_loss['m_loss']->tong453;
+        $loss['tong454']=$m_loss['m_loss']->tong454;//四同
+
+        $loss['ding21']=$ding21;
+        $loss['ding22']=$m_loss['m_loss']->ding22;
+        $loss['ding23']=$m_loss['m_loss']->ding23;
+        $loss['ding24']=$m_loss['m_loss']->ding24;//二定
+        $loss['ding31']=$ding31;
+        $loss['ding32']=$m_loss['m_loss']->ding32;
+        $loss['ding33']=$m_loss['m_loss']->ding33;
+        $loss['ding34']=$m_loss['m_loss']->ding34;//三定
+        $data_loss['loss']=json_encode($loss);
+        //$users->where($uid)->save($data_loss);
         if ($user['lock'] == 2) {
             $arr['code'] = 400;
         } else {
-            $uloss = M("uloss");
-            $loss1 = $uloss->where($where)->find();
-            if (empty($loss1)) {
-                $data3['uid'] = $uid;
-                $loss2 = $uloss->add($data3);
-            } else {
-                $loss2 = $uloss->where($where)->save($data3);
-            }
+//            $uloss = M("uloss");
+//            $loss1 = $uloss->where($where)->find();
+//            if (empty($loss1)) {
+//                $data3['uid'] = $uid;
+//                $loss2 = $uloss->add($data3);
+//            } else {
+//                $loss2 = $uloss->where($where)->save($data3);
+//            }
+            $users=M('user');
+            $users->where($uid)->save($data_loss);
             $arr['code'] = 200;
         }
 		if($dd1){
