@@ -33,8 +33,8 @@
   <article class="page-container"> 
    <form class="form form-horizontal"> 
     <div class="row cl"> 
-     <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label> 
-     <div class="formControls col-xs-8 col-sm-9"> 
+     <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>账号：</label>
+     <div class="formControls col-xs-8 col-sm-9">
       <input type="text" class="input-text" value="<{$data['username']}>" placeholder="" id="adminName" name="adminName" /> 
      </div> 
     </div> 
@@ -58,97 +58,94 @@
       <input type="hidden" name="moneys" value="<{$data['money']}>" /> 
       <input type="hidden" name="money" value="<{$data1['au_money']-$data1['au_moneys']}>" /> 
      </div> 
-    </div> 
-   <!--  <if condition="$data['uid']"> 
-      <div class="row cl"> 
-    <else /> 
-      <div class="row cl" style="display:none">  
-    </if>
-       <label class="form-label col-xs-4 col-sm-3">赔率配置：</label> 
-       <div class="formControls col-xs-8 col-sm-9"> 
-        <table width="400" border="1" cellspacing="0" cellpadding="0" style="solid 1px #ddd"> 
+    </div>
+       <label class="form-label col-xs-4 col-sm-3">赔率配置：</label>
+       <div class="formControls col-xs-8 col-sm-9" style="margin-top: 10px;margin-bottom: 10px;">
+        <table width="400" border="1" cellspacing="0" cellpadding="0" style="solid 1px #ddd">
          <tbody>
-          <tr> 
-           <td width="50" height="28" align="center" bgcolor="#FFFFFF">类型</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">说明</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">上级给的基本赔率</td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF">上级要获取的佣金/剩余赔率</td> 
-          </tr> 
-          <tr> 
-           <td width="50" height="28" align="center" bgcolor="#FFFFFF">直码</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">&nbsp;</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->ding41}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select1" id="Select1" style="width:120px;"><{$j1}> </select></td> 
-          </tr> 
-          <tr> 
-           <td width="50" rowspan="2" align="center" bgcolor="#FFFFFF">两同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">数字不同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong211}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select21" id="Select21" style="width:120px;"><{$j2}> </select></td> 
-          </tr> 
-          <tr> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">两数相同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong221}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select22" id="Select22" style="width:120px;"><{$j3}> </select></td> 
-          </tr> 
-          <tr> 
-           <td width="50" rowspan="3" align="center" bgcolor="#FFFFFF">三同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">数字不同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong311}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select31" id="Select31" style="width:120px;"><{$j4}> </select></td> 
-          </tr> 
-          <tr> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">两数相同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong321}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select32" id="Select32" style="width:120px;"><{$j5}> </select></td> 
-          </tr> 
-          <tr> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">三数相同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong331}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select33" id="Select33" style="width:120px;"><{$j6}> </select></td> 
-          </tr> 
-          <tr> 
-           <td width="50" rowspan="5" align="center" bgcolor="#FFFFFF">四同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">数字不同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong411}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select41" id="Select41" style="width:120px;"><{$j7}> </select></td> 
-          </tr> 
-          <tr> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">两数相同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong421}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select42" id="Select42" style="width:120px;"><{$j8}> </select></td> 
-          </tr> 
-          <tr> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">两两相同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong431}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select43" id="Select43" style="width:120px;"><{$j9}> </select></td> 
-          </tr> 
-          <tr> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF">三数相同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong441}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select44" id="Select44" style="width:120px;"><{$j10}> </select></td> 
-          </tr> 
-          <tr> 
-           <td height="28" align="center" bgcolor="#FFFFFF">四数相同</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong451}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select45" id="Select45" style="width:120px;"><{$j11}> </select></td> 
-          </tr> 
-          <tr> 
-           <td height="28" align="center" bgcolor="#FFFFFF">两定</td> 
-           <td height="28" align="center" bgcolor="#FFFFFF">&nbsp;</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->ding21}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select5" id="Select5" style="width:120px;"><{$j12}> </select></td> 
-          </tr> 
-          <tr> 
-           <td height="28" align="center" bgcolor="#FFFFFF">三定</td> 
-           <td height="28" align="center" bgcolor="#FFFFFF">&nbsp;</td> 
-           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->ding31}></td> 
-           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><select name="Select6" id="Select6" style="width:120px;"><{$j13}> </select></td> 
-          </tr> 
+          <tr>
+           <td width="50" height="28" align="center" bgcolor="#FFFFFF">类型</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">说明</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">上级给的基本赔率</td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF">给下级赔率</td>
+          </tr>
+          <tr>
+           <td width="50" height="28" align="center" bgcolor="#FFFFFF">直码</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->ding41}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF">
+               <input type="text" name="ding41" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding41.'"'; } ?>>
+           </td>
+          </tr>
+          <tr>
+           <td width="50" rowspan="2" align="center" bgcolor="#FFFFFF">两同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">数字不同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong211}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong211" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong211.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">两数相同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong221}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong221" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong221.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td width="50" rowspan="3" align="center" bgcolor="#FFFFFF">三同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">数字不同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong311}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong311" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong311.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">两数相同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong321}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong321" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong321.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">三数相同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong331}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong331" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong331.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td width="50" rowspan="5" align="center" bgcolor="#FFFFFF">四同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">数字不同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong411}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong411" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong411.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">两数相同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong421}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong421" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong421.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">两两相同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong431}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong431" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong431.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF">三数相同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong441}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong441" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong441.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td height="28" align="center" bgcolor="#FFFFFF">四数相同</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->tong451}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="tong451" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong451.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td height="28" align="center" bgcolor="#FFFFFF">两定</td>
+           <td height="28" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->ding21}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="ding21" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding21.'"'; } ?>></td>
+          </tr>
+          <tr>
+           <td height="28" align="center" bgcolor="#FFFFFF">三定</td>
+           <td height="28" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+           <td width="80" height="28" align="center" bgcolor="#FFFFFF"><{$loss->ding31}></td>
+           <td width="100" height="28" align="center" bgcolor="#FFFFFF"><input type="text" name="ding31" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding31.'"'; } ?>></td>
+          </tr>
          </tbody>
-        </table> 
-       </div> 
-      </div>  -->
+        </table>
+       </div>
+      </div>
       <div class="row cl"> 
        <label class="form-label col-xs-4 col-sm-3">备注：</label> 
        <div class="formControls col-xs-8 col-sm-9"> 
@@ -202,7 +199,7 @@ $(function(){
 
     $('#submits').click(function(){
 
-        var name,password,password2,phone,email,type,integral,uid,money,select1,moneys;
+        var name,password,password2,phone,email,type,integral,uid,money,moneys,ding41,tong211,tong221,tong311,tong321,tong331,tong411,tong421,tong431,tong441,tong451,ding21,ding31;
         name=$('input[name="adminName"]').val();
         password=$('input[name="password"]').val();
         phone=$('input[name="phone"]').val();
@@ -212,19 +209,19 @@ $(function(){
         moneys=$('input[name="moneys"]').val();
         //email=$('input[name="email"]').val();
         content=$('textarea[name="content"]').val();
-        select1=$('select[name="Select1"] option:selected').val();
-        var select21=$('select[name="Select21"] option:selected').val();
-        var select22=$('select[name="Select22"] option:selected').val();
-        var select31=$('select[name="Select31"] option:selected').val();
-        var select32=$('select[name="Select32"] option:selected').val();
-        var select33=$('select[name="Select33"] option:selected').val();
-        var select41=$('select[name="Select41"] option:selected').val();
-        var select42=$('select[name="Select42"] option:selected').val();
-        var select43=$('select[name="Select43"] option:selected').val();
-        var select44=$('select[name="Select44"] option:selected').val();
-        var select45=$('select[name="Select45"] option:selected').val();
-        var select5=$('select[name="Select5"] option:selected').val();
-        var select6=$('select[name="Select6"] option:selected').val();
+		ding41=$('input[name="ding41"]').val();
+		tong211=$('input[name="tong211"]').val();
+		tong221=$('input[name="tong221"]').val();
+		tong311=$('input[name="tong311"]').val();
+		tong321=$('input[name="tong321"]').val();
+		tong331=$('input[name="tong331"]').val();
+		tong411=$('input[name="tong411"]').val();
+		tong421=$('input[name="tong421"]').val();
+		tong431=$('input[name="tong431"]').val();
+		tong441=$('input[name="tong441"]').val();
+		tong451=$('input[name="tong451"]').val();
+		ding21=$('input[name="ding21"]').val();
+		ding31=$('input[name="ding31"]').val();
 
         //alert(name+'---'+password+'---'+password2+'---'+phone+'---'+email+'---'+type);
         if(name=='') {
@@ -289,19 +286,19 @@ $(function(){
                      'uid':uid,
                     'password':password,
                     'content':content,
-                    'select1':select1,
-                    'select21':select21,
-                    'select22':select22,
-                    'select31':select31,
-                    'select32':select32,
-                    'select33':select33,
-                    'select41':select41,
-                    'select42':select42,
-                    'select43':select43,
-                    'select44':select44,
-                    'select45':select45,
-                    'select5':select5,
-                    'select6':select6,
+                    'ding41':ding41,
+                    'tong211':tong211,
+                    'tong221':tong221,
+                    'tong311':tong311,
+                    'tong321':tong321,
+                    'tong331':tong331,
+                    'tong411':tong411,
+                    'tong421':tong421,
+                    'tong431':tong431,
+                    'tong441':tong441,
+                    'tong451':tong451,
+                    'ding21':ding21,
+                    'ding31':ding31,
                 },
                 async: false,
                 dataType:'json',

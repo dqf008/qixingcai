@@ -647,6 +647,9 @@ function findIndex(){
 					  <input type="hidden" name="odds" value="">
 				      <input type="hidden" name="limit" value="">
 				      <input type="hidden" name="moneys" value="">
+				      <input type="hidden" name="odds_zd" value="">
+				      <input type="hidden" name="odds_dl" value="">
+				      <input type="hidden" name="odds_hy" value="">
 					</li>
 				</ul>
 			</div>
@@ -1011,8 +1014,11 @@ toFixed(2)+'</td></tr>';
 			          $("#sfrank").text(msg[0]);//赔率
 
 			          $("input[name='limit']").val(msg[2]);//上限
-			          $("input[name='odds']").val(msg[0]);//赔率
+			          $("input[name='odds']").val(msg[9]);//会员下级赔率
 			          $("input[name='moneys']").val(msg[3]);//下限
+			          $("input[name='odds_zd']").val(msg[6]);//总代赔率
+			          $("input[name='odds_dl']").val(msg[7]);//代理赔率
+			          $("input[name='odds_hy']").val(msg[8]);//会员赔率
 			          //下注金额上线和下线
 			        }
 			       

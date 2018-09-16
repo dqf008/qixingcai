@@ -41,6 +41,7 @@ class IndexController extends CommonController {
         $data2 = $opentimes->order('id desc')->limit(10)->select();
         //会员资料
         //赔率和单注上限（1直码/2两同/3三同/4四同/5两定/6三定）
+        $data_time['m_loss']=$user['loss'];
         if ($data_time['m_loss']) {
             $loss = json_decode($data_time['m_loss']);
             $market = json_decode($data_time['m_sales']);
@@ -1053,8 +1054,14 @@ class IndexController extends CommonController {
             }
         } else {
             $where1['qishu'] = session('qishu');
-            $data1 = M('opentime')->where($where1)->limit(1)->find();
-            $loss = json_decode($data1['m_loss']);
+
+            $user = M('user')->where($where)->find();
+            if($user){
+                $loss = json_decode($user['loss']);
+            }else{
+                $data1 = M('opentime')->where($where1)->limit(1)->find();
+                $loss = json_decode($data1['m_loss']);
+            }
             $loss1 = $loss->ding21;
         }
         return $loss1;
@@ -1321,25 +1328,17 @@ class IndexController extends CommonController {
         $where3['name'] = $data[2];
         $where3['type'] = $data[0];
         $markets = M('markets')->field('markets,loss')->where($where3)->find();
-        //if(empty($markets) && empty($bets)){//股东没有限制(赔率和销售上限)
-        if (empty($loss) || empty($loss['loss'])) { //用户配置为空-->走股东
-            $arrs = $this->haomas($datas, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
-        } else { //赔率，每码上限，单注上限，会员回水,号码
-            $arrs = $this->haomas1($datas, $loss, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
-        }
-        // }else{
-        //   if(empty($loss) || empty($loss['loss'])){//用户配置为空-->走股东
-        //       $arrs=$this->haomas($datas,$data[0],$data[2],$markets,$bets);
-        //     }else{//赔率，每码上限，单注上限，会员回水,号码
-        //       $arrs=$this->haomas1($datas,$loss,$data[0],$data[2],$markets,$bets);
-        //     }
-        // }
+        $user = M('user')->where($uid)->find();
+        //会员下级赔率
+        $datas['m_loss']=$user['loss'];
+        $arrs = $this->haomas($datas, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
+
         if ($arrs['code'] == 400) {
             echo -5;
             exit;
         }
         $arrs[1]=$arrs[1]-$bets;
-        //返回 赔率，每码上限，单注上限，最小下注上限，会员回水,号码
+        //返回 赔率，每码上限，单注上限，最小下注上限，会员回水,号码;
         echo json_encode($arrs);
         exit; //["49", "1", "1", "1", "0", "123"]
         
@@ -4229,22 +4228,52 @@ class IndexController extends CommonController {
                 $data1['money'] = $money;
                 $data1['js'] = 0;
                 $data1['index_id'] = 2;
-                if (empty($loss) || empty($loss['loss'])) { //用户配置为空-->走股东
-                    $arrs = $this->haomas($datas, $data[0], $v, $markets, $bets, $data[3], $types, $prohibits);
-                } else { //赔率，每码上限，单注上限，会员回水,号码
-                    $arrs = $this->haomas1($datas, $loss, $data[0], $v, $markets, $bets, $data[3], $types, $prohibits);
-                }
+                $user = M('user')->where($uid)->find();
+                $top_dl['au_id']=$user['top_uid'];
+                $user_dl = M('admin')->where($top_dl)->find();
+                $top_zd['au_id']=$user_dl['top_uid'];
+                $user_zd = M('admin')->where($top_zd)->find();
+                $arrs = $this->haomas($datas, $data[0], $v, $markets, $bets, $data[3], $types, $prohibits);
+                //总代理赔率
+                $datas['m_loss']=$user_zd['m_loss'];
+                $arrs_zd = $this->haomas($datas, $data[0], $v, $markets, $bets, $data[3], $types, $prohibit);
+                //代理赔率
+                $datas['m_loss']=$user_dl['m_loss'];
+                $arrs_dl = $this->haomas($datas, $data[0], $v, $markets, $bets, $data[3], $types, $prohibit);
+                //会员赔率
+                $datas['m_loss']=$user['m_loss'];
+                $arrs_hui = $this->haomas($datas, $data[0], $v, $markets, $bets, $data[3], $types, $prohibit);
+                //会员下级赔率
+                $datas['m_loss']=$user['loss'];
+                $arrs_huiyuan = $this->haomas($datas, $data[0], $v, $markets, $bets, $data[3], $types, $prohibit);
+                $arrs[]=$arrs_zd[0];
+                $arrs[]=$arrs_dl[0];
+                $arrs[]=$arrs_hui[0];
+                $arrs[]=$arrs_huiyuan[0];
+//                if (empty($loss) || empty($loss['loss'])) { //用户配置为空-->走股东
+//                    $arrs = $this->haomas($datas, $data[0], $v, $markets, $bets, $data[3], $types, $prohibits);
+//                } else { //赔率，每码上限，单注上限，会员回水,号码
+//                    $arrs = $this->haomas1($datas, $loss, $data[0], $v, $markets, $bets, $data[3], $types, $prohibits);
+//                }
+
                 if ($arrs['code'] != 400) {
                     $data1['js'] = 0;
                     $moneys1+= $money;
-                    $data1['odds'] = $arrs[0];
+                    $data1['odds'] = $arrs[9];
+                    $data1['odds_zd'] = $arrs[6];
+                    $data1['odds_dl'] = $arrs[7];
+                    $data1['odds_hy'] = $arrs[8];
                     $data1['loss'] = $arrs[4];
                     $data1['win'] = $money * $arrs[4];
                     $data1['topwin'] = $arrs[4] * $data1['topmoney']; //拦货回水
+
                     //$data1['topzanc'] = $toparr[1];
                 } else {
                     $data1['js'] = 4;
                     $data1['odds'] = 0;
+                    $data1['odds_zd'] = 0;
+                    $data1['odds_dl'] = 0;
+                    $data1['odds_hy'] = 0;
                     $data1['loss'] = 0;
                     $data1['win'] = 0;
                     $data1['topwin'] = 0;
@@ -4265,6 +4294,7 @@ class IndexController extends CommonController {
             exit;
         } else {
             //判断改号码是否禁止购买
+            echo 2;
             $where['qishu'] = $qishu;
             $where['p_type'] = $data[0];
             $where['name'] = $data[2];
@@ -4288,11 +4318,34 @@ class IndexController extends CommonController {
             $where3['name'] = $data[2];
             $where3['type'] = $data[0];
             $markets = M('markets')->field('markets,loss')->where($where3)->find();
-            if (empty($loss) || empty($loss['loss'])) { //用户配置为空-->走股东
-                $arrs = $this->haomas($datas, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
-            } else { //赔率，每码上限，单注上限，会员回水,号码
-                $arrs = $this->haomas1($datas, $loss, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
-            }
+            $user = M('user')->where($uid)->find();
+            $top_dl['au_id']=$user['top_uid'];
+            $user_dl = M('admin')->where($top_dl)->find();
+            $top_zd['au_id']=$user_dl['top_uid'];
+            $user_zd = M('admin')->where($top_zd)->find();
+            $arrs = $this->haomas($datas, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
+
+            //总代理赔率
+            $datas['m_loss']=$user_zd['m_loss'];
+            $arrs_zd = $this->haomas($datas, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
+            //代理赔率
+            $datas['m_loss']=$user_dl['m_loss'];
+            $arrs_dl = $this->haomas($datas, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
+            //会员赔率
+            $datas['m_loss']=$user['m_loss'];
+            $arrs_hui = $this->haomas($datas, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
+            //会员下级赔率
+            $datas['m_loss']=$user['loss'];
+            $arrs_huiyuan = $this->haomas($datas, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
+            $arrs[]=$arrs_zd[0];
+            $arrs[]=$arrs_dl[0];
+            $arrs[]=$arrs_hui[0];
+            $arrs[]=$arrs_huiyuan[0];
+//            if (empty($loss) || empty($loss['loss'])) { //用户配置为空-->走股东
+//                $arrs = $this->haomas($datas, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
+//            } else { //赔率，每码上限，单注上限，会员回水,号码
+//                $arrs = $this->haomas1($datas, $loss, $data[0], $data[2], $markets, $bets, $data[3], $types, $prohibit);
+//            }
             if ($arrs['code'] == 400) {
                 echo -6;
                 exit;
@@ -4326,11 +4379,14 @@ class IndexController extends CommonController {
             $bet['mingxi_2'] = $data[2];
             $bet['mingxi_3'] = $data[4];
             $bet['types'] = $data[1];
-            $bet['odds'] = $arrs[0];
+            $bet['odds'] = $arrs[9];
+            $bet['odds_zd'] = $arrs[6];
+            $bet['odds_dl'] = $arrs[7];
+            $bet['odds_hy'] = $arrs[8];
             $bet['loss'] = $arrs[4];
             $bet['win'] = $money * $arrs[4];
             $bet['assets'] = $moneys;
-	    $bet['type'] = '';
+	        $bet['type'] = '';
             //下注添加操作
             $dd = M('bet')->add($bet);
             if (!empty($dd)) {
@@ -4873,6 +4929,11 @@ class IndexController extends CommonController {
             // $bet['topzanc'] = $toparr[1]; //代理占成
             // $bet['topwin'] = 0;
         }
+        $user = M('user')->where($uid)->find();
+        $top_dl['au_id']=$user['top_uid'];
+        $user_dl = M('admin')->where($top_dl)->find();
+        $top_zd['au_id']=$user_dl['top_uid'];
+        $user_zd = M('admin')->where($top_zd)->find();
         //$moneys1=user();//当前用户的积分
         if (strlen($haoma) == 4) {
             if ($topUid) {
@@ -4884,7 +4945,14 @@ class IndexController extends CommonController {
             //$sum1=1;
             $bet['mingxi_2'] = $haoma;
             $bet['types'] = $this->unm1($haoma);
+            $data1['m_loss']=$user['loss'];
             $odds = get_odd3($haoma, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
+            $data1['m_loss']=$user_zd['m_loss'];
+            $odds_zd = get_odd3($haoma, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
+            $data1['m_loss']=$user_dl['m_loss'];
+            $odds_dl = get_odd3($haoma, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
+            $data1['m_loss']=$user['m_loss'];
+            $odds_hy = get_odd3($haoma, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
             // var_dump($odds);
             // var_dump($weishu);
             if ($odds['code'] != 400 && $money <= $odds[2] && $money >= $odds[3]) {
@@ -4895,6 +4963,9 @@ class IndexController extends CommonController {
                     $bet['win'] = 0;
                 } else {
                     $bet['odds'] = $odds[0];
+                    $bet['odds_zd'] = $odds_zd[0];
+                    $bet['odds_dl'] = $odds_dl[0];
+                    $bet['odds_hy'] = $odds_hy[0];
                     $bet['loss'] = $odds[1];
                     $bet['win'] = $money * $odds[1];
                     $bet['topwin'] = $odds[1] * $toparr[0];
@@ -4903,11 +4974,12 @@ class IndexController extends CommonController {
             } else {
                 $bet['js'] = 4;
                 $bet['odds'] = 0;
+                $bet['odds_zd'] = 0;
+                $bet['odds_dl'] = 0;
+                $bet['odds_hy'] = 0;
                 $bet['loss'] = 0;
                 $bet['win'] = 0;
             }
-            //   var_dump($bet);
-            // exit;
             $dd = $bets->add($bet); //插入k_bet
             
         } elseif (strlen($haoma) > 4) {
@@ -4922,11 +4994,21 @@ class IndexController extends CommonController {
                         $bet['topwin'] = 0;
                     }
                     //分别查赔率
+                    $data1['m_loss']=$user['loss'];
                     $odds = get_odd3($cc, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
+                    $data1['m_loss']=$user_zd['m_loss'];
+                    $odds_zd = get_odd3($cc, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
+                    $data1['m_loss']=$user_dl['m_loss'];
+                    $odds_dl = get_odd3($cc, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
+                    $data1['m_loss']=$user['m_loss'];
+                    $odds_hy = get_odd3($cc, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
                     //$datas[]=$odds;
                     if ($odds['code'] != 400 && $money <= $odds[2] && $money >= $odds[3]) {
                         $bet['js'] = 0;
                         $bet['odds'] = $odds[0];
+                        $bet['odds_zd'] = $odds_zd[0];
+                        $bet['odds_dl'] = $odds_dl[0];
+                        $bet['odds_hy'] = $odds_hy[0];
                         $bet['loss'] = $odds[1];
                         $bet['win'] = $money * $odds[1];
                         $bet['topwin'] = $odds[1] * $toparr[0];
@@ -4934,10 +5016,13 @@ class IndexController extends CommonController {
                     } else {
                         $bet['js'] = 4;
                         $bet['odds'] = 0;
+                        $bet['odds_zd'] = 0;
+                        $bet['odds_dl'] = 0;
+                        $bet['odds_hy'] = 0;
                         $bet['loss'] = 0;
                         $bet['win'] = 0;
                     }
-		    $bet['type'] = '';
+		            $bet['type'] = '';
                     $dd = $bets->add($bet); //插入k_bet
                     $odds = '';
                 }
@@ -5017,6 +5102,11 @@ class IndexController extends CommonController {
             // $bet['topzanc'] = $toparr[1]; //代理占成
             // $bet['topwin'] = 0;
         }
+        $user = M('user')->where($uid)->find();
+        $top_dl['au_id']=$user['top_uid'];
+        $user_dl = M('admin')->where($top_dl)->find();
+        $top_zd['au_id']=$user_dl['top_uid'];
+        $user_zd = M('admin')->where($top_zd)->find();
         if (strlen($haoma) > 11) {
             $strs = explode('|', $haoma);
             for ($a = 0;$a < count($strs);$a++) {
@@ -5036,16 +5126,29 @@ class IndexController extends CommonController {
                     $money = $strs1[1]; //下注金额
                     $bet['money'] = $money;
                     //分别查赔率
+                    $data1['m_loss']=$user['loss'];
                     $odds = get_odd3($haoma1, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
+                    $data1['m_loss']=$user_zd['m_loss'];
+                    $odds_zd = get_odd3($haoma1, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
+                    $data1['m_loss']=$user_dl['m_loss'];
+                    $odds_dl = get_odd3($haoma1, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
+                    $data1['m_loss']=$user['m_loss'];
+                    $odds_hy = get_odd3($haoma1, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
                     if ($odds['code'] != 400 && $money <= $odds[2] && $money >= $odds[3]) {
                         if ($money > $moneys1) { //下注积分大于
                             $bet['js'] = 4;
                             $bet['odds'] = 0;
+                            $bet['odds_zd'] = 0;
+                            $bet['odds_dl'] = 0;
+                            $bet['odds_hy'] = 0;
                             $bet['loss'] = 0;
                             $bet['win'] = 0;
                         } else {
                             $bet['types'] = $this->unm1($haoma1);
                             $bet['odds'] = $odds[0];
+                            $bet['odds_zd'] = $odds_zd[0];
+                            $bet['odds_dl'] = $odds_dl[0];
+                            $bet['odds_hy'] = $odds_hy[0];
                             $bet['loss'] = $odds[1];
                             $bet['win'] = $money * $odds[1];
                             $bet['topwin'] = $odds[1] * $toparr[0];
@@ -5301,11 +5404,25 @@ class IndexController extends CommonController {
             $bet[$k]['mingxi_3'] = $mingxi_3;
             $bet[$k]['types'] = $this->unm2($v, $mingxi_1);
             $bet[$k]['mingxi_2'] = $v;
-            if (empty($loss) || empty($loss['loss'])) { //用户配置为空-->走股东
-                $arrs = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
-            } else { //赔率，每码上限，单注上限，会员回水,号码
-                $arrs = $this->haomas3($datas, $weishu, $v, $mingxi_1, $loss, $prohibits, $bets1, $markets1, $numbers);
-            }
+             $user = M('user')->where($uid)->find();
+             $top_dl['au_id']=$user['top_uid'];
+             $user_dl = M('admin')->where($top_dl)->find();
+             $top_zd['au_id']=$user_dl['top_uid'];
+             $user_zd = M('admin')->where($top_zd)->find();
+             $datas['m_loss']=$user['loss'];
+             $arrs = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
+             $datas['m_loss']=$user_zd['m_loss'];
+             $arrs_zd = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
+             $datas['m_loss']=$user_dl['m_loss'];
+             $arrs_dl = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
+             $datas['m_loss']=$user['m_loss'];
+             $arrs_hy = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
+//            if (empty($loss) || empty($loss['loss'])) { //用户配置为空-->走股东
+//                $arrs = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
+//                var_dump($arrs);exit;
+//            } else { //赔率，每码上限，单注上限，会员回水,号码
+//                $arrs = $this->haomas3($datas, $weishu, $v, $mingxi_1, $loss, $prohibits, $bets1, $markets1, $numbers);
+//            }
             $bet[$k]['uid'] = $uid;
             $bet[$k]['username'] = $uname;
             $bet[$k]['did'] = $did;
@@ -5330,6 +5447,9 @@ class IndexController extends CommonController {
                 $bet[$k]['js'] = 0;
                 $moneys+= $money;
                 $bet[$k]['odds'] = $arrs[0];
+                $bet[$k]['odds_zd'] = $arrs_zd[0];
+                $bet[$k]['odds_dl'] = $arrs_dl[0];
+                $bet[$k]['odds_hy'] = $arrs_hy[0];
                 $bet[$k]['loss'] = $arrs[4];
                 $bet[$k]['win'] = $money * $arrs[4];
                 $bet[$k]['topwin'] = $arrs[4] * $toparr[0];
@@ -5340,6 +5460,9 @@ class IndexController extends CommonController {
                 // $bet['win']  =0;
                 $bet[$k]['js'] = 4;
                 $bet[$k]['odds'] = 0;
+                $bet[$k]['odds_zd'] = 0;
+                $bet[$k]['odds_dl'] = 0;
+                $bet[$k]['odds_hy'] = 0;
                 $bet[$k]['loss'] = 0;
                 $bet[$k]['win'] = 0;
                 $bet[$k]['topwin'] = 0;
