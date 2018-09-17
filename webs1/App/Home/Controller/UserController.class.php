@@ -155,6 +155,7 @@ class UserController extends CommonController
         $ding31=I('post.ding31');
         $admins=M('admin');
         $utype=session('autype');
+        $auid=session('auid');
         if(empty($uname))
         {
             $arr['code']=true;
@@ -173,6 +174,105 @@ class UserController extends CommonController
         $qi=qishus();
         $qishu['qishu']=$qi[0]['qishu'];
         $opentimes = M('opentime')->where($qishu)->find();
+        $top_id['au_id'] = $auid;
+        $top_loss = $admins->where($top_id)->find();
+        if($top_loss['au_type'] =='partner'){
+            $sx_loss = json_decode($opentimes['m_loss']);
+        }else if($top_loss['au_type'] =='agencys'){
+            $sx_loss = json_decode($top_loss['m_loss']);
+        }
+        //赔率 1初始赔率2赔率下降阀值3销售增量4赔率下调步长
+        if($ding41 > $sx_loss->ding41)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong211 > $sx_loss->tong211)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong221 > $sx_loss->tong221)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong311 > $sx_loss->tong311)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong321 > $sx_loss->tong321)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong331 > $sx_loss->tong331)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong411 > $sx_loss->tong411)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong421 > $sx_loss->tong421)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong431 > $sx_loss->tong431)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong441 > $sx_loss->tong441)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong451 > $sx_loss->tong451)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($ding21 > $sx_loss->ding21)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($ding31 > $sx_loss->ding31)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/index'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
         $m_loss['m_loss'] = json_decode($opentimes['m_loss']);
         //赔率 1初始赔率2赔率下降阀值3销售增量4赔率下调步长
         $loss['ding41']=$ding41;
@@ -257,8 +357,6 @@ class UserController extends CommonController
             $data['au_type']='agency';
 
         }
-        $auid=session('auid');
-
         $where1['au_id']=$auid;
         $where1['au_type']=$utype;
         $user1=$admins->field('au_moneys,au_money,au_proportion,au_sum')->where($where1)->find();
@@ -317,8 +415,6 @@ class UserController extends CommonController
                     $data3['au_moneys']=$user1['au_moneys'] + ($moeny - $moneys11);
                     $dd=$admins->where($where1)->save($data3);
                 }
-                $data_loss['m_loss']=json_encode($loss);
-                $admins->where($where)->save($data_loss);
                 //dump($where1);exit;
                 //操作日志
                 $data2['log_ip']=get_client_ip();
@@ -337,7 +433,12 @@ class UserController extends CommonController
                 $arr=['code'=>true, 'titles'=>'修改成功', 'urls'=>'/User/index'];
                 $stats=json_encode($arr);
             }
-
+            $data_loss['m_loss']=json_encode($loss);
+            $save_user = $admins->where($where)->save($data_loss);
+            if(!empty($save_user)){
+                $arr=['code'=>true, 'titles'=>'修改成功', 'urls'=>'/User/index'];
+                $stats=json_encode($arr);
+            }
         }
         else
         {
@@ -1420,8 +1521,100 @@ class UserController extends CommonController
         //操作用户
         $where1['au_id']=session('auid');
         $where1['au_type']=session('autype');
-        $user1=$admins->field('au_moneys,au_money,au_proportion,au_sum')->where($where1)->find();
+        $user1=$admins->field('au_moneys,au_money,au_proportion,au_sum,m_loss')->where($where1)->find();
+        $sx_loss = json_decode($user1['m_loss']);
         //赔率 1初始赔率2赔率下降阀值3销售增量4赔率下调步长
+        if($ding41 > $sx_loss->ding41)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong211 > $sx_loss->tong211)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong221 > $sx_loss->tong221)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong311 > $sx_loss->tong311)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong321 > $sx_loss->tong321)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong331 > $sx_loss->tong331)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong411 > $sx_loss->tong411)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong421 > $sx_loss->tong421)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong431 > $sx_loss->tong431)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong441 > $sx_loss->tong441)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($tong451 > $sx_loss->tong451)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($ding21 > $sx_loss->ding21)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
+        if($ding31 > $sx_loss->ding31)
+        {
+            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
+            $stats=json_encode($arr);
+            echo $stats;
+            exit;
+        }
         $loss['ding41']=$ding41;
         $loss['ding42']=$m_loss['m_loss']->ding42;
         $loss['ding43']=$m_loss['m_loss']->ding43;
@@ -1567,8 +1760,7 @@ class UserController extends CommonController
             {
                 $user=$users->where($where)->save($data);
             }
-            $data_loss['m_loss']=json_encode($loss);
-            $users->where($uid)->save($data_loss);
+
             //$user=1;
             if( !empty($user))
             {
@@ -1591,7 +1783,12 @@ class UserController extends CommonController
                 $arr=['code'=>false, 'titles'=>'修改失败', 'urls'=>'/User/user1'];
                 $stats=json_encode($arr);
             }
-
+            $data_loss['m_loss']=json_encode($loss);
+            $save_user = $users->where($uid)->save($data_loss);
+            if(!empty($save_user)){
+                $arr=['code'=>true, 'titles'=>'修改成功', 'urls'=>'/User/user1'];
+                $stats=json_encode($arr);
+            }
         }
         else
         {

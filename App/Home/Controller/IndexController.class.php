@@ -5547,7 +5547,7 @@ class IndexController extends CommonController {
         $count = $bets->where($where)->count();
         $Page = new \Think\Page1($count,50); // 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show = $Page->show(); // 分页显示输出
-        $field = 'id,did,username,addtime,mingxi_1,mingxi_2,mingxi_3,odds,money,js,status,win';
+        $field = 'id,did,username,addtime,mingxi_1,mingxi_2,mingxi_3,odds,odds_hy,money,js,status,win';
         $data1 = $bets->field($field)->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         //dump($data1);exit;
 		$times=M('opentime')->where(array('qishu'=>$where['qishu']))->find();
@@ -5557,6 +5557,7 @@ class IndexController extends CommonController {
                 $v['yingkui'] = 0;
                 if ($v['status'] == 1 && $v['js'] == 0) { //中奖
                     $v['zj'] = $v['money'] * $v['odds'];
+                    $v['hs'] = $v['money'] * $v['odds_hy'] - $v['zj'];
                     $v['yingkui'] = $v['zj'] + $v['win'] - $v['money'];
                     //$win=$v['win'];
                     
