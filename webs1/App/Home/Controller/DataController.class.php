@@ -90,7 +90,7 @@ class DataController extends CommonController {
         $Page->parameter .= "&category=".$category;
         $show       = $Page->show();// 分页显示输出
         
-        $field='win,did,username,tuima_time,addtime,mingxi_1,mingxi_2,odds,money,js,status,topmoney,topwin';
+        $field='win,did,username,tuima_time,addtime,mingxi_1,mingxi_2,odds,odds_hy,money,js,status,topmoney,topwin';
 
         $data=$bets->field($field)->where($where)->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
         
@@ -117,8 +117,7 @@ class DataController extends CommonController {
             //     $data1=$this->process($data,$lanhuo,$opentime); 
             // }
             
-            $data1=$this->process($data,$opentime); 
-            
+            $data1=$this->process($data,$opentime);
             $datas1['sum']=0;
             $datas1['moneys']='0.00';
             $datas1['win']='0.00';
