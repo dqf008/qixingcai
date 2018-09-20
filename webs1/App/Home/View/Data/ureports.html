@@ -157,7 +157,7 @@
       </td> 
       <td class="bg-yellow"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
       <td class="bg-yellow"><if condition="$vo.yingkuis "><{$vo.yingkuis}><else/>0</if></td> 
-      <td class="bg-yellow"><if condition="$vo.huishui"><{$vo.huishui}><else/>0</if></td>
+      <td class="bg-yellow"><if condition="$vo.huishuis"><{$vo.huishuis}><else/>0</if></td>
       <!-- <td class="bg-yellow">0</td>  -->
       <td class="bg-orange"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
         <td class="bg-orange"><if condition="$vo.yingkuis "><{$vo.yingkuis}><else/>0</if></td> 
@@ -169,7 +169,7 @@
    <td class="fb"><if condition="$data['sum']"><{$data['sum']}><else/>0</if></td> 
     <td class="fb"><if condition="$data['money']"><{$data['money']}><else/>0</if></td>  
     <td class="fb"><if condition="$data['yingkui']"><{-$data['yingkui']}><else/>0</if></td> 
-    <td class="fb">0</td>
+    <td class="fb"><if condition="$data['huishuis']"><{$data['huishuis']}><else/>0</if></td>
     <td class="fb"><if condition="$data['money']"><{$data['money']}><else/>0</if></td>  
     <td class="fb"><if condition="$data['yingkui']"><{-$data['yingkui']}><else/>0</if></td> 
 
@@ -195,7 +195,7 @@
         <td class="bg-orange">0</td>  -->
         <td class="bg-orange"><if condition="$vo.money">0<else/>0</if></td>  
         <td class="bg-orange"><if condition="$vo.yingkuis">0<else/>0</if></td> 
-        <td class="bg-deeporg">0</td>  
+        <td class="bg-deeporg"><if condition="$vo.huishui2"><{$vo.huishui2}><else/>0</if></td>
         <td class="bg-deeporg"><if condition="$vo.yingkuis"><{$vo.yingkuis}><else/>0</if></td>   
         <td class="bg-pink"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
         <td class="bg-pink"><if condition="$vo.yingkui"><{$vo.yingkui}><else/>0</if></td> 
@@ -207,7 +207,7 @@
          <td class="fb">0</td> 
         <td class="fb"><if condition="$data['money']">0<else/>0</if></td>  
         <td class="fb"><if condition="$data['yingkui']">0<else/>0</if></td>
-        <td class="fb">0</td> 
+        <td class="fb"><if condition="$data['huishui2']"><{$data['huishui2']}><else/>0</if></td>
         <td class="fb"><if condition="$data['yingkui']"><{-$data['yingkui']}><else/>0</if></td> 
 
         <td class="fb"><if condition="$data['money']"><{$data['money']}><else/>0</if></td>  
@@ -230,19 +230,19 @@
         <td class="bg-orange"><if condition="$vo.umoney"><{$vo.umoney}><else/>0</if></td> 
         <td class="bg-orange"><if condition="$vo.uyingkui"><{$vo.uyingkui}><else/>0</if></td> 
         <td class="bg-deeporg"><if condition="$vo.huishui"><{$vo.huishui}><else/>0</if></td>
-        <td class="bg-deeporg"><if condition="$vo.uyingkui"><{$vo.uyingkui}><else/>0</if></td>  
+        <td class="bg-deeporg"><if condition="$vo.uyingkui"><{$vo.uyingkui}><else/>0</if></td>
 
         <td class="bg-pink"><if condition="$vo.money"><{$vo['money']-$vo['umoney']}><else/>0</if></td>  
         <td class="bg-pink"><if condition="$vo.yingkui"><{$vo['yingkui']-$vo['uyingkui']}><else/>0</if></td> 
       </volist>
-      <tr class="tfoot"> <td class="tc"><span class="fb">合计</span> </td>  
+      <tr class="tfoot"> <td class="tc"><span class="fb">合计</span> </td>
         <td class="fb"><if condition="$data['sum']"><{$data['sum']}><else/>0</if></td> 
         <td class="fb"><if condition="$data['money']"><{$data['money']}><else/>0</if></td>  
-        <td class="fb"><if condition="$data['yingkui']"><{$data['yingkuis']}><else/>0</if></td>  
+        <td class="fb"><if condition="$data['yingkui']"><{$data['yingkuis']}><else/>0</if></td>
        
         <td class="fb"><if condition="$data['umoney']"><{$data['umoney']}><else/>0</if></td>  
         <td class="fb"><if condition="$data['uyingkui']"><{$data['uyingkui']}><else/>0</if></td>
-        <td class="fb">0</td>
+        <td class="fb"><if condition="$data['huishui']"><{$data['huishui']}><else/>0</if></td>
         <td class="fb"><if condition="$data['uyingkui']"><{$data['uyingkui']}><else/>0</if></td>   
   
         <td class="fb"><if condition="$data['money']"><{$data['money']-$data['umoney']}><else/>0</if></td>  
