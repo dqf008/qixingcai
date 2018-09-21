@@ -160,7 +160,7 @@
       <td class="bg-yellow"><if condition="$vo.huishuis"><{$vo.huishuis}><else/>0</if></td>
       <!-- <td class="bg-yellow">0</td>  -->
       <td class="bg-orange"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
-        <td class="bg-orange"><if condition="$vo.yingkuis "><{$vo.yingkuis}><else/>0</if></td> 
+        <td class="bg-orange"><if condition="$vo.yingkuis"><{$vo.yingkuis}><else/>0</if></td>
        <td class="bg-pink"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
         <td class="bg-pink"><if condition="$vo.yingkui "><{$vo.yingkui}><else/>0</if></td> 
       </tr>
@@ -174,8 +174,7 @@
     <td class="fb"><if condition="$data['yingkui']"><{-$data['yingkui']}><else/>0</if></td> 
 
     <td class="fb"><if condition="$data['money']"><{$data['money']}><else/>0</if></td>  
-    <td class="fb"><if condition="$data['yingkui']"><{$data['yingkui']}><else/>0</if></td> 
-
+    <td class="fb"><if condition="$data['yingkui']"><{$data['yingkui']}><else/>0</if></td>
     </tr>
     <elseif condition="$utype eq 'agencys'" />
          <volist name="datas" id="vo" key="k">

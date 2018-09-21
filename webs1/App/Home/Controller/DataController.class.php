@@ -1193,6 +1193,7 @@ class DataController extends CommonController {
     }
 
     //等级报表数汇总
+    //等级报表数汇总
     public function ureports(){
         $unames=I('get.unames');//空
         $qishu1=I('get.qishu');//空
@@ -1200,44 +1201,40 @@ class DataController extends CommonController {
             $where1['qishu']=$qishu1;
             $qishus=M('opentime')->field('qishu,m_status')->where($where1)->find();
         }else{
-        $qishus=M('opentime')->field('qishu,m_status,m_loss')->order('id desc')->find();//进入这里
-        $where1['qishu']=$qishus['qishu'];
+            $qishus=M('opentime')->field('qishu,m_status,m_loss')->order('id desc')->find();//进入这里
+            $where1['qishu']=$qishus['qishu'];
         }
         if($unames){
             $where2['au_name']=$unames;
             $udata=M('admin')->field('au_id,au_type')->where($where2)->find();
-
             if($udata){
-              $utype=$udata['au_type'];  
-              //$uagency=user3($udata['au_id'],$auid); 
-              $data=users2($udata['au_id'],$udata['au_type']);//当前下级账号类型
+                $utype=$udata['au_type'];
+                //$uagency=user3($udata['au_id'],$auid);
+                $data=users2($udata['au_id'],$udata['au_type']);//当前下级账号类型
                 if(!empty($data[0])){
                     $where1['uid']=array('in',$data[0]);
                 }else{
-                    $where1['uid']='-1';     
+                    $where1['uid']='-1';
                 }
             }else{
-                    $where1['uid']='-1';
+                $where1['uid']='-1';
             }
-            
+
         }else{
             //进入这里
             $auid=session('auid');
             $autype=session('autype');
             $data=users2($auid,$autype);//当前下级账号类型
-
             if(!empty($data[0])){
                 $where1['uid']=array('in',$data[0]);//array(2) { ["qishu"]=> string(1) "2" ["uid"]=> array(2) { [0]=> string(2) "in" [1]=> string(11) "21,25,26,27" } }
             }else{
-                $where1['uid']='-1';     
+                $where1['uid']='-1';
             }
             $utype=$autype;
         }
-
         //得到最近一期的所有下注数据
-        
-        $where1['js']=0;
 
+        $where1['js']=0;
         set_time_limit(0);
         $datas=M('bet')->field('uid,win,money as moneys,js,qishu,odds,odds_hy,odds_dl,odds_zd,mingxi_1,mingxi_2,status,topmoney,topwin')->where($where1)->select();
         //$data = array(3) { [0]=> array(3) { ["au_id"]=> string(3) "121" ["au_name"]=> string(6) "shi002" ["au_type"]=> string(7) "agencys" } [1]=> array(3) { ["au_id"]=> string(3) "125" ["au_name"]=> string(6) "shi007" ["au_type"]=> string(7) "agencys" } [2]=> array(3) { ["au_id"]=> string(3) "126" ["au_name"]=> string(6) "shi100" ["au_type"]=> string(7) "agencys" } }
@@ -1247,7 +1244,6 @@ class DataController extends CommonController {
                 foreach($datas1 as $k1=>$v1){
                     foreach($datas as $k2=>$v2){
                         if($v2['uid']==$v1['uid']){
-
                             $bets = M('bet');
                             $zongjilu= $bets->where(array('qishu'=>$v2['qishu'],'uid'=>$v1['uid']))->select();
                             //获取四定赔率
@@ -1266,56 +1262,10 @@ class DataController extends CommonController {
                             $zongxian2= $bets->where(array('qishu'=>$v2['qishu'],'mingxi_1'=>'2现'))->find();
                             $huiyuanhuixian2=intval($zongxian2['odds_hy']);
                             $huiyuanhuishuixian2=intval($zongxian2['odds_dl']);
-                            //获取三现
-                            $zongxian3= $bets->where(array('qishu'=>$v2['qishu'],'mingxi_1'=>'3现','uid'=>$v1['uid']))->select();
-                            $a=[];
-                            $b=[];
-                            $c=[];
-                            foreach($zongxian3 as $xian3=>$xian33){
-                                $t = array_count_values(str_split($xian33['mingxi_2']));
-                                $xian3tong=0;
-                                $xian3shui=0;
-                                $xian3huishui=0;
-                                //三现
-                                if(max($t) ==1){
-                                    $a[] = array('zhi'=>$xian33['mingxi_2'],'hui'=>$xian33['odds_hy'],'huiyuan'=>$xian33['odds_dl'],'money'=>$xian33['money']);
-                                }
-                                foreach($a as $xian31=>$xian311){
-                                    $xian3tong+=intval($xian311['money']);
-                                    $xian3shui=intval($xian311['hui']);
-                                    $xian3huishui=intval($xian311['huiyuan']);
-                                }
-                                $xian31tong=0;
-                                $xian31shui=0;
-                                $xian31huishui=0;
-                                if(max($t) == 2){
-                                    $b[] = array('zhi'=>$xian33['mingxi_2'],'hui'=>$xian33['odds_hy'],'huiyuan'=>$xian33['odds_dl'],'money'=>$xian33['money']);
-                                }
-                                foreach($b as $xian32=>$xian321){
-                                    $xian31tong+=intval($xian321['money']);
-                                    $xian31shui=intval($xian321['hui']);
-                                    $xian31huishui=intval($xian321['huiyuan']);
-                                }
-                                $xian32tong=0;
-                                $xian32shui=0;
-                                $xian32huishui=0;
-                                if(max($t) == 3){
-                                    $c[] = array('zhi'=>$xian33['mingxi_2'],'hui'=>$xian33['odds_hy'],'huiyuan'=>$xian33['odds_dl'],'money'=>$xian33['money']);
-                                }
-                                foreach($c as $xian32=>$xian331){
-                                    $xian32tong+=intval($xian331['money']);
-                                    $xian32shui=intval($xian331['hui']);
-                                    $xian32huishui=intval($xian331['huiyuan']);
-                                }
-                            }
-
-                            //三现
-                            $huishuixian341 = $xian3tong * ($xian3huishui-$xian3shui) * 0.5;
-                            //三现二同
-                            $huishuixian342 = $xian31tong * ($xian31huishui-$xian31shui) * 0.6;
-                            //三现三同
-                            $huishuixian343 = $xian32tong * ($xian32huishui-$xian32shui) * 0.7;
-                            $zongxian3huishui = $huishuixian341 + $huishuixian342 + $huishuixian343;
+                            //获取三现赔率
+                            $qixian=$v2['qishu'];
+                            $xianid=$v2['uid'];
+                            $zongxian = $this->abc($qixian,$xianid);
                             //获取三现
                             $ding4=0;
                             $ding3=0;
@@ -1331,43 +1281,38 @@ class DataController extends CommonController {
                                 }elseif($value['mingxi_1'] == '2现'){
                                     $xian2+=intval($value['money']);
                                 }
-
                             }
                             $ding4huishui=$ding4 * ($huiyuanhuishuiding4-$huiyuanhuiding4) * 0.0001;
                             $ding3huishui=$ding3 * ($huiyuanhuishuiding3-$huiyuanhuiding3) * 0.001;
                             $ding2huishui=$ding2 * ($huiyuanhuishuiding2-$huiyuanhuiding2) * 0.01;
                             $xian2huishui=$xian2 * ($huiyuanhuishuixian2-$huiyuanhuixian2) * 0.1;
-
-                            $zonghuishui = $ding4huishui + $ding3huishui + $ding2huishui + $xian2huishui + $huishuixian313 + $zongxian3huishui;
+                            $zonghuishui = $ding4huishui + $ding3huishui + $ding2huishui + $xian2huishui + $zongxian;
                             $arr['sum']+=1;
                             $win+=$v2['win'];
                             $arr['win']=intval($win);
-
                             $win1+=$v2['topwin'];
                             $arr['uwin']=intval($win1);
-
                             $money+=$v2['moneys'];
                             $arr['money']=intval($money);
-
                             $money1+=$v2['topmoney'];
-                            $arr['umoney']=intval($money1);  
+                            $arr['umoney']=intval($money1);
                             if($v2['status']==1){
                                 $moneys+=$v2['moneys']*$v2['odds'];
-                                $arr['moneys']=intval($moneys); 
+                                $arr['moneys']=intval($moneys);
                                 $moneys1+=$v2['topmoney']*$v2['odds'];
                                 //$arr['umoneys']=intval($moneys);
-                            }  
+                            }
                             if($qishus['m_status']==3){
                                 $arr['yingkuis']=$arr['moneys']+$arr['win']-$arr['money'];
                                 $arr['yingkui']=$arr['money']-$arr['moneys']-$arr['win'];
                                 $arr['uyingkuis']=$moneys1+$arr['uwin']-$arr['umoney'];
                                 $arr['uyingkui']=$arr['umoney']-$moneys1-$arr['uwin'];
                             }
-                        } 
+                        }
                     }
                     $datas1[$k1]['au_name']=$v1['username'];
-                     if($arr){
-						  $data2['umoney']+=$arr['umoney'];//下注笔数
+                    if($arr){
+                        $data2['umoney']+=$arr['umoney'];//下注笔数
                         $data2['sum']+=$arr['sum'];//下注笔数
                         $data2['money']+=$arr['money'];//金额
                         $data2['win1']+=$arr['win'];//回水
@@ -1376,268 +1321,246 @@ class DataController extends CommonController {
                         $data2['huishui']+=$zonghuishui;//
                         //盈亏
                         if($qishus['m_status']==3){
-                        $data2['yingkui']+=$arr['yingkui'];
-                        $data2['yingkuis']+=$arr['yingkuis'];
-                        $data2['uyingkui']+=$arr['uyingkui'];
-                        $data2['uyingkuis']+=$arr['uyingkuis'];
+                            $data2['yingkui']+=$arr['yingkui'];
+                            $data2['yingkuis']+=$arr['yingkuis'];
+                            $data2['uyingkui']+=$arr['uyingkui'];
+                            $data2['uyingkuis']+=$arr['uyingkuis'];
                         }
-                      
-                      $datas1[$k1]['sum']=$arr['sum'];  
-                      $datas1[$k1]['money']=$arr['money']; 
-                      $datas1[$k1]['yingkui']=$arr['yingkui'];
-                      $datas1[$k1]['yingkuis']=$arr['yingkuis'];
 
-                      $datas1[$k1]['umoney']=$arr['umoney'];
-                      $datas1[$k1]['uyingkui']=$arr['uyingkui'];  
-                      $datas1[$k1]['uyingkuis']=$arr['uyingkuis'];
-                      $datas1[$k1]['huishui'] = $zonghuishui;
+                        $datas1[$k1]['sum']=$arr['sum'];
+                        $datas1[$k1]['money']=$arr['money'];
+                        $datas1[$k1]['yingkui']=$arr['yingkui'];
+                        $datas1[$k1]['yingkuis']=$arr['yingkuis'];
+                        $datas1[$k1]['umoney']=$arr['umoney'];
+                        $datas1[$k1]['uyingkui']=$arr['uyingkui'];
+                        $datas1[$k1]['uyingkuis']=$arr['uyingkuis'];
+                        $datas1[$k1]['huishui'] = $zonghuishui;
                     }
-                     unset($arr);
-                      $win='';
-                      $win1='';
-                      $money='';
-                      $money1='';
-                      $moneys=''; 
-                      $moneys1=''; 
-
-
+                    unset($arr);
+                    $win='';
+                    $win1='';
+                    $money='';
+                    $money1='';
+                    $moneys='';
+                    $moneys1='';
+                    $zonghuishui='';
                 }
             }else{
-            foreach($datas1 as $k1=>$v1){
-                if($udata){
-                    $uids=users2($udata['au_id'],$udata['au_type'],$v1['au_id']);
-                }else{
-                  $uids=users($v1['au_id']);  
-                }
-                 if(!empty($uids[0])){
-                    $uidarr=explode(',',$uids[0]);
-//var_dump($uids[0]);string(8) "21,25,27"
-//var_dump($uidarr);array(3) { [0]=> string(2) "21" [1]=> string(2) "25" [2]=> string(2) "27" } int(10)
-                     $xin = [];
-                    foreach($datas as $k2=>$v2){
-                         $arr['qishu']=$v2['qishu'];
-                        if(in_array($v2['uid'],$uidarr)){
-                            $xin[]=$v2;
-                            $arr['sum']+=1;
-
-                            $win+=$v2['win']-$v2['topwin'];
-                            $arr['win']=intval($win); 
-                            $money+=$v2['moneys']-$v2['topmoney'];
-                            $arr['money']=intval($money); 
-							 $money1+=$v2['topmoney'];
-                            $arr['umoney']=intval($money1);
-                            //代理回水
+                foreach($datas1 as $k1=>$v1){
+                    if($udata){
+                        $uids=users2($udata['au_id'],$udata['au_type'],$v1['au_id']);
+                    }else{
+                        $uids=users($v1['au_id']);
+                    }
+                    if(!empty($uids[0])){
+                        $uidarr=explode(',',$uids[0]);
+                        //var_dump($uids[0]);string(8) "21,25,27"
+                        //var_dump($uidarr);array(3) { [0]=> string(2) "21" [1]=> string(2) "25" [2]=> string(2) "27" } int(10)
+                        $xin = [];
+                        foreach($datas as $k2=>$v2){
+                            $arr['qishu']=$v2['qishu'];
+                            if(in_array($v2['uid'],$uidarr)){
+                                $xin[]=$v2;
+                                $arr['sum']+=1;
+                                $win+=$v2['win']-$v2['topwin'];
+                                $arr['win']=intval($win);
+                                $money+=$v2['moneys']-$v2['topmoney'];
+                                $arr['money']=intval($money);
+                                $money1+=$v2['topmoney'];
+                                $arr['umoney']=intval($money1);
+                                //代理回水
                                 $huishui+=$v2['top1'];
                                 $huishui2+=$v2['top2'];
                                 $arr['huishui']=$huishui;
                                 $arr['huishui2']=$huishui2;
-                            if($v2['status']==1){
-                                $moneys+=($v2['moneys']-$v2['topmoney'])*$v2['odds'];
-                                $arr['moneys']=intval($moneys); 
-                            } 
-                            if($qishus['m_status']==3){
-                                $arr['yingkuis']=$arr['moneys']+$arr['win']-$arr['money'];
-                                $arr['yingkui']=$arr['money']-$arr['moneys']-$arr['win'];
+                                if($v2['status']==1){
+                                    $moneys+=($v2['moneys']-$v2['topmoney'])*$v2['odds'];
+                                    $arr['moneys']=intval($moneys);
+                                }
+                                if($qishus['m_status']==3){
+                                    $arr['yingkuis']=$arr['moneys']+$arr['win']-$arr['money'];
+                                    $arr['yingkui']=$arr['money']-$arr['moneys']-$arr['win'];
+                                }
                             }
+                        }
+                        $ding4=0;
+                        $ding3=0;
+                        $ding2=0;
+                        $xian2=0;
+                        $huiyuanhuishuiding4=0;
+                        $huiyuanhuiding4=0;
+                        $huiyuanhuishuiding3=0;
+                        $huiyuanhuiding3=0;
+                        $huiyuanhuishuiding2=0;
+                        $huiyuanhuiding2=0;
+                        $huiyuanhuishuixian2=0;
+                        $huiyuanhuixian2=0;
+                        $xian3tong=0;
+                        $xian3shui=0;
+                        $xian3huishui=0;
+                        $xian31tong=0;
+                        $xian31shui=0;
+                        $xian31huishui=0;
+                        $xian32tong=0;
+                        $xian32shui=0;
+                        $xian32huishui=0;
+                        //$utype
+                        $gudonghuishui = json_decode($qishus['m_loss']);
+                        if($utype == 'agencys'){
+
+                            foreach($xin as $item=>$value){
+                                if($value['mingxi_1'] == '4定'){
+                                    $ding4+=intval($value['moneys']);
+                                    $huiyuanhuishuiding4 = intval($value['odds_zd']);
+                                    $huiyuanhuiding4 = intval($value['odds_dl']);
+                                }elseif($value['mingxi_1'] == '3定'){
+                                    $ding3+=intval($value['moneys']);
+                                    $huiyuanhuishuiding3 = intval($value['odds_zd']);
+                                    $huiyuanhuiding3 = intval($value['odds_dl']);
+                                }elseif($value['mingxi_1'] == '2定'){
+                                    $ding2+=intval($value['moneys']);
+                                    $huiyuanhuishuiding2 = intval($value['odds_zd']);
+                                    $huiyuanhuiding2 = intval($value['odds_dl']);
+                                }elseif($value['mingxi_1'] == '2现'){
+                                    $xian2+=intval($value['moneys']);
+                                    $huiyuanhuishuixian2 = intval($value['odds_zd']);
+                                    $huiyuanhuixian2 = intval($value['odds_dl']);
+                                }elseif($value['mingxi_1'] == '3现'){
+                                    $t = array_count_values(str_split($value['mingxi_2']));
+                                    if(max($t) == 1){
+                                        $xian3tong +=$value['moneys'];
+                                        $xian3shui =intval($value['odds_dl']);
+                                        $xian3huishui =intval($value['odds_zd']);
+                                    }else if(max($t) == 2){
+                                        $xian31tong +=$value['moneys'];
+                                        $xian31shui =intval($value['odds_dl']);
+                                        $xian31huishui =intval($value['odds_zd']);
+                                    }elseif(max($t) == 3){
+                                        $xian32tong +=$value['moneys'];
+                                        $xian32shui =intval($value['odds_dl']);
+                                        $xian32huishui =intval($value['odds_zd']);
+                                    }
+                                }
+                                //三现
+                                $huishuixian341 = $xian3tong * ($xian3huishui-$xian3shui) * 0.014;
+                                //三现二同
+                                $huishuixian342 = $xian31tong * ($xian31huishui-$xian31shui) * 0.017;
+                                //三现三同
+                                $huishuixian343 = $xian32tong * ($xian32huishui-$xian32shui) * 0.02;
+                                $zongxian3huishui = $huishuixian341 + $huishuixian342 + $huishuixian343;
+                                //获取三现
+                                $ding4huishui=$ding4 * ($huiyuanhuishuiding4-$huiyuanhuiding4) * 0.0001;
+                                $ding3huishui=$ding3 * ($huiyuanhuishuiding3-$huiyuanhuiding3) * 0.001;
+                                $ding2huishui=$ding2 * ($huiyuanhuishuiding2-$huiyuanhuiding2) * 0.01;
+                                $xian2huishui=$xian2 * ($huiyuanhuishuixian2-$huiyuanhuixian2) * 0.1;
+
+                            }
+                        }elseif($utype == 'partner')
+                        {
+                            foreach($xin as $item=>$value){
+                                if($value['mingxi_1'] == '4定'){
+                                    $ding4+=intval($value['moneys']);
+                                    $huiyuanhuishuiding4 = intval($gudonghuishui->ding41);
+                                    $huiyuanhuiding4 = intval($value['odds_zd']);
+                                }elseif($value['mingxi_1'] == '3定'){
+                                    $ding3+=intval($value['moneys']);
+                                    $huiyuanhuishuiding3 = intval($gudonghuishui->ding31);
+                                    $huiyuanhuiding3 = intval($value['odds_zd']);
+                                }elseif($value['mingxi_1'] == '2定'){
+                                    $ding2+=intval($value['moneys']);
+                                    $huiyuanhuishuiding2 = intval($gudonghuishui->ding21);
+                                    $huiyuanhuiding2 = intval($value['odds_dl']);
+                                }elseif($value['mingxi_1'] == '2现'){
+                                    $xian2+=intval($value['moneys']);
+                                    $huiyuanhuishuixian2 = intval($gudonghuishui->tong211);
+                                    $huiyuanhuixian2 = intval($value['odds_zd']);
+                                }elseif($value['mingxi_1'] == '3现'){
+                                    $t = array_count_values(str_split($value['mingxi_2']));
+                                    if(max($t) == 1){
+                                        $xian3tong +=$value['moneys'];
+                                        $xian3shui =intval($value['odds_zd']);
+                                        $xian3huishui =intval($gudonghuishui->tong311);
+                                    }else if(max($t) == 2){
+                                        $xian31tong +=$value['moneys'];
+                                        $xian31shui =intval($value['odds_zd']);
+                                        $xian31huishui =intval($gudonghuishui->tong321);
+                                    }elseif(max($t) == 3){
+                                        $xian32tong +=$value['moneys'];
+                                        $xian32shui =intval($value['odds_zd']);
+                                        $xian32huishui =intval($gudonghuishui->tong331);
+                                    }
+                                }
+                                //三现
+                                $huishuixian341 = $xian3tong * ($xian3huishui-$xian3shui) * 0.014;
+                                //三现二同
+                                $huishuixian342 = $xian31tong * ($xian31huishui-$xian31shui) * 0.017;
+                                //三现三同
+                                $huishuixian343 = $xian32tong * ($xian32huishui-$xian32shui) * 0.02;
+                                $zongxian3huishui = $huishuixian341 + $huishuixian342 + $huishuixian343;
+                                //获取三现
+                                $ding4huishui=$ding4 * ($huiyuanhuishuiding4-$huiyuanhuiding4) * 0.0001;
+                                $ding3huishui=$ding3 * ($huiyuanhuishuiding3-$huiyuanhuiding3) * 0.001;
+                                $ding2huishui=$ding2 * ($huiyuanhuishuiding2-$huiyuanhuiding2) * 0.01;
+                                $xian2huishui=$xian2 * ($huiyuanhuishuixian2-$huiyuanhuixian2) * 0.1;
+                            }
+                        }
+                        $zonghuishui = $ding4huishui + $ding3huishui + $ding2huishui + $xian2huishui  + $zongxian3huishui;
+                        if($arr){//会员的销售额-佣金-中奖金额=会员的盈亏
+                            $data2['umoney']+=$arr['umoney'];//代理回水
+                            $data2['huishui']+=$arr['huishui'];//代理回水
+                            $data2['huishui2']+=$zonghuishui;//总代回水
+                            $data2['huishuis']+=$zonghuishui;//股东回水
+                            $data2['sum']+=$arr['sum'];//下注笔数
+                            $data2['money']+=$arr['money'];//金额
+                            $data2['win1']+=$arr['win'];//回水
+                            $data2['moneys1']+=$arr['moneys'];//中奖汇总
+                            $data2['sums1']+=1;//
+                            //盈亏
+                            if($qishus['m_status']==3){
+                                $data2['yingkui']+=$arr['yingkui'];
+                                $data2['yingkuis']+=$arr['yingkuis'];
+                            }
+                            $datas1[$k1]['huishui']=$arr['huishui'];
+                            $datas1[$k1]['huishui2']=$arr['huishui2'];
+                            $datas1[$k1]['qishu']=$arr['qishu'];
+
+                            $datas1[$k1]['sum']=$arr['sum'];
+                            $datas1[$k1]['money']=$arr['money'];
+                            $datas1[$k1]['yingkui']=$arr['yingkui'];
+                            $datas1[$k1]['yingkuis']=$arr['yingkuis'];
+                            $datas1[$k1]['huishui2']=$zonghuishui;
+                            $datas1[$k1]['huishuis']=$zonghuishui;
 
                         }
+                        $arr='';
+                        $win='';
+                        $money='';
+                        $moneys='';
+                        $money1='';
                     }
-                     $ding4=0;
-                     $ding3=0;
-                     $ding2=0;
-                     $xian2=0;
-                     $huiyuanhuishuiding4=0;
-                     $huiyuanhuiding4=0;
-                     $huiyuanhuishuiding3=0;
-                     $huiyuanhuiding3=0;
-                     $huiyuanhuishuiding2=0;
-                     $huiyuanhuiding2=0;
-                     $huiyuanhuishuixian2=0;
-                     $huiyuanhuixian2=0;
-
-                     $xian3tong=0;
-                     $xian3shui=0;
-                     $xian3huishui=0;
-
-                     $xian31tong=0;
-                     $xian31shui=0;
-                     $xian31huishui=0;
-
-                     $xian32tong=0;
-                     $xian32shui=0;
-                     $xian32huishui=0;
-                     //$utype
-                     $gudonghuishui = json_decode($qishus['m_loss']);
-                     if($utype == 'agencys'){
-                         foreach($xin as $item=>$value){
-                             if($value['mingxi_1'] == '4定'){
-                                 $ding4+=intval($value['moneys']);
-                                 $huiyuanhuishuiding4 = intval($value['odds_zd']);
-                                 $huiyuanhuiding4 = intval($value['odds_dl']);
-                             }elseif($value['mingxi_1'] == '3定'){
-                                 $ding3+=intval($value['moneys']);
-                                 $huiyuanhuishuiding3 = intval($value['odds_zd']);
-                                 $huiyuanhuiding3 = intval($value['odds_dl']);
-                             }elseif($value['mingxi_1'] == '2定'){
-                                 $ding2+=intval($value['moneys']);
-                                 $huiyuanhuishuiding2 = intval($value['odds_zd']);
-                                 $huiyuanhuiding2 = intval($value['odds_dl']);
-                             }elseif($value['mingxi_1'] == '2现'){
-                                 $xian2+=intval($value['moneys']);
-                                 $huiyuanhuishuixian2 = intval($value['odds_zd']);
-                                 $huiyuanhuixian2 = intval($value['odds_dl']);
-                             }elseif($value['mingxi_1'] == '3现'){
-                                 $t = array_count_values(str_split($value['mingxi_2']));
-                                 if(max($t) == 1){
-                                     $xian3tong +=$value['moneys'];
-                                     $xian3shui =intval($value['odds_dl']);
-                                     $xian3huishui =intval($value['odds_zd']);
-                                 }else if(max($t) == 2){
-                                     $xian31tong +=$value['moneys'];
-                                     $xian31shui =intval($value['odds_dl']);
-                                     $xian31huishui =intval($value['odds_zd']);
-                                 }elseif(max($t) == 3){
-                                     $xian32tong +=$value['moneys'];
-                                     $xian32shui =intval($value['odds_dl']);
-                                     $xian32huishui =intval($value['odds_zd']);
-                                 }
-                             }
-                             //三现
-                             $huishuixian341 = $xian3tong * ($xian3huishui-$xian3shui) * 0.5;
-                             //三现二同
-                             $huishuixian342 = $xian31tong * ($xian31huishui-$xian31shui) * 0.6;
-                             //三现三同
-                             $huishuixian343 = $xian32tong * ($xian32huishui-$xian32shui) * 0.7;
-
-                             $zongxian3huishui = $huishuixian341 + $huishuixian342 + $huishuixian343;
-
-
-                             //获取三现
-                             $ding4huishui=$ding4 * ($huiyuanhuishuiding4-$huiyuanhuiding4) * 0.0001;
-                             $ding3huishui=$ding3 * ($huiyuanhuishuiding3-$huiyuanhuiding3) * 0.001;
-                             $ding2huishui=$ding2 * ($huiyuanhuishuiding2-$huiyuanhuiding2) * 0.01;
-                             $xian2huishui=$xian2 * ($huiyuanhuishuixian2-$huiyuanhuixian2) * 0.1;
-                         }
-
-                     }elseif($utype == 'partner')
-                     {
-                         foreach($xin as $item=>$value){
-                             if($value['mingxi_1'] == '4定'){
-                                 $ding4+=intval($value['moneys']);
-                                 $huiyuanhuishuiding4 = intval($gudonghuishui->ding41);
-                                 $huiyuanhuiding4 = intval($value['odds_zd']);
-                             }elseif($value['mingxi_1'] == '3定'){
-                                 $ding3+=intval($value['moneys']);
-                                 $huiyuanhuishuiding3 = intval($gudonghuishui->ding31);
-                                 $huiyuanhuiding3 = intval($value['odds_zd']);
-                             }elseif($value['mingxi_1'] == '2定'){
-                                 $ding2+=intval($value['moneys']);
-                                 $huiyuanhuishuiding2 = intval($gudonghuishui->ding21);
-                                 $huiyuanhuiding2 = intval($value['odds_dl']);
-                             }elseif($value['mingxi_1'] == '2现'){
-                                 $xian2+=intval($value['moneys']);
-                                 $huiyuanhuishuixian2 = intval($gudonghuishui->tong211);
-                                 $huiyuanhuixian2 = intval($value['odds_zd']);
-                             }elseif($value['mingxi_1'] == '3现'){
-                                 $t = array_count_values(str_split($value['mingxi_2']));
-                                 if(max($t) == 1){
-                                     $xian3tong +=$value['moneys'];
-                                     $xian3shui =intval($value['odds_zd']);
-                                     $xian3huishui =intval($gudonghuishui->tong311);
-                                 }else if(max($t) == 2){
-                                     $xian31tong +=$value['moneys'];
-                                     $xian31shui =intval($value['odds_zd']);
-                                     $xian31huishui =intval($gudonghuishui->tong321);
-                                 }elseif(max($t) == 3){
-                                     $xian32tong +=$value['moneys'];
-                                     $xian32shui =intval($value['odds_zd']);
-                                     $xian32huishui =intval($gudonghuishui->tong331);
-                                 }
-                             }
-                             //三现
-                             $huishuixian341 = $xian3tong * ($xian3huishui-$xian3shui) * 0.5;
-                             //三现二同
-                             $huishuixian342 = $xian31tong * ($xian31huishui-$xian31shui) * 0.6;
-                             //三现三同
-                             $huishuixian343 = $xian32tong * ($xian32huishui-$xian32shui) * 0.7;
-
-                             $zongxian3huishui = $huishuixian341 + $huishuixian342 + $huishuixian343;
-
-
-                             //获取三现
-                             $ding4huishui=$ding4 * ($huiyuanhuishuiding4-$huiyuanhuiding4) * 0.0001;
-                             $ding3huishui=$ding3 * ($huiyuanhuishuiding3-$huiyuanhuiding3) * 0.001;
-                             $ding2huishui=$ding2 * ($huiyuanhuishuiding2-$huiyuanhuiding2) * 0.01;
-                             $xian2huishui=$xian2 * ($huiyuanhuishuixian2-$huiyuanhuixian2) * 0.1;
-                         }
-                     }
-                     $zonghuishui1 = $ding4huishui + $ding3huishui + $ding2huishui + $xian2huishui  + $zongxian3huishui;
-
-                    if($arr){//会员的销售额-佣金-中奖金额=会员的盈亏
-						$data2['umoney']+=$arr['umoney'];//代理回水
-                        $data2['huishui']+=$arr['huishui'];//代理回水
-                        $data2['huishui2']+=$zonghuishui;//总代回水
-                        $data2['huishuis']+=$zonghuishui1;//股东回水
-                        $data2['sum']+=$arr['sum'];//下注笔数
-                        $data2['money']+=$arr['money'];//金额
-                        $data2['win1']+=$arr['win'];//回水
-                        $data2['moneys1']+=$arr['moneys'];//中奖汇总
-                        $data2['sums1']+=1;//
-                        //盈亏
-                        if($qishus['m_status']==3){
-                            $data2['yingkui']+=$arr['yingkui'];
-                            $data2['yingkuis']+=$arr['yingkuis'];
-                        }
-
-                      $datas1[$k1]['huishui']=$arr['huishui'];
-                      $datas1[$k1]['huishui2']=$arr['huishui2'];
-                      $datas1[$k1]['qishu']=$arr['qishu'];
-                        
-                      $datas1[$k1]['sum']=$arr['sum'];  
-                      $datas1[$k1]['money']=$arr['money'];  
-                      $datas1[$k1]['yingkui']=$arr['yingkui'];  
-                      $datas1[$k1]['yingkuis']=$arr['yingkuis'];
-                      $datas1[$k1]['huishui2']=$zonghuishui;
-                      $datas1[$k1]['huishuis']=$zonghuishui1;
-
-                     
-                    }
-
-                     $arr=''; 
-                      $win='';
-                      $money=''; 
-                      $moneys=''; 
-					  $money1='';
-                }
-
                     unset($uidarr);
                     unset($uids);
                     unset($arr);
-                      $win=''; 
-                      $win1=''; 
-                      $money='';
-                      $money1='';
-                      $moneys=''; 
-                      $moneys1=''; 
-
-            }
-
-
-            foreach($datas1 as $k3=>$v3){
-                if($v3['au_id']){
-                    $where3['au_id']=$v3['au_id'];
-                    $where3['qishu']=$v3['qishu'];
-                    $v3['huishui']=M('backwater')->where($where3)->sum('sums');
+                    $win='';
+                    $win1='';
+                    $money='';
+                    $money1='';
+                    $moneys='';
+                    $moneys1='';
                 }
-                $datas1[$k3]=$v3;
-            }
-         
+                foreach($datas1 as $k3=>$v3){
+                    if($v3['au_id']){
+                        $where3['au_id']=$v3['au_id'];
+                        $where3['qishu']=$v3['qishu'];
+                        $v3['huishui']=M('backwater')->where($where3)->sum('sums');
+                    }
+                    $datas1[$k3]=$v3;
+                }
 
             }//if
         }
-         //dump($data2);
-
-//       dump($datas1);exit;
+        //dump($data2);
+        //       dump($datas1);exit;
         $this->assign('huishui',$huishui);
         $this->assign('uyingkuis',$uyingkuis);
         $this->assign('uyingkui',$uyingkui);
@@ -1647,6 +1570,59 @@ class DataController extends CommonController {
         $this->assign('qishu1',$qishus['qishu']);
         $this->assign('utype',$utype);
         $this->display();
+    }
+        function abc($qishu,$id){
+        //获取三现
+        $bets = M('bet');
+        $zongxian3= $bets->where(array('qishu'=>$qishu,'mingxi_1'=>'3现','uid'=>$id))->select();
+        $a=[];
+        $b=[];
+        $c=[];
+        foreach($zongxian3 as $xian3=>$xian33){
+            $t = array_count_values(str_split($xian33['mingxi_2']));
+            $xian3tong=0;
+            $xian3shui=0;
+            $xian3huishui=0;
+            //三现
+            if(max($t) ==1){
+                $a[] = array('zhi'=>$xian33['mingxi_2'],'hui'=>$xian33['odds_hy'],'huiyuan'=>$xian33['odds_dl'],'money'=>$xian33['money']);
+            }
+            foreach($a as $xian31=>$xian311){
+                $xian3tong+=intval($xian311['money']);
+                $xian3shui=intval($xian311['hui']);
+                $xian3huishui=intval($xian311['huiyuan']);
+            }
+            $xian31tong=0;
+            $xian31shui=0;
+            $xian31huishui=0;
+            if(max($t) == 2){
+                $b[] = array('zhi'=>$xian33['mingxi_2'],'hui'=>$xian33['odds_hy'],'huiyuan'=>$xian33['odds_dl'],'money'=>$xian33['money']);
+            }
+            foreach($b as $xian32=>$xian321){
+                $xian31tong+=intval($xian321['money']);
+                $xian31shui=intval($xian321['hui']);
+                $xian31huishui=intval($xian321['huiyuan']);
+            }
+            $xian32tong=0;
+            $xian32shui=0;
+            $xian32huishui=0;
+            if(max($t) == 3){
+                $c[] = array('zhi'=>$xian33['mingxi_2'],'hui'=>$xian33['odds_hy'],'huiyuan'=>$xian33['odds_dl'],'money'=>$xian33['money']);
+            }
+            foreach($c as $xian32=>$xian331){
+                $xian32tong+=intval($xian331['money']);
+                $xian32shui=intval($xian331['hui']);
+                $xian32huishui=intval($xian331['huiyuan']);
+            }
+            //三现
+            $huishuixian341 = $xian3tong * ($xian3huishui-$xian3shui) * 0.02;
+            //三现二同
+            $huishuixian342 = $xian31tong * ($xian31huishui-$xian31shui) * 0.017;
+            //三现三同
+            $huishuixian343 = $xian32tong * ($xian32huishui-$xian32shui) * 0.014;
+
+        }
+            return   $zongxian3huishui = $huishuixian341 + $huishuixian342 + $huishuixian343;
     }
    private function getDatas1($auid,$autype,$datas,$qishus){
         //会员得到代理配置
