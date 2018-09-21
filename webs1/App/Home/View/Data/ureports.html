@@ -54,7 +54,7 @@
     <tr class="tc"> 
     <if condition="$utype eq 'admin'">
        <td rowspan="2" class="bg2" width="150"> 股东 </td> 
-        <td colspan="3" class="bg-yellow">股东</td>
+        <td colspan="4" class="bg-yellow">股东</td>
     <elseif condition="$utype eq 'partner'" />
        <td rowspan="2" class="bg2" width="150"> 总代理 </td> 
        <td colspan="4" class="bg-yellow">总代理</td> 
@@ -80,6 +80,7 @@
           <td class="bg-yellow">笔数</td> 
           <td class="bg-yellow">总投</td> 
           <td class="bg-yellow">盈亏</td>
+          <td class="bg-yellow">总赔回水</td>
         </tr>
     <elseif condition="$utype eq 'partner'" />
          <tr class="tc"> 
@@ -135,14 +136,16 @@
       <td class="bg-yellow">
         <if condition="$vo.sum"><{$vo.sum}><else/>0</if>
       </td> 
-      <td class="bg-yellow"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
-      <td class="bg-yellow"><if condition="$vo.yingkui"><{$vo.yingkui}><else/>0</if></td> 
+      <td class="bg-yellow"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>
+      <td class="bg-yellow"><if condition="$vo.yingkui"><{$vo.yingkui}><else/>0</if></td>
+      <td class="bg-yellow"></td>
       </tr>
     </volist>
     <tr class="tfoot"> <td class="tc"><span class="fb">合计</span> </td>  
    <td class="fb"><if condition="$data['sum']"><{$data['sum']}><else/>0</if></td> 
     <td class="fb"><if condition="$data['money']"><{$data['money']}><else/>0</if></td>  
     <td class="fb"><if condition="$data['yingkui']"><{$data['yingkui']}><else/>0</if></td> 
+    <td class="fb"><if condition="$data['huishuiss']"><{$data['huishuiss']}><else/>0</if></td>
     </tr>
   <elseif condition="$utype eq 'partner'" />
        <volist name="datas" id="vo" key="k">
