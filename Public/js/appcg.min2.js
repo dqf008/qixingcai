@@ -1149,7 +1149,7 @@ cgCheckSend = {
     sendTuima: function() {
         var strid = "";
         strid = $("#SoonOrder input[type=checkbox]").checkedValue(),
-        "" == strid || jsonAjax("/index.php/Index/tuima", "POST", "action=ordertuima&tuimaid=" + strid, "json", cgCheckSend.showSendTuima)
+        "" == strid || jsonAjax("__MODULE__/Index/tuima", "POST", "action=ordertuima&tuimaid=" + strid, "json", cgCheckSend.showSendTuima)
     },
     showSendTuima: function(data) {
         var json = eval(data);
