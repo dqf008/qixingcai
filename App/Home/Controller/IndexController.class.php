@@ -5570,7 +5570,6 @@ class IndexController extends CommonController {
         $huiyuanhuishuixian2=intval($zongxian2['odds_hy']);
         //获取三现
         $zongxian3= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'3现'))->where('js<>2')->select();
-        var_dump($zongxian3);exit;
         $a=[];
         $b=[];
         $c=[];
