@@ -1248,21 +1248,21 @@ class DataController extends CommonController {
                             if($unames == '')
                             {
                                 $bets=M('bet');
-                                $zongjilu=$bets->where(['qishu'=>$v2['qishu'], 'uid'=>$v1['uid']])->select();
+                                $zongjilu=$bets->where(['qishu'=>$v2['qishu'], 'uid'=>$v1['uid']])->where('js<>2')->select();
                                 //获取四定赔率
-                                $zongding4=$bets->where(['qishu'=>$v2['qishu'], 'mingxi_1'=>'4定'])->find();
+                                $zongding4=$bets->where(['qishu'=>$v2['qishu'], 'mingxi_1'=>'4定'])->where('js<>2')->find();
                                 $huiyuanhuiding4=intval($zongding4['odds_hy']);
                                 $huiyuanhuishuiding4=intval($zongding4['odds_dl']);
                                 //获取三定赔率
-                                $zongding3=$bets->where(['qishu'=>$v2['qishu'], 'mingxi_1'=>'3定'])->find();
+                                $zongding3=$bets->where(['qishu'=>$v2['qishu'], 'mingxi_1'=>'3定'])->where('js<>2')->find();
                                 $huiyuanhuiding3=intval($zongding3['odds_hy']);
                                 $huiyuanhuishuiding3=intval($zongding3['odds_dl']);
                                 //获取二定赔率
-                                $zongding2=$bets->where(['qishu'=>$v2['qishu'], 'mingxi_1'=>'2定'])->find();
+                                $zongding2=$bets->where(['qishu'=>$v2['qishu'], 'mingxi_1'=>'2定'])->where('js<>2')->find();
                                 $huiyuanhuiding2=intval($zongding2['odds_hy']);
                                 $huiyuanhuishuiding2=intval($zongding2['odds_dl']);
                                 //获取二现
-                                $zongxian2=$bets->where(['qishu'=>$v2['qishu'], 'mingxi_1'=>'2现'])->find();
+                                $zongxian2=$bets->where(['qishu'=>$v2['qishu'], 'mingxi_1'=>'2现'])->where('js<>2')->find();
                                 $huiyuanhuixian2=intval($zongxian2['odds_hy']);
                                 $huiyuanhuishuixian2=intval($zongxian2['odds_dl']);
                                 //获取三现赔率
@@ -1431,35 +1431,35 @@ class DataController extends CommonController {
 
                                 foreach($xin as $item=>$value)
                                 {
-                                    if($value['mingxi_1'] == '4定')
+                                    if($value['mingxi_1'] == '4定' && $value['js'] != 2)
                                     {
                                         $ding4=intval($value['moneys']);
                                         $huiyuanhuishuiding4=intval($value['odds_zd']);
                                         $huiyuanhuiding4=intval($value['odds_dl']);
                                         $zongding45+=$ding4 * ($huiyuanhuishuiding4 - $huiyuanhuiding4) * 0.0001;
                                     }
-                                    else if($value['mingxi_1'] == '3定')
+                                    else if($value['mingxi_1'] == '3定' && $value['js'] != 2)
                                     {
                                         $ding3=intval($value['moneys']);
                                         $huiyuanhuishuiding3=intval($value['odds_zd']);
                                         $huiyuanhuiding3=intval($value['odds_dl']);
                                         $zongding35 += $ding3 * ($huiyuanhuishuiding3 - $huiyuanhuiding3) * 0.001;
                                     }
-                                    else if($value['mingxi_1'] == '2定')
+                                    else if($value['mingxi_1'] == '2定' && $value['js'] != 2)
                                     {
                                         $ding2=intval($value['moneys']);
                                         $huiyuanhuishuiding2=intval($value['odds_zd']);
                                         $huiyuanhuiding2=intval($value['odds_dl']);
                                         $zongding25+=$ding2 * ($huiyuanhuishuiding2 - $huiyuanhuiding2) * 0.01;
                                     }
-                                    else if($value['mingxi_1'] == '2现')
+                                    else if($value['mingxi_1'] == '2现' && $value['js'] != 2)
                                     {
                                         $xian2=intval($value['moneys']);
                                         $huiyuanhuishuixian2=intval($value['odds_zd']);
                                         $huiyuanhuixian2=intval($value['odds_dl']);
                                         $zongxian25+=$xian2 * ($huiyuanhuishuixian2 - $huiyuanhuixian2) * 0.1;
                                     }
-                                    else if($value['mingxi_1'] == '3现')
+                                    else if($value['mingxi_1'] == '3现' && $value['js'] != 2)
                                     {
                                         $t=array_count_values(str_split($value['mingxi_2']));
                                         if(max($t) == 1)
@@ -1575,35 +1575,35 @@ class DataController extends CommonController {
 
         foreach($qishu as $item=>$value)
         {
-            if($value['mingxi_1'] == '4定')
+            if($value['mingxi_1'] == '4定' && $value['js'] != 2)
             {
                 $ding4=intval($value['moneys']);
                 $huiyuanhuishuiding4=intval($gudonghuishui->ding41);
                 $huiyuanhuiding4=intval($value['odds_zd']);
                 $zongding413+=$ding4 * ($huiyuanhuishuiding4 - $huiyuanhuiding4) * 0.0001;
             }
-            else if($value['mingxi_1'] == '3定')
+            else if($value['mingxi_1'] == '3定' && $value['js'] != 2)
             {
                 $ding3=intval($value['moneys']);
                 $huiyuanhuishuiding3=intval($gudonghuishui->ding31);
                 $huiyuanhuiding3=intval($value['odds_zd']);
                 $zongding313+=$ding3 * ($huiyuanhuishuiding3 - $huiyuanhuiding3) * 0.001;
             }
-            else if($value['mingxi_1'] == '2定')
+            else if($value['mingxi_1'] == '2定' && $value['js'] != 2)
             {
                 $ding2=intval($value['moneys']);
                 $huiyuanhuishuiding2=intval($gudonghuishui->ding21);
                 $huiyuanhuiding2=intval($value['odds_zd']);
                 $zongding213+=$ding2 * ($huiyuanhuishuiding2 - $huiyuanhuiding2) * 0.01;
             }
-            else if($value['mingxi_1'] == '2现')
+            else if($value['mingxi_1'] == '2现' && $value['js'] != 2)
             {
                 $xian2=intval($value['moneys']);
                 $huiyuanhuishuixian2=intval($gudonghuishui->tong211);
                 $huiyuanhuixian2=intval($value['odds_zd']);
                 $zongxian213+=$xian2 * ($huiyuanhuishuixian2 - $huiyuanhuixian2) * 0.1;
             }
-            else if($value['mingxi_1'] == '3现')
+            else if($value['mingxi_1'] == '3现' && $value['js'] != 2)
             {
                 $t=array_count_values(str_split($value['mingxi_2']));
                 if(max($t) == 1)
@@ -1638,7 +1638,7 @@ class DataController extends CommonController {
     private function abc($qishu,$id){
         //获取三现
         $bets = M('bet');
-        $zongxian3= $bets->where(array('qishu'=>$qishu,'mingxi_1'=>'3现','uid'=>$id))->select();
+        $zongxian3= $bets->where(array('qishu'=>$qishu,'mingxi_1'=>'3现','uid'=>$id))->where('js<>2')->select();
         $a=[];
         $b=[];
         $c=[];
@@ -1693,7 +1693,7 @@ class DataController extends CommonController {
         $admin = M('admin');
         $user = M('user');
         $bet = M('bet');
-        $suoyou = $bet->where(['qishu'=>$qishu])->select();
+        $suoyou = $bet->where(['qishu'=>$qishu])->where('js<>2')->select();
 
         $guanliyuan = $opentime->where(['qishu'=>$qishu])->find();
         $gudonghuishui=json_decode($guanliyuan['m_loss']);

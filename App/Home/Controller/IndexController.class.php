@@ -5551,25 +5551,26 @@ class IndexController extends CommonController {
         $data1 = $bets->field($field)->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         //dump($data1);exit;
 		$times=M('opentime')->where(array('qishu'=>$where['qishu']))->find();
-		$zongjilu= $bets->where(array('qishu'=>$where['qishu']))->select();
+		$zongjilu= $bets->where(array('qishu'=>$where['qishu']))->where('js<>2')->select();
 		//获取四定赔率
-		$zongding4= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'4定'))->find();
+		$zongding4= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'4定'))->where('js<>2')->find();
 		$huiyuanhuiding4=intval($zongding4['odds']);
 		$huiyuanhuishuiding4=intval($zongding4['odds_hy']);
         //获取三定赔率
-		$zongding3= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'3定'))->find();
+		$zongding3= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'3定'))->where('js<>2')->find();
 		$huiyuanhuiding3=intval($zongding3['odds']);
 		$huiyuanhuishuiding3=intval($zongding3['odds_hy']);
         //获取二定赔率
-		$zongding2= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'2定'))->find();
+		$zongding2= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'2定'))->where('js<>2')->find();
 		$huiyuanhuiding2=intval($zongding2['odds']);
 		$huiyuanhuishuiding2=intval($zongding2['odds_hy']);
 		//获取二现
-        $zongxian2= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'2现'))->select();
+        $zongxian2= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'2现'))->where('js<>2')->select();
         $huiyuanhuixian2=intval($zongxian2['odds']);
         $huiyuanhuishuixian2=intval($zongxian2['odds_hy']);
         //获取三现
-        $zongxian3= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'3现'))->select();
+        $zongxian3= $bets->where(array('qishu'=>$where['qishu'],'mingxi_1'=>'3现'))->where('js<>2')->select();
+        var_dump($zongxian3);exit;
         $a=[];
         $b=[];
         $c=[];
@@ -5624,13 +5625,13 @@ class IndexController extends CommonController {
         $ding2=0;
         $xian2=0;
 		foreach($zongjilu as $item=>$value){
-		    if($value['mingxi_1'] == '4定'){
+		    if($value['mingxi_1'] == '4定' && $value['js'] !=2){
                 $ding4+=intval($value['money']);
-            }elseif($value['mingxi_1'] == '3定'){
+            }elseif($value['mingxi_1'] == '3定' && $value['js'] !=2){
                 $ding3+=intval($value['money']);
-            }elseif($value['mingxi_1'] == '2定'){
+            }elseif($value['mingxi_1'] == '2定' && $value['js'] !=2){
                 $ding2+=intval($value['money']);
-            }elseif($value['mingxi_1'] == '2现'){
+            }elseif($value['mingxi_1'] == '2现' && $value['js'] !=2){
                 $ding2+=intval($value['money']);
             }
 
