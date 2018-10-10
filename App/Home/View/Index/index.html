@@ -900,7 +900,7 @@ toFixed(2)+'</td></tr>';
 		            }
 		             arrHaoma();
 		             $(".frankmoney").hide();
-		             jsonAjax("__MODULE__/Index/xiazhukuang","get", "action=soonorder"+ "&time=" + new Date().getMilliseconds(), "json", cgOrber.GetSoonOrder);
+		             jsonAjax("/Index/xiazhukuang","get", "action=soonorder"+ "&time=" + new Date().getMilliseconds(), "json", cgOrber.GetSoonOrder);
 		             //leftprint.location.reload(); 	//zc xiugai
 					leftprint.jsonAjax("__MODULE__/Index/appindexajax","get", "action=printrefresh"+ "&time=" + new Date().getMilliseconds(), "json", leftprint.cgPrint.GetPrint);
 		            $('#sendnumber').focus();
