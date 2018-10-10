@@ -1564,7 +1564,7 @@ class DataController extends CommonController {
         $this->display();
     }
     private function dagudong($qishu,$gudonghuishui)
-    {;
+    {
         $zongding213=0;
         $zongding313=0;
         $zongding413=0;
@@ -2573,10 +2573,11 @@ class DataController extends CommonController {
         //dump($qishu3);
         //$dataqishu=$opentime->field('qishu,m_time,m_status')->where($where)->select();
         $dataqishu=qishus();//得到期数
+        $dataqishu = array_slice($dataqishu,0,4,true);
         if(!empty($qishu1) && !empty($qishu2)){
             $where1['qishu']=array(array('egt',($qishu1)),array('elt',($qishu2)),'and');
             $where4['qishu']=array(array('egt',($qishu1)),array('elt',($qishu2)),'and');
-           $dd=M('opentime')->field('qishu,m_status,m_time')->where($where4)->select();
+           $dd=M('opentime')->field('qishu,m_status,m_time')->where($where4)->limit(4)->select();
             if(!empty($dd)){
                 //得到所有期数
                 foreach($dd as $k=>$v){

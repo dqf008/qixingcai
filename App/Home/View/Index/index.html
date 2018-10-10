@@ -250,7 +250,7 @@ function findIndex(){
 		            			
 
 		            			moneys+=parseFloat(data[i]['money']);
-			            		wins2+=parseFloat(data[i]['win']);
+			            		wins2=parseFloat(data[0]['wins']);
 			            		moneys1+=parseFloat(data[i]['zj']);
 			            		wins3+=parseFloat(data[i]['yingkui']);
 			            		sum+=1;
@@ -260,7 +260,7 @@ function findIndex(){
 		            		}
 		            	}
 
-		            	html+='<tr id="detailheji"><td colspan="2">合计</td><td>'+sum+'</td><td> </td><td>'+moneys.toFixed(2)+'</td><td> </td><td>'+moneys1.toFixed(2)+'</td><td>'+wins2.toFixed(3)+'</td><td>'+wins3.toFixed(3)+'</td><td> </td><td> </td></tr>';
+		            	html+='<tr id="detailheji"><td colspan="2">合计</td><td>'+sum+'</td><td> </td><td>'+moneys.toFixed(2)+'</td><td> </td><td>'+moneys1.toFixed(2)+'</td><td>'+wins2.toFixed(2)+'</td><td>'+wins3.toFixed(3)+'</td><td> </td><td> </td></tr>';
 		            	
 		            	$('#DetailList').html(html);
 		            	$('#DetailListPager').html(msg['show']);
