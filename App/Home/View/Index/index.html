@@ -107,13 +107,6 @@ function ShowCountDown(leftsecond,divname){
 function findIndex(){
 	window.location.href="__MODULE__/Index/index";
 }
-// var ut='<{$ustatus}>';
-// if(parseInt(ut)==1){	
-// 	$("#aa").text('该账号异地登陆了，被迫下线！');
-// 	//alert("该账号异地登陆了，被迫下线！");
-// 	window.location.href="/index.php/Login/retreats";
-	
-// }
 </script>
 
 
@@ -391,42 +384,152 @@ function findIndex(){
 						
 						<th>单项上限</th>
 						<th>单注上限</th>
+						<th>回水</th>
 						<th>下级/赔率</th>
 						<!-- <th>赔率</th> -->
 
 					</tr>
 				</thead>
 				<tbody id="memberList">
-				<tr><td class="mred">直码</td>
+				<tr><td class="mred">二定</td>
+					<td class="altbg2"><span id="erxia"><{$market->ding23}></span></td>
+					<td class="altbg2"><span id="erloss"><{$loss->ding21}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding21}></td>
+					<td class="altbg2" width="12%"><{$market->ding22}></td>
+
+					<td>
+						<input type="text" style="height: 30px;line-height: 30px;" name="ding210" disabled="disabled" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding21.'"'; } ?>>
+					</td>
+					<td>
+						<input type="text" style="height: 30px;line-height: 30px;" name="ding21"  <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding21.'"'; } ?>>
+					</td>
+				</tr>
+				<tr>
+					<td>口口XX</td>
+					<td class="altbg2"><span><{$market->ding23}></span></td>
+					<td class="altbg2"><span><{$loss->ding21}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding21}></td>
+					<td class="altbg2" width="12%"><{$market->ding22}></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>口X口X</td>
+					<td class="altbg2"><span><{$market->ding23}></span></td>
+					<td class="altbg2"><span><{$loss->ding21}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding21}></td>
+					<td class="altbg2" width="12%"><{$market->ding22}></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>口XX口</td>
+					<td class="altbg2"><span><{$market->ding23}></span></td>
+					<td class="altbg2"><span><{$loss->ding21}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding21}></td>
+					<td class="altbg2" width="12%"><{$market->ding22}></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>X口X口</td>
+					<td class="altbg2"><span><{$market->ding23}></span></td>
+					<td class="altbg2"><span><{$loss->ding21}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding21}></td>
+					<td class="altbg2" width="12%"><{$market->ding22}></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>X口口X</td>
+					<td class="altbg2"><span><{$market->ding23}></span></td>
+					<td class="altbg2"><span><{$loss->ding21}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding21}></td>
+					<td class="altbg2" width="12%"><{$market->ding22}></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>XX口口</td>
+					<td class="altbg2"><span><{$market->ding23}></span></td>
+					<td class="altbg2"><span><{$loss->ding21}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding21}></td>
+					<td class="altbg2" width="12%"><{$market->ding22}></td>
+					<td></td>
+					<td></td>
+				</tr>
+
+				<tr><td class="mred">三定</td>
+
+					<td class="altbg2"><span><{$market->ding33}></span></td>
+					<td class="altbg2"><span><{$loss->ding31}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding31}></td>
+					<td class="altbg2" width="12%"><{$market->ding32}></td>
+
+					<td><input type="text" style="height: 30px;line-height: 30px;" disabled="disabled" name="ding310" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding31.'"'; } ?>></td>
+					<td><input type="text" style="height: 30px;line-height: 30px;" name="ding31" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding31.'"'; } ?>></td>
+
+				</tr>
+				<tr>
+					<td>口口口X</td>
+					<td class="altbg2"><span><{$market->ding33}></span></td>
+					<td class="altbg2"><span><{$loss->ding31}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding31}></td>
+					<td class="altbg2" width="12%"><{$market->ding32}></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>口口X口</td>
+					<td class="altbg2"><span><{$market->ding33}></span></td>
+					<td class="altbg2"><span><{$loss->ding31}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding31}></td>
+					<td class="altbg2" width="12%"><{$market->ding32}></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>口X口口</td>
+					<td class="altbg2"><span><{$market->ding33}></span></td>
+					<td class="altbg2"><span><{$loss->ding31}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding31}></td>
+					<td class="altbg2" width="12%"><{$market->ding32}></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>X口口口</td>
+					<td class="altbg2"><span><{$market->ding33}></span></td>
+					<td class="altbg2"><span><{$loss->ding31}></span></td>
+					<td class="altbg1" width="12%"><{$market->ding31}></td>
+					<td class="altbg2" width="12%"><{$market->ding32}></td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr><td class="mred">四字定</td>
 				<td><span><{$market->ding43}></span></td>
 				<td><span><{$loss->ding41}></span></td>
 				<td><{$market->ding41}></td>
 				<td><{$market->ding42}></td>
-				<td><input type="text" style="height: 30px;line-height: 30px;" name="ding41" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding41.'"'; } ?>></td></tr>
+				<td><input type="text" style="height: 30px;line-height: 30px;" disabled="disabled" name="ding410" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding41.'"'; } ?>></td>
+				<td><input type="text" style="height: 30px;line-height: 30px;" name="ding41" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding41.'"'; } ?>></td>
+
+				</tr>
 
 
-				<tr class="xiazhukuang2"><th class="mred">两同</th><th> </th><th> </th><th> </th><th> </th><th><select name="hs_1" id="hs_1" style="display:none"><option value="0">0</option></select></th><th> </th></tr>
-				<tr>
-				  <td>数字不同</td>
-				  <td class="altbg2" width="12%"><{$market->tong23}></td>
+				<tr class="xiazhukuang2"><tr><td class="mred">二字现</td>
+					<td class="altbg2" width="12%"><{$market->tong23}></td>
 					<td class="altbg2" width="20%"><{$loss->tong211}></td>
 					<td class="altbg1" width="12%"><{$market->tong21}></td>
 					<td class="altbg2" width="12%"><{$market->tong22}></td>
-				  <td>
-                      <input type="text" style="height: 30px;line-height: 30px;" name="tong211" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong211.'"'; } ?>>
-				  </td>
+					<td>
+						<input type="text" style="height: 30px;line-height: 30px;" disabled="disabled" name="tong2110" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong211.'"'; } ?>>
+					</td>
+					<td>
+						<input type="text" style="height: 30px;line-height: 30px;" name="tong211" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong211.'"'; } ?>>
+					</td>
 				</tr>
-				<tr>
-				  <td>两数相同</td>
-				  <td class="altbg2" width="12%"><{$market->tong23}></td>
-			<td class="altbg2" width="20%"><{$loss->tong221}></td>
-			<td class="altbg1" width="12%"><{$market->tong21}></td>
-			<td class="altbg2" width="12%"><{$market->tong22}></td>
-				  <td>
-                      <input type="text" style="height: 30px;line-height: 30px;" name="tong221" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong221.'"'; } ?>>
-				  </td>
-				</tr>
-				<tr class="xiazhukuang2"><th class="mred">三同</th><th> </th><th> </th><th> </th><th> </th><th><select name="" id="hs_4" style="display:none"><option value="0">0</option></select></th><th> </th></tr>
+				<tr class="xiazhukuang2"><th class="mred">三字现</th><th> </th><th> </th><th> </th><th> </th><th><select name="" id="hs_4" style="display:none"><option value="0">0</option></select></th><th> </th></tr>
 
 				<tr>
 				  <td>数字不同</td>
@@ -435,6 +538,9 @@ function findIndex(){
                 <td class="altbg1" width="12%"><{$market->tong31}></td>
                 <td class="altbg2" width="12%"><{$market->tong32}></td>
 				  <td>
+                      <input type="text" style="height: 30px;line-height: 30px;" disabled="disabled" name="tong3110" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong311.'"'; } ?>>
+				  </td>
+					<td>
                       <input type="text" style="height: 30px;line-height: 30px;" name="tong311" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong311.'"'; } ?>>
 				  </td>
 				</tr>
@@ -445,6 +551,8 @@ function findIndex(){
 			<td class="altbg1" width="12%"><{$market->tong31}></td>
 			<td class="altbg2" width="12%"><{$market->tong32}></td>
 				  <td>
+                      <input type="text" style="height: 30px;line-height: 30px;" name="tong3210" disabled="disabled" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong321.'"'; } ?>>
+				  </td><td>
                       <input type="text" style="height: 30px;line-height: 30px;" name="tong321" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong321.'"'; } ?>>
 				  </td>
 				</tr>
@@ -455,107 +563,43 @@ function findIndex(){
 			<td class="altbg1" width="12%"><{$market->tong31}></td>
 			<td class="altbg2" width="12%"><{$market->tong32}></td>
 				  <td>
+                      <input type="text" style="height: 30px;line-height: 30px;" disabled="disabled" name="tong3310" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong331.'"'; } ?>>
+				  </td><td>
                       <input type="text" style="height: 30px;line-height: 30px;" name="tong331" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong331.'"'; } ?>>
 				  </td>
 				</tr>
-				<tr class="xiazhukuang2"><th class="mred">四同</th><th> </th><th> </th><th> </th><th> </th><th><select name="hs" id="hs_4" style="display:none"><option value="0">0</option></select></th><th> </th></tr>
-				<tr>
-				  <td>数字不同</td>
-				  <td class="altbg2" width="12%"><{$market->tong43}></td>
-			<td class="altbg2" width="20%"><{$loss->tong411}></td>
-			<td class="altbg1" width="12%"><{$market->tong41}></td>
-			<td class="altbg2" width="12%"><{$market->tong42}></td>
-				  <td>
-                      <input type="text" style="height: 30px;line-height: 30px;" name="tong411" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong411.'"'; } ?>>
-				  </td>
-				</tr>
-				
-				<tr>
-				  <td>两数相同</td>
-				  <td class="altbg2" width="12%"><{$market->tong43}></td>
-			<td class="altbg2" width="20%"><{$loss->tong421}></td>
-			<td class="altbg1" width="12%"><{$market->tong41}></td>
-			<td class="altbg2" width="12%"><{$market->tong42}></td>
-				  <td>
-                      <input type="text" style="height: 30px;line-height: 30px;" name="tong421" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong421.'"'; } ?>>
-				  </td>
-				</tr>
-				<tr>
-				  <td>两两相同</td>
-				  <td class="altbg2" width="12%"><{$market->tong43}></td>
-			<td class="altbg2" width="20%"><{$loss->tong431}></td>
-			<td class="altbg1" width="12%"><{$market->tong41}></td>
-			<td class="altbg2" width="12%"><{$market->tong42}></td>
-				  <td>
-                      <input type="text" style="height: 30px;line-height: 30px;" name="tong431" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong431.'"'; } ?>>
-				  </td>
-				</tr>
-				<tr>
-				  <td>三数相同</td>
-				  <td class="altbg2" width="12%"><{$market->tong43}></td>
-			<td class="altbg2" width="20%"><{$loss->tong441}></td>
-			<td class="altbg1" width="12%"><{$market->tong41}></td>
-			<td class="altbg2" width="12%"><{$market->tong42}></td>
-				  <td>
-                      <input type="text" style="height: 30px;line-height: 30px;" name="tong441" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong441.'"'; } ?>>
-				  </td>
-				</tr>
-				<tr>
-				  <td>四数相同</td>
-				  <td class="altbg2" width="12%"><{$market->tong43}></td>
-			<td class="altbg2" width="20%"><{$loss->tong451}></td>
-			<td class="altbg1" width="12%"><{$market->tong41}></td>
-			<td class="altbg2" width="12%"><{$market->tong42}></td>
-				  <td>
-                      <input type="text" style="height: 30px;line-height: 30px;" name="tong451" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->tong451.'"'; } ?>>
-				  </td>
-				</tr>
-				
-				<tr><td class="mred">二定</td>
-
-				<td class="altbg2"><span><{$market->ding23}></span></td>
-			<td class="altbg2"><span><{$loss->ding21}></span></td>
-			<td class="altbg1" width="12%"><{$market->ding21}></td>
-			<td class="altbg2" width="12%"><{$market->ding22}></td>
-
-			<td>
-                <input type="text" style="height: 30px;line-height: 30px;" name="ding21" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding21.'"'; } ?>>
-				</tr>
-
-
-				<tr><td class="mred">三定</td>
-
-				<td class="altbg2"><span><{$market->ding33}></span></td>
-			<td class="altbg2"><span><{$loss->ding31}></span></td>
-			<td class="altbg1" width="12%"><{$market->ding31}></td>
-			<td class="altbg2" width="12%"><{$market->ding32}></td>
-
-				<td><input type="text" style="height: 30px;line-height: 30px;" name="ding31" <?php if(!empty(user_loss_m)){ echo 'value="'.$user_loss_m->ding31.'"'; } ?>></td>
-
-				</tr>
-
-				<!-- <tr><td class="mred">四字现</td><td>0.2</td><td>9550</td><td>100</td><td>1701</td><td><select name="hs_5" id="hs_5" data-pid="0" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><option value="0.255" selected="">0.255</option></select></td><td><select name="hs_5" id="hs_5" data-pid="0" class="chosen-select" data-placeholder="交易回水" style="width:100px;"><option value="0.255" selected="">0.255</option></select></td></tr> -->
 				</tbody>
 				</table>
 				<div class="clear"></div>
 			</div>
 		</li>
 		<script type="text/javascript">
+			$(function(){
+			if($('input[name="ding41"]').val() != '')
+			{
+				var a = $('input[name="ding21"]').val();//客人
+				var b = $('#erxia').html();//下注
+				var c = $('#erloss').html();//会员
+				d=b*(c-a)*0.01;
+				$('input[name="ding210"]').val(d);
+			}
+
+			});
 			$('#memberbuts').click(function(){
-			var	ding41=$('input[name="ding41"]').val();
-            var	tong211=$('input[name="tong211"]').val();
-            var	tong221=$('input[name="tong221"]').val();
-            var	tong311=$('input[name="tong311"]').val();
-            var	tong321=$('input[name="tong321"]').val();
-            var	tong331=$('input[name="tong331"]').val();
-            var	tong411=$('input[name="tong411"]').val();
-            var	tong421=$('input[name="tong421"]').val();
-            var	tong431=$('input[name="tong431"]').val();
-            var	tong441=$('input[name="tong441"]').val();
-            var	tong451=$('input[name="tong451"]').val();
-            var	ding21=$('input[name="ding21"]').val();
-            var	ding31=$('input[name="ding31"]').val();
-            var about=$('input[name="about"]').val();
+				var	ding41=$('input[name="ding41"]').val();
+				var	tong211=$('input[name="tong211"]').val();
+				var	tong221=$('input[name="tong221"]').val();
+				var	tong311=$('input[name="tong311"]').val();
+				var	tong321=$('input[name="tong321"]').val();
+				var	tong331=$('input[name="tong331"]').val();
+				var	tong411=$('input[name="tong411"]').val();
+				var	tong421=$('input[name="tong421"]').val();
+				var	tong431=$('input[name="tong431"]').val();
+				var	tong441=$('input[name="tong441"]').val();
+				var	tong451=$('input[name="tong451"]').val();
+				var	ding21=$('input[name="ding21"]').val();
+				var	ding31=$('input[name="ding31"]').val();
+				var about=$('input[name="about"]').val();
 				 $.ajax({
 			      type: "post",
 			      url: "__MODULE__/Index/user1",
