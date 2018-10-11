@@ -1451,67 +1451,7 @@ class UserController extends CommonController
         $tong451=I('post.tong451');
         $ding21=I('post.ding21');
         $ding31=I('post.ding31');
-        //同时修改当前用户的赔率
-        // $ding41=explode('/',I('post.select1'));
-        // $tong21=explode('/',I('post.select21'));
-        // $tong22=explode('/',I('post.select22'));
 
-        // $tong31=explode('/',I('post.select31'));
-        // $tong32=explode('/',I('post.select32'));
-        // $tong33=explode('/',I('post.select33'));
-
-        // $tong41=explode('/',I('post.select41'));
-        // $tong42=explode('/',I('post.select42'));
-        // $tong43=explode('/',I('post.select43'));
-        // $tong44=explode('/',I('post.select44'));
-        // $tong45=explode('/',I('post.select45'));
-
-
-        // $ding21=explode('/',I('post.select5'));
-        // $ding31=explode('/',I('post.select6'));
-
-        // $data21[0]['loss4']=$ding41[0];
-        // $data21[0]['ding4']=$ding41[1];
-
-
-        // $data21[1]['loss21']=$tong21[0];
-        // $data21[1]['loss22']=$tong22[0];
-        // $data21[1]['tong21']=$tong21[1];
-        // $data21[1]['tong22']=$tong22[1];
-
-        // $data21[2]['loss31']=$tong31[0];
-        // $data21[2]['loss32']=$tong32[0];
-        // $data21[2]['loss33']=$tong33[0];
-        // $data21[2]['tong31']=$tong31[1];
-        // $data21[2]['tong32']=$tong32[1];
-        // $data21[2]['tong33']=$tong33[1];
-
-        // $data21[3]['loss41']=$tong41[0];
-        // $data21[3]['loss42']=$tong42[0];
-        // $data21[3]['loss43']=$tong43[0];
-        // $data21[3]['loss44']=$tong44[0];
-        // $data21[3]['loss45']=$tong45[0];
-        // $data21[3]['tong41']=$tong41[1];
-        // $data21[3]['tong42']=$tong42[1];
-        // $data21[3]['tong43']=$tong43[1];
-        // $data21[3]['tong44']=$tong44[1];
-        // $data21[3]['tong45']=$tong45[1];
-
-        // $data21[4]['loss2']=$ding21[0];
-        // $data21[5]['loss3']=$ding31[0];
-        // $data21[4]['ding2']=$ding21[1];
-        // $data21[5]['ding3']=$ding31[1];
-        // $data31['loss']=json_encode($data21);
-
-        // $where4['uid']=$uid;
-        // $uloss=M("uloss");
-        // $loss1=$uloss->where($where4)->find();
-        // if(empty($loss1)){
-        //   $data31['uid']=session('auid');
-        //   $loss2=$uloss->add($data31);
-        // }else{
-        //   $loss2=$uloss->where($where4)->save($data31);
-        // }
         $admins=M('admin');
         $users=M('user');
         $qi=qishus();
@@ -1624,7 +1564,7 @@ class UserController extends CommonController
         $loss['tong212']=$m_loss['m_loss']->tong212;
         $loss['tong213']=$m_loss['m_loss']->tong213;
         $loss['tong214']=$m_loss['m_loss']->tong214;
-        $loss['tong221']=$tong221;
+        $loss['tong221']=$tong211;
         $loss['tong222']=$m_loss['m_loss']->tong222;
         $loss['tong223']=$m_loss['m_loss']->tong223;
         $loss['tong224']=$m_loss['m_loss']->tong224;//二同
@@ -2447,7 +2387,7 @@ class UserController extends CommonController
         }
         else
         {
-            $uid1=explode(',', $uid);
+            $uid1=explode(',',$uid);
             $counts=count($uid1);
             if($counts)
             {
@@ -2461,7 +2401,7 @@ class UserController extends CommonController
                         if($admin)
                         {
 
-                            $data['au_money']='';
+                            $data['au_money']=0;
                             $data['au_moneys']='';
                             $admin1=$admins->where($where)->save($data);
                             if($admin['au_type'] != 'admin' && $admin['au_type'] != 'partner')

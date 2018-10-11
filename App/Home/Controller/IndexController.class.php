@@ -5451,13 +5451,15 @@ class IndexController extends CommonController {
 
         $uid = session('userid');
         $where['uid'] = $uid;
-        $user = M('user')->field('lock')->where($where)->find();
+        $user = M('user')->field('lock,m_loss')->where($where)->find();
 		$about = I('post.about');
         $udata['about']=$about;
         $dd1=M('user')->where($where)->save($udata);
         $qishu=session('qishu');
         $datas=M('opentime')->where($qishu)->limit(1)->find();
         $m_loss['m_loss'] = json_decode($datas['m_loss']);
+        $huiyuan = json_decode($user['m_loss']);
+
         //赔率 1初始赔率2赔率下降阀值3销售增量4赔率下调步长
         $loss['ding41']=$ding41;
         $loss['ding42']=$m_loss['m_loss']->ding42;
@@ -5468,7 +5470,7 @@ class IndexController extends CommonController {
         $loss['tong212']=$m_loss['m_loss']->tong212;
         $loss['tong213']=$m_loss['m_loss']->tong213;
         $loss['tong214']=$m_loss['m_loss']->tong214;
-        $loss['tong221']=$tong221;
+        $loss['tong221']=$tong211;
         $loss['tong222']=$m_loss['m_loss']->tong222;
         $loss['tong223']=$m_loss['m_loss']->tong223;
         $loss['tong224']=$m_loss['m_loss']->tong224;//二同
@@ -5516,6 +5518,7 @@ class IndexController extends CommonController {
         $loss['ding33']=$m_loss['m_loss']->ding33;
         $loss['ding34']=$m_loss['m_loss']->ding34;//三定
         $data_loss['loss']=json_encode($loss);
+
         //$users->where($uid)->save($data_loss);
         if ($user['lock'] == 2) {
             $arr['code'] = 400;
@@ -5528,9 +5531,25 @@ class IndexController extends CommonController {
 //            } else {
 //                $loss2 = $uloss->where($where)->save($data3);
 //            }
-            $users=M('user');
-            $users->where($uid)->save($data_loss);
-            $arr['code'] = 200;
+            if($ding41 > $huiyuan->ding41){
+                $arr['code'] = 500;
+            }elseif($ding31 > $huiyuan->ding31 ){
+                $arr['code'] = 500;
+            }elseif($ding21 > $huiyuan->ding21 ){
+                $arr['code'] = 500;
+            }elseif($tong211 > $huiyuan->tong211 ){
+                $arr['code'] = 500;
+            }elseif($tong311 > $huiyuan->tong311 ){
+                $arr['code'] = 500;
+            }elseif($tong321 > $huiyuan->tong321 ){
+                $arr['code'] = 500;
+            }elseif($tong331 > $huiyuan->tong331 ){
+                $arr['code'] = 500;
+            }else{
+                $users=M('user');
+                $users->where($uid)->save($data_loss);
+                $arr['code'] = 200;
+            }
         }
 		if($dd1){
 			$arr['code'] = 200;

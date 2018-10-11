@@ -42,7 +42,7 @@
   <if condition="($utype eq 'agencys') OR ($utype eq 'agency')  ">
     &nbsp;&nbsp;总信用额度：<{$user['au_money']-0}>；     可分配信用额度：<{$user['au_money']-$user['au_moneys']-0}>；     已分配信用额度：<{$user['au_moneys']-0}>； 
   </if>
-  <span class="r">共有数据：<strong><{$count}></strong> 条</span> 
+  <span class="r">共有数据：<strong><{$count}></strong> 条</span>
   </div>
   
   <if condition="$user['au_type'] neq 'agency'">
@@ -57,12 +57,12 @@
           <if condition="$user['au_type'] neq 'admin'">
             <th width="80">可用信用额度</th>
           </if>
-          <if condition="$utype eq 'admin'">
-            <th width="60">占成</th>
-          </if>
-          <if condition="$utype eq 'agencys'">
-            <th width="60">拦货占成</th>
-          </if>
+          <!--<if condition="$utype eq 'admin'">-->
+            <!--<th width="60">占成</th>-->
+          <!--</if>-->
+          <!--<if condition="$utype eq 'agencys'">-->
+            <!--<th width="60">拦货占成</th>-->
+          <!--</if>-->
           <th width="120">联系电话</th>
           <th width="60">创建时间</th>
           <if condition="$user['au_type'] neq 'agency'">
@@ -100,13 +100,13 @@
           <if condition="$utype eq 'admin'">
             <td><{$vo['au_proportion']}>%</td>
           </if>
-          <if condition="$utype eq 'agency'">
-            <td width="60">
-            <a class="btn btn-primary radius" title="占成配置" href="javascript:void(0);" onclick="addConfig('<{$vo['au_id']}>')">占成配置</a>
-            </td>
-          <elseif condition="$utype eq 'agencys'"/>
-              <td><{$vo['au_proportion']}>%</td>
-          </if>
+          <!--<if condition="$utype eq 'agency'">-->
+            <!--<td width="60">-->
+            <!--<a class="btn btn-primary radius" title="占成配置" href="javascript:void(0);" onclick="addConfig('<{$vo['au_id']}>')">占成配置</a>-->
+            <!--</td>-->
+          <!--<elseif condition="$utype eq 'agencys'"/>-->
+              <!--<td><{$vo['au_proportion']}>%</td>-->
+          <!--</if>-->
           <td><{$vo.au_phone}></td>
           <td><{$vo.au_time}></td>
           <if condition="$user['au_type'] neq 'agency'">
