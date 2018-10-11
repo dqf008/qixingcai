@@ -947,7 +947,7 @@ class IndexController extends CommonController {
         $where['uid'] = session('userid');
         $where['qishu'] = session('qishu');
         $where['js'] =array('not in','4,5');
-        $data['data'] = M('bet')->field('js,id,addtime,money,did,mingxi_1,mingxi_2,mingxi_3,odds')->where($where)->order('id desc')->limit(10)->select();
+        $data['data'] = M('bet')->field('js,id,addtime,money,did,mingxi_1,mingxi_2,mingxi_3,odds')->where($where)->where('js!=2')->order('id desc')->limit(10)->select();
         $times=M('opentime')->where(array('qishu'=>$where['qishu']))->find();
 		if (!empty($data['data'])) {
 			foreach($data['data'] as $k=>$v){
