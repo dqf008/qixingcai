@@ -300,7 +300,9 @@ public function saveTask(){
        $data['3xian_xiane']=I('post.CheckType3');
        $data['4xian_xiane']=I('post.CheckType4');
        $data['m_odds']=I('post.CheckAutoScale');//自动降赔率
-
+        $user=M('user');
+        $usersql = "UPDATE k_user SET money=usermoney";
+        $user->execute($usersql);
 	//开奖任务添加
 	if(empty($mid)){
 		$data['m_year']=I('post.Year');//年份

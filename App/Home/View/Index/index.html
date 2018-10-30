@@ -320,7 +320,7 @@
                             <tr>
                                 <td>自动:<input type="radio" name="entermode" value="0" checked></td>
                                 <td>小票打印:<input type="radio" name="sendmode" value="1" checked></td>
-                                <td>实际赔率:<input type="radio" name="isfpfrankhotzhuan" value="1" checked></td>
+                                <td>实际赔率:<input type="radio" name="isfpfrankhotzhuan" value="1"></td>
                             </tr>
                             <tr>
                                 <td>回车:<input type="radio" name="entermode" value="1"></td>
@@ -647,6 +647,7 @@
 					var	ding21=$('input[name="ding21"]').val();
 					var	ding31=$('input[name="ding31"]').val();
 					var about=$('input[name="about"]').val();
+					var isfpfrankhotzhuan=$('input[name="isfpfrankhotzhuan"]:checked').val();
 					$.ajax({
 						type: "post",
 						url: "__MODULE__/Index/user1",
@@ -665,6 +666,7 @@
 							tong451:tong451,
 							ding21:ding21,
 							ding31:ding31,
+							isfpfrankhotzhuan:isfpfrankhotzhuan
 						},
 						success: function(msg){
 							if(msg.code==200){

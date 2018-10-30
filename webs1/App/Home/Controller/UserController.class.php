@@ -1463,98 +1463,6 @@ class UserController extends CommonController
         $where1['au_type']=session('autype');
         $user1=$admins->field('au_moneys,au_money,au_proportion,au_sum,m_loss')->where($where1)->find();
         $sx_loss = json_decode($user1['m_loss']);
-        //赔率 1初始赔率2赔率下降阀值3销售增量4赔率下调步长
-        if($ding41 > $sx_loss->ding41)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong211 > $sx_loss->tong211)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong221 > $sx_loss->tong221)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong311 > $sx_loss->tong311)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong321 > $sx_loss->tong321)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong331 > $sx_loss->tong331)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong411 > $sx_loss->tong411)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong421 > $sx_loss->tong421)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong431 > $sx_loss->tong431)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong441 > $sx_loss->tong441)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($tong451 > $sx_loss->tong451)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($ding21 > $sx_loss->ding21)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
-        if($ding31 > $sx_loss->ding31)
-        {
-            $arr=['code'=>false, 'titles'=>'不能大于上级设置的赔率！', 'urls'=>'/User/user1'];
-            $stats=json_encode($arr);
-            echo $stats;
-            exit;
-        }
         $loss['ding41']=$ding41;
         $loss['ding42']=$m_loss['m_loss']->ding42;
         $loss['ding43']=$m_loss['m_loss']->ding43;
@@ -1640,10 +1548,12 @@ class UserController extends CommonController
             if($user2['money'] > 0)
             {
                 $data['money']=$user2['money'] + ($integral - $user2['money']);
+                $data['usermoney']=$user2['money'] + ($integral - $user2['money']);
             }
             else
             {
                 $data['money']=$user2['money'] + $integral;
+                $data['usermoney']=$user2['money'] + $integral;
             }
 
             //dump($data);exit;
@@ -2519,10 +2429,11 @@ class UserController extends CommonController
                         {
                             //查到以前的数据
                             $where['uid']=$uid1[$a];
-                            $user=$users->field('username,money')->where($where)->find();
+                            $user=$users->field('username,money,usermoney')->where($where)->find();
                             if($user)
                             {
                                 $data1['money']=$user['money'] + $money;
+                                $data1['usermoney']=$user['usermoney'] + $money;
                                 $user1=$users->where($where)->save($data1);
                                 if($user1)
                                 {
@@ -2603,6 +2514,7 @@ class UserController extends CommonController
                         {
                             $data['money']='0';
                             $data['moneys']='0';
+                            $data['usermoney']='0';
                             $admin1=$users->where($where)->save($data);
                             $where1['au_id']=$admin['top_uid'];
                             $admin2=$admins->field('au_moneys')->where($where1)->find();

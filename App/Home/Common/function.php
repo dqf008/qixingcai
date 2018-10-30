@@ -245,13 +245,13 @@ function get_odd3($num,$weishu,$types,$data,$data1,$qishu,$prohibits,$markets1,$
    //  exit;
    // }
     $loss2=json_decode($data1['m_loss']);//原始赔率和下滑值
+    $loss8=json_decode($data1['admin_loss']);//原始赔率和下滑值
     $market=json_decode($data1['m_sales']);//单注上限
     //得到改号码股东是否修改赔率和销售上限
       $where4['qishu']=$qishu;
       $where4['name']=$num;
       $where4['type']=5;
       $markets=$markets1->field('loss,markets')->where($where4)->find();
-     
     //会员赔率了回水
     //改号码有销售-->相对应修改赔率
     $where2['qishu']=$qishu;
@@ -259,17 +259,19 @@ function get_odd3($num,$weishu,$types,$data,$data1,$qishu,$prohibits,$markets1,$
     $where2['mingxi_2']=$num;
     $where2['js']='0';
     $money=$bets->field('money')->where($where2)->sum('money');//该号码销售
+    if($money == null){
+        $money = $data1['money'];
+    }
      //dump($data);exit;
    if(!empty($data) && !empty($data['loss'])){
-   
     $loss1=json_decode($data['loss']);//用户赔率配置
     $loss3=$loss1[4]->ding2;//赔率
     $loss4=$loss1[4]->loss2;//回水
     // $loss3=$loss2->ding21;//赔率
     // $loss4=$loss1[4]->loss2;//回水
     $xhz1=$loss2->ding22;//下滑基数
-    $xhz2=$loss2->ding23;//每增加数
-    $xhz3=$loss2->ding24;//下滑值
+    $xhz2=$loss8->ding23;//每增加数
+    $xhz3=$loss8->ding24;//下滑值
     $market1=$market->ding21;//号码(总)销售
     $market2=$market->ding22;//号码(最多下注)销售
     $market3=$market->ding23;//号码(最新下注)销售
@@ -367,15 +369,12 @@ function get_odd3($num,$weishu,$types,$data,$data1,$qishu,$prohibits,$markets1,$
       }
       $arrs=array('code'=>200,$loss3,$loss4,$market2,$market3);//赔率，回水，可以下注金额、最小下注金额
     }
-
-    
-
    }else{//不存在走股东赔率
     $loss3=$loss2->ding21;//赔率
     $loss4=0;//回水
-    $xhz1=$loss2->ding22;//下滑基数
-    $xhz2=$loss2->ding23;//每增加数
-    $xhz3=$loss2->ding24;//下滑值
+    $xhz1=$loss8->ding22;//下滑基数
+    $xhz2=$loss8->ding23;//每增加数
+    $xhz3=$loss8->ding24;//下滑值
     $market1=$market->ding21;//号码(总)销售
     $market2=$market->ding22;//号码(最多下注)销售
     $market3=$market->ding23;//号码(最新下注)销售
@@ -391,32 +390,60 @@ function get_odd3($num,$weishu,$types,$data,$data1,$qishu,$prohibits,$markets1,$
             $market1=$c_markets;
           }
         }
-         
+
         if($money>=$market1){//判断总数是否超过每码销售值 
           $arrs=array('code'=>400);
           return $arrs;
           exit;
         }
-        if($money>=$xhz1){
-         $loss3=$loss3-$xhz3;
-        }
-        //销售数
-         if($money>=($xhz1+$xhz2)){//得到该号码的下滑值
-            $money1=$money-$xhz1;
-            $money2=floor($money1/$xhz2);
-            if($money2>=1){
-              $loss3=$loss3-($money2*$xhz3);
-              if(($loss3+$xhz3) < $xhz3 ){
-                  $arrs=array('code'=>400);
-                  return $arrs;
-                  exit;
-              }
+        if($data1['user'] == '0'){
+            if($data1['hy'] != null){
+                if($data1['hy'] <= $loss2->ding21){
+                    $loss3 =(float)$data1['hy'];
+                }else{
+                    $loss3 = $loss2->ding21;
+                }
+            }else{
+                if($money>=$xhz1){
+                    $loss3=$loss3-$xhz3;
+                }
+                //销售数
+                if($money>=($xhz1+$xhz2)){//得到该号码的下滑值
+                    $money1=$money-$xhz1;
+                    $money2=floor($money1/$xhz2);
+                    if($money2>=1){
+                        $loss3=$loss3-($money2*$xhz3);
+                        if(($loss3+$xhz3) < $xhz3 ){
+                            $arrs=array('code'=>400);
+                            return $arrs;
+                            exit;
+                        }
+                    }
+                }
             }
-          }
+        }else{
+            if($money>=$xhz1){
+                $loss3=$loss3-$xhz3;
+            }
+            //销售数
+            if($money>=($xhz1+$xhz2)){//得到该号码的下滑值
+                $money1=$money-$xhz1;
+                $money2=floor($money1/$xhz2);
+                if($money2>=1){
+                    $loss3=$loss3-($money2*$xhz3);
+                    if(($loss3+$xhz3) < $xhz3 ){
+                        $arrs=array('code'=>400);
+                        return $arrs;
+                        exit;
+                    }
+                }
+            }
+        }
           //该号码的上限减去总下注金额小于 单注金额 那么可下值就是该号码剩下金额
           if(($market1-$money)<$market2){
               $market2=$market1-$money;
           }
+//        var_dump($loss3);
         $arrs=array('code'=>200,$loss3,$loss4,$market2,$market3);//赔率，回水，可以下注金额、最小下注金额
     
     }else{
