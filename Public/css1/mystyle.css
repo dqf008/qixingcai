@@ -491,6 +491,7 @@ table td[class*="span"],table th[class*="span"],.row-fluid table td[class*="span
 .table tbody tr.warning td{background-color:#fcf8e3;}
 .table tbody tr.info td{background-color:#d9edf7;}
 .table tbody tr.tuima td{color:red;background-color:#f2dede;}
+.table tbody tr.bianse td{color:yellow;background-color:#f2dede;}
 .table tbody tr.hotcss td{color:red;background-color:#ffff00;}
 .table-hover tbody tr.success:hover td{background-color:#d0e9c6;}
 .table-hover tbody tr.error:hover td{background-color:#ebcccc;}
