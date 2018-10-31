@@ -1097,7 +1097,6 @@ class IndexController extends CommonController {
                 $arr['' . $v1['name'] . ''] = $v1['loss'];
             }
         }
-        //dump($arr);exit;
         if ($types == 102) {
             for ($i = 0;$i <= 9;$i++) {
                 if ($type1 == 2) {
@@ -2941,9 +2940,9 @@ class IndexController extends CommonController {
         }
         return $type1;
     }
-    private function haomas2($data, $types, $num, $leixing, $prohibits, $bet, $markets1, $numbers) {
-        // $uid=session('userid');
-        // $qishu=session('qishu');
+    private function haomas2($data, $types, $num, $leixing, $prohibits, $bet, $markets1, $numbers,$usermoney,$molls) {
+        $uid=session('userid');
+        $qishu=session('qishu');
         //判断改号码是否禁止购买
         if (!empty($prohibits)) {
             if (in_array($num, $prohibits)) {
@@ -2961,11 +2960,12 @@ class IndexController extends CommonController {
                 }
             }
         }
-        // $where1['qishu']=$qishu;
-        // $where1['mingxi_1']=$leixing;
-        // $where1['mingxi_2']=$num;
-        // $where1['js']='0';
-        // $bets=$bet->field('money')->where($where1)->sum('money');
+        $where1['qishu']=$qishu;
+        $where1['mingxi_1']=$leixing;
+        $where1['mingxi_2']=$num;
+        $where1['js']='0';
+        $bet = M('bet');
+        $bets=$bet->field('money')->where($where1)->sum('money');
         //得到改号码股东是否修改赔率和销售上限
         if (!empty($markets1)) {
             foreach ($markets1 as $k1 => $v1) {
@@ -2985,16 +2985,22 @@ class IndexController extends CommonController {
                 }
             }
         }
+        $usermoneys = $usermoney;
+        $moll=json_decode($molls['m_loss']);
+        $usermoll=json_decode($molls['userloss']);
         $loss = json_decode($data['m_loss']); //赔率
         $market = json_decode($data['m_sales']); //单注上限
-        // if($bets){//得到该号码的销售总数
-        //     $money=$bets;
-        // }
+        if ($bets == null ) { //得到该号码的销售总数
+            $money = 0;
+        }else{
+            $money = $bets;
+        }
         if ($types == 1) {
             $loss1 = $loss->ding41;
-            $xhz1 = $loss->ding42; //下滑基数
-            $xhz2 = $loss->ding43; //每增加数
-            $xhz3 = $loss->ding44; //下滑值
+            $xhz1 = $moll->ding42; //下滑基数
+            $xhz2 = $moll->ding43; //每增加数
+            $xhz3 = $moll->ding44; //下滑值
+            $xhz4 = $usermoll->ding41;
             $market1 = $market->ding41;
             $market2 = $market->ding42;
             $market3 = $market->ding43;
@@ -3004,18 +3010,20 @@ class IndexController extends CommonController {
             $market3 = $market->tong23;
             if ($number['types'] == 1) {
                 $loss1 = $loss->tong211;
-                $xhz1 = $loss->tong212; //下滑基数
-                $xhz2 = $loss->tong213; //每增加数
-                $xhz3 = $loss->tong214; //下滑值
+                $xhz1 = $moll->tong212; //下滑基数
+                $xhz2 = $moll->tong213; //每增加数
+                $xhz3 = $moll->tong214; //下滑值
+                $xhz4 = $usermoll->tong211;
                 //$market1=$market->tong22;
-                
+
             } elseif ($number['types'] == 2) {
                 $loss1 = $loss->tong221;
-                $xhz1 = $loss->tong222; //下滑基数
-                $xhz2 = $loss->tong223; //每增加数
-                $xhz3 = $loss->tong224; //下滑值
+                $xhz1 = $moll->tong222; //下滑基数
+                $xhz2 = $moll->tong223; //每增加数
+                $xhz3 = $moll->tong224; //下滑值
+                $xhz4 = $usermoll->tong221;
                 //$marke1t=$market->tong22;
-                
+
             }
         } elseif ($types == 3) {
             $market1 = $market->tong31;
@@ -3023,25 +3031,28 @@ class IndexController extends CommonController {
             $market3 = $market->tong33;
             if ($number['types'] == 1) {
                 $loss1 = $loss->tong311;
-                $xhz1 = $loss->tong312; //下滑基数
-                $xhz2 = $loss->tong313; //每增加数
-                $xhz3 = $loss->tong314; //下滑值
+                $xhz1 = $moll->tong312; //下滑基数
+                $xhz2 = $moll->tong313; //每增加数
+                $xhz3 = $moll->tong314; //下滑值
+                $xhz4 = $usermoll->tong311;
                 //$market1=$market->tong32;
-                
+
             } elseif ($number['types'] == 2) {
                 $loss1 = $loss->tong321;
-                $xhz1 = $loss->tong322; //下滑基数
-                $xhz2 = $loss->tong323; //每增加数
-                $xhz3 = $loss->tong324; //下滑值
+                $xhz1 = $moll->tong322; //下滑基数
+                $xhz2 = $moll->tong323; //每增加数
+                $xhz3 = $moll->tong324; //下滑值
+                $xhz4 = $usermoll->tong321;
                 //$market1=$market->tong32;
-                
+
             } elseif ($number['types'] == 3) {
                 $loss1 = $loss->tong331;
-                $xhz1 = $loss->tong332; //下滑基数
-                $xhz2 = $loss->tong333; //每增加数
-                $xhz3 = $loss->tong334; //下滑值
+                $xhz1 = $moll->tong332; //下滑基数
+                $xhz2 = $moll->tong333; //每增加数
+                $xhz3 = $moll->tong334; //下滑值
+                $xhz4 = $usermoll->tong331;
                 //$market1=$market->tong32;
-                
+
             }
         } elseif ($types == 4) {
             $market1 = $market->tong41;
@@ -3049,53 +3060,60 @@ class IndexController extends CommonController {
             $market3 = $market->tong43;
             if ($number['types'] == 1) {
                 $loss1 = $loss->tong411;
-                $xhz1 = $loss->tong412; //下滑基数
-                $xhz2 = $loss->tong413; //每增加数
-                $xhz3 = $loss->tong414; //下滑值
+                $xhz1 = $moll->tong412; //下滑基数
+                $xhz2 = $moll->tong413; //每增加数
+                $xhz3 = $moll->tong414; //下滑值
+                $xhz4 = $usermoll->tong411;
                 //$market1=$market->tong42;
-                
+
             } elseif ($number['types'] == 2) {
                 $loss1 = $loss->tong421;
-                $xhz1 = $loss->tong422; //下滑基数
-                $xhz2 = $loss->tong423; //每增加数
-                $xhz3 = $loss->tong424; //下滑值
+                $xhz1 = $moll->tong422; //下滑基数
+                $xhz2 = $moll->tong423; //每增加数
+                $xhz3 = $moll->tong424; //下滑值
+                $xhz4 = $usermoll->tong421;
                 //$market1=$market->tong42;
-                
-            } elseif ($number['types'] == 4) {
+
+            } elseif ($number['types'] == 4) { //三数相同
                 $loss1 = $loss->tong431;
-                $xhz1 = $loss->tong432; //下滑基数
-                $xhz2 = $loss->tong433; //每增加数
-                $xhz3 = $loss->tong434; //下滑值
+                $xhz1 = $moll->tong432; //下滑基数
+                $xhz2 = $moll->tong433; //每增加数
+                $xhz3 = $moll->tong434; //下滑值
+                $xhz4 = $usermoll->tong431;
                 //$market1=$market->tong42;
-                
-            } elseif ($number['types'] == 3) {
+
+            } elseif ($number['types'] == 3) { //二数相同
                 $loss1 = $loss->tong441;
-                $xhz1 = $loss->tong442; //下滑基数
-                $xhz2 = $loss->tong443; //每增加数
-                $xhz3 = $loss->tong444; //下滑值
+                $xhz1 = $moll->tong442; //下滑基数
+                $xhz2 = $moll->tong443; //每增加数
+                $xhz3 = $moll->tong444; //下滑值
+                $xhz4 = $usermoll->tong441;
                 //$market1=$market->tong42;
-                
-            } elseif ($number['types'] == 5) {
+
+            } elseif ($number['types'] == 5) { //数一样
                 $loss1 = $loss->tong451;
-                $xhz1 = $loss->tong452; //下滑基数
-                $xhz2 = $loss->tong453; //每增加数
-                $xhz3 = $loss->tong454; //下滑值
+                $xhz1 = $moll->tong452; //下滑基数
+                $xhz2 = $moll->tong453; //每增加数
+                $xhz3 = $moll->tong454; //下滑值
+                $xhz4 = $usermoll->tong451;
                 // $market1=$market->tong42;
-                
+
             }
         } elseif ($types == 5) {
             $loss1 = $loss->ding21;
-            $xhz1 = $loss->ding22; //下滑基数
-            $xhz2 = $loss->ding23; //每增加数
-            $xhz3 = $loss->ding24; //下滑值
+            $xhz1 = $moll->ding22; //下滑基数
+            $xhz2 = $moll->ding23; //每增加数
+            $xhz3 = $moll->ding24; //下滑值
+            $xhz4 = $usermoll->ding21;
             $market1 = $market->ding21;
             $market2 = $market->ding22;
             $market3 = $market->ding23;
         } elseif ($types == 6) {
             $loss1 = $loss->ding31;
-            $xhz1 = $loss->ding32; //下滑基数
-            $xhz2 = $loss->ding33; //每增加数
-            $xhz3 = $loss->ding34; //下滑值
+            $xhz1 = $moll->ding32; //下滑基数
+            $xhz2 = $moll->ding33; //每增加数
+            $xhz3 = $moll->ding34; //下滑值
+            $xhz4 = $usermoll->ding31;
             $market1 = $market->ding31;
             $market2 = $market->ding32;
             $market3 = $market->ding33;
@@ -3111,44 +3129,65 @@ class IndexController extends CommonController {
                 $market1 = $c_markets;
             }
         }
-        //if(!empty($money) && ($data['m_odds']==1)){
-        if (!empty($money) && ($data['m_odds'] == 1)) {
+        //判断总数是否超过每码销售值
+        if ($data['m_odds'] == 1) {
             if ($money >= $market1) {
                 $arrs = array('code' => 400);
                 return $arrs;
                 exit;
             }
-            if ($money >= $xhz1) {
-                $loss1 = $loss1 - $xhz3;
+            if($money == 0){
+                $money = $usermoneys;
+            }else{
+                $money=$money + $usermoneys;
             }
-            //销售数
-            if ($money >= ($xhz1 + $xhz2)) { //得到该号码的下滑值
-                $money1 = $money - $xhz1;
-                $money2 = floor($money1 / $xhz2);
-                if ($money2 >= 1) {
-                    $loss1 = $loss1 - ($money2 * $xhz3);
-                    if (($loss1 + $xhz3) < $xhz3) {
-                        $arrs = array('code' => 400);
-                        return $arrs;
-                        exit;
+            if($molls['peilv'] == '0'){
+                if(!empty($molls['user'])){
+                    if($molls['user'] <= $loss1){
+                        $loss1 = (float)$molls['user'];
+                    }else{
+                        $loss1 = (float)$loss1;
+                    }
+                }else{
+                    if ($money >= $xhz1) {
+                        $loss1 = $loss1 - $xhz3;
+                    }
+                    //销售数
+                    if ($money >= ($xhz1 + $xhz2)) { //得到该号码的下滑值
+                        $money1 = $money - $xhz1;
+                        $money2 = floor($money1 / $xhz2);
+                        if ($money2 >= 1) {
+                            $loss1 = $loss1 - ($money2 * $xhz3);
+                            if (($loss1 + $xhz3) < $xhz3) {
+                                $arrs = array('code' => 400);
+                                return $arrs;
+                                exit;
+                            }
+                        }
+                    }
+                }
+            }else{
+                if ($money >= $xhz1) {
+                    $loss1 = $loss1 - $xhz3;
+                }
+                //销售数
+                if ($money >= ($xhz1 + $xhz2)) { //得到该号码的下滑值
+                    $money1 = $money - $xhz1;
+                    $money2 = floor($money1 / $xhz2);
+                    if ($money2 >= 1) {
+                        $loss1 = $loss1 - ($money2 * $xhz3);
+                        if (($loss1 + $xhz3) < $xhz3) {
+                            $arrs = array('code' => 400);
+                            return $arrs;
+                            exit;
+                        }
                     }
                 }
             }
+
             //该号码的上限减去总下注金额小于 单注金额 那么可下值就是该号码剩下金额
             if (($market1 - $money) < $market2) {
                 $market2 = $market1 - $money;
-            }
-        } else {
-            if (!empty($money)) {
-                if ($money >= $market1) {
-                    $arrs = array('code' => 400);
-                    return $arrs;
-                    exit;
-                }
-                //该号码的上限减去总下注金额小于 单注金额 那么可下值就是该号码剩下金额
-                if (($market1 - $money) < $market2) {
-                    $market2 = $market1 - $money;
-                }
             }
         }
         $loss3 = 0;
@@ -5184,29 +5223,32 @@ class IndexController extends CommonController {
                 $bet[$k]['topzanc'] = $toparr[1]; //代理占成
                 $bet[$k]['topwin'] = 0;
             }
-            // $bet[$k]['topmoney'] = $toparr[0]; //拦货金额
-            // $bet[$k]['topzanc'] = $toparr[1]; //代理占成
-            // $bet['mingxi_1']=$mingxi_1;
-            // $bet['mingxi_3']=$mingxi_3;
-            // $bet['types']=$this->unm2($v,$mingxi_1);
-            // $bet['mingxi_2'] = $v;
+            $datas = M('opentime')->field('m_odds,m_status,fengpan,m_loss,m_sales,2ding_xiane,3ding_xiane,4ding_xiane,2xian_xiane,3xian_xiane,4xian_xiane')->where('qishu = "' . $qishu . '"')->order("id DESC")->find();
+            $molss = $datas;
+
             $bet[$k]['mingxi_1'] = $mingxi_1;
             $bet[$k]['mingxi_3'] = $mingxi_3;
             $bet[$k]['types'] = $this->unm2($v, $mingxi_1);
             $bet[$k]['mingxi_2'] = $v;
+             $molss['peilv'] = $user['peilv'];
              $user = M('user')->where($uid)->find();
              $top_dl['au_id']=$user['top_uid'];
              $user_dl = M('admin')->where($top_dl)->find();
              $top_zd['au_id']=$user_dl['top_uid'];
              $user_zd = M('admin')->where($top_zd)->find();
-             $datas['m_loss']=$user['loss'];
-             $arrs = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
              $datas['m_loss']=$user_zd['m_loss'];
-             $arrs_zd = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
+             $arrs_zd = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers,$money,$molss);
              $datas['m_loss']=$user_dl['m_loss'];
-             $arrs_dl = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
+             $arrs_dl = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers,$money,$molss);
              $datas['m_loss']=$user['m_loss'];
-             $arrs_hy = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
+             $arrs_hy = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers,$money,$molss);
+             $molss['userloss'] = $user['loss'];
+             $molss['user'] = $arrs_hy[0];
+             $datas['m_loss']=$user['loss'];
+             $arrs = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers,$money,$molss);
+
+
+//             exit;
 //            if (empty($loss) || empty($loss['loss'])) { //用户配置为空-->走股东
 //                $arrs = $this->haomas2($datas, $weishu, $v, $mingxi_1, $prohibits, $bets1, $markets1, $numbers);
 //                var_dump($arrs);exit;
