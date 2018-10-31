@@ -74,7 +74,7 @@ td {
     <input type="text" name="finish" value="<{$finish}>" placeholder="" style="width:100px" class="input-text">
     &nbsp;&nbsp;分类：
     <span class="select-box inline">
-      <select name="category" id="category" class="select"> 
+      <select name="category" id="category" class="select">
       <option value="0">全部</option>
       <option value="1" <?php if($category==1){ echo 'selected';} ?>>二定位</option>
       <option value="口口XX" <?php if($category=='口口XX'){ echo 'selected';} ?>>口口XX</option>
@@ -92,30 +92,30 @@ td {
       <option value="二字现" <?php if($category=='二字现'){ echo 'selected';} ?>>二字现</option>
       <option value="三字现" <?php if($category=='三字现'){ echo 'selected';} ?>>三字现</option>
       <option value="四字现" <?php if($category=='四字现'){ echo 'selected';} ?>>四字现</option>
-       <!--  <option value="0">全部分类</option> 
-        <option value="20">二定位</option> 
-        <option value="1">口口XX</option> 
-        <option value="2">口X口X</option> 
-        <option value="3">口XX口</option> 
-        <option value="4">X口X口</option> 
-        <option value="5">X口口X</option> 
-        <option value="6">XX口口</option> 
-        <option value="30">三定位</option> 
-        <option value="7">口口口X</option> 
-        <option value="8">口口X口</option> 
-        <option value="9">口X口口</option> 
-        <option value="10">X口口口</option> 
-        <option value="11">四定位</option> 
-        <option value="12">二字现</option> 
-        <option value="13">三字现</option> 
-        <option value="14">四字现</option> 
-        <option value="101">快打</option> 
+       <!--  <option value="0">全部分类</option>
+        <option value="20">二定位</option>
+        <option value="1">口口XX</option>
+        <option value="2">口X口X</option>
+        <option value="3">口XX口</option>
+        <option value="4">X口X口</option>
+        <option value="5">X口口X</option>
+        <option value="6">XX口口</option>
+        <option value="30">三定位</option>
+        <option value="7">口口口X</option>
+        <option value="8">口口X口</option>
+        <option value="9">口X口口</option>
+        <option value="10">X口口口</option>
+        <option value="11">四定位</option>
+        <option value="12">二字现</option>
+        <option value="13">三字现</option>
+        <option value="14">四字现</option>
+        <option value="101">快打</option>
         <option value="102">快选</option>  -->
       </select>
     </span>
     <!-- &nbsp;&nbsp;类型：
     <span class="select-box inline">
-      <select name="types" class="select"> 
+      <select name="types" class="select">
         <option value="all">全部</option>
         <option value="1"<?php if($types=='1'){echo 'selected';;} ?> >散货</option>
         <option value="2"<?php if($types=='2'){echo 'selected';;} ?> >包牌</option>
@@ -132,8 +132,8 @@ td {
     var uname=$('input[name="uname"]').val();
     var number=$('input[name="number"]').val();
     var xian='';
-    $('input[name="xian"]:checked').each(function(){  
-      xian=$(this).val();//向数组中添加元素  
+    $('input[name="xian"]:checked').each(function(){
+      xian=$(this).val();//向数组中添加元素
     });
     //var xian=$('input[name="xian"]checked').val();
     var condition=$('select[name="condition"] option:selected').val();
@@ -165,7 +165,7 @@ td {
           <th width="60">亏盈</th>
           <!--<th width="60">下线回水</th>
           <th width="60">实收下线</th>
-          <th width="60">自己回水</th>    
+          <th width="60">自己回水</th>
           <th width="60">实付上线</th>
           <th width="60">赚水</th>
            <th width="60">包牌</th>
@@ -239,7 +239,7 @@ td {
       <else/>
         <tr><td  colspan="9" style="text-align: center;">没有数据</td></tr>
       </if>
-        
+
       </tbody>
     </table>
     <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">共 <{$count}> 条</div>
@@ -256,14 +256,14 @@ td {
   </div>
 </div>
 <!--_footer 作为公共模版分离出去-->
-<script type="text/javascript" src="__PUBLIC__/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/lib/jquery/1.9.1/jquery.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/lib/layer/2.4/layer.js"></script>
-<script type="text/javascript" src="__PUBLIC__/static/h-ui/js/H-ui.min.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="__PUBLIC__/static/h-ui.admin/js/H-ui.admin.js"></script>
 <!--/_footer 作为公共模版分离出去-->
 
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="__PUBLIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script> 
+<script type="text/javascript" src="__PUBLIC__/lib/My97DatePicker/4.8/WdatePicker.js"></script>
 <script>
   $(function(){
    $('input[name="pages"]').keyup(function(){
@@ -292,7 +292,7 @@ td {
 
 
 });
-  
+
 </script>
 </body>
 </html>

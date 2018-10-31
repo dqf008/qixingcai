@@ -1765,12 +1765,14 @@ class IndexController extends CommonController {
                 if(!empty($molls['user'])){
                     if($molls['user'] <= $loss1){
                         $loss1 = (float)$molls['user'];
+                        $bianse = 1;
                     }else{
                         $loss1 = (float)$loss1;
                     }
                 }else{
                     if ($money >= $xhz1) {
                         $loss1 = $loss1 - $xhz3;
+                        $bianse = 1;
                     }
                     //销售数
                     if ($money >= ($xhz1 + $xhz2)) { //得到该号码的下滑值
@@ -1789,6 +1791,7 @@ class IndexController extends CommonController {
             }else{
                 if ($money >= $xhz1) {
                     $loss1 = $loss1 - $xhz3;
+                    $bianse = 1;
                 }
                 //销售数
                 if ($money >= ($xhz1 + $xhz2)) { //得到该号码的下滑值
@@ -1811,7 +1814,7 @@ class IndexController extends CommonController {
             }
         }
         $loss3 = 0;
-        $arr = array($loss1, $market1, $market2, $market3, $loss3, $num); //赔率，每码上限，单注上限，会员回水,号码
+        $arr = array($loss1, $market1, $market2, $market3, $loss3, $num,$bianse); //赔率，每码上限，单注上限，会员回水,号码
         return $arr;
     }
     //用户配置赔率
@@ -3145,12 +3148,14 @@ class IndexController extends CommonController {
                 if(!empty($molls['user'])){
                     if($molls['user'] <= $loss1){
                         $loss1 = (float)$molls['user'];
+                        $bianse = 1;
                     }else{
                         $loss1 = (float)$loss1;
                     }
                 }else{
                     if ($money >= $xhz1) {
                         $loss1 = $loss1 - $xhz3;
+                        $bianse = 1;
                     }
                     //销售数
                     if ($money >= ($xhz1 + $xhz2)) { //得到该号码的下滑值
@@ -3169,6 +3174,7 @@ class IndexController extends CommonController {
             }else{
                 if ($money >= $xhz1) {
                     $loss1 = $loss1 - $xhz3;
+                    $bianse = 1;
                 }
                 //销售数
                 if ($money >= ($xhz1 + $xhz2)) { //得到该号码的下滑值
@@ -3191,7 +3197,7 @@ class IndexController extends CommonController {
             }
         }
         $loss3 = 0;
-        $arr = array('code' => 200, $loss1, $market1, $market2, $market3, $loss3, $num); //赔率，每码上限，单注上限，会员回水,号码
+        $arr = array('code' => 200, $loss1, $market1, $market2, $market3, $loss3, $num,$bianse); //赔率，每码上限，单注上限，会员回水,号码
         return $arr;
     }
     private function haomas3($data, $types, $num, $leixing, $loss1, $prohibits, $bet, $markets1, $numbers) {
@@ -4359,6 +4365,7 @@ class IndexController extends CommonController {
                     $data1['odds_dl'] = $arrs[7];
                     $data1['odds_hy'] = $arrs[8];
                     $data1['loss'] = $arrs[4];
+                    $data1['bianse'] = $arrs_huiyuan[6];
                     $data1['win'] = $money * $arrs[4];
                     $data1['topwin'] = $arrs[4] * $data1['topmoney']; //拦货回水
 
@@ -4480,6 +4487,7 @@ class IndexController extends CommonController {
             $bet['odds_dl'] = $arrs[7];
             $bet['odds_hy'] = $arrs[8];
             $bet['loss'] = $arrs[4];
+            $bet['bianse'] = $arrs_huiyuan[6];
             $bet['win'] = $money * $arrs[4];
             $bet['assets'] = $moneys;
 	        $bet['type'] = '';
@@ -4718,7 +4726,7 @@ class IndexController extends CommonController {
         $bet['mingxi_3'] = '定'; //类型
         $bet['mingxi_1'] = '2定'; //类型
         $weishu = 2;
-         $t1 = '2定';
+        $t1 = '2定';
         //得到用户下的赔率配置
         $where['uid'] = $uid;
         $data = M('uloss')->where($where)->find(); //用户赔率
@@ -4771,7 +4779,6 @@ class IndexController extends CommonController {
             $data1['m_loss']=$user['loss'];
             $data1['hy'] = $odds_hy['0'];
             $odds = get_odd3($haoma, $weishu, $bet['mingxi_3'], $data, $data1, $qishu, $prohibits, $markets1, $bets);
-            // var_dump($odds);
             // var_dump($weishu);
             if ($odds['code'] != 400 && $money <= $odds[2] && $money >= $odds[3]) {
                 if ($money > $moneys1) { //下注积分大于
@@ -4785,6 +4792,7 @@ class IndexController extends CommonController {
                     $bet['odds_dl'] = $odds_dl[0];
                     $bet['odds_hy'] = $odds_hy[0];
                     $bet['loss'] = $odds[1];
+                    $bet['bianse'] = $odds[4];
                     $bet['win'] = $money * $odds[1];
                     $bet['topwin'] = $odds[1] * $toparr[0];
                     $moneys+= $money;
@@ -4799,7 +4807,7 @@ class IndexController extends CommonController {
                 $bet['win'] = 0;
             }
             $dd = $bets->add($bet); //插入k_bet
-            
+
         } elseif (strlen($haoma) > 4) {
             for ($i = 0;$i < strlen($haoma);$i++) {
                 $data1 = M('opentime')->field('m_odds,m_status,fengpan,m_loss,m_sales,2ding_xiane')->where($where1)->order('id desc')->find();
@@ -4834,6 +4842,7 @@ class IndexController extends CommonController {
                         $bet['odds_dl'] = $odds_dl[0];
                         $bet['odds_hy'] = $odds_hy[0];
                         $bet['loss'] = $odds[1];
+                        $bet['bianse'] = $odds[4];
                         $bet['win'] = $money * $odds[1];
                         $bet['topwin'] = $odds[1] * $toparr[0];
                         $moneys+= $money;
@@ -4846,7 +4855,7 @@ class IndexController extends CommonController {
                         $bet['loss'] = 0;
                         $bet['win'] = 0;
                     }
-		            $bet['type'] = '';
+                    $bet['type'] = '';
                     $dd = $bets->add($bet); //插入k_bet
                     $odds = '';
                 }
@@ -4862,7 +4871,7 @@ class IndexController extends CommonController {
             $udata['money'] = $umoney - $moneys;
             $dd = M('user')->where($where4)->save($udata);
             //echo 6;exit;
-            
+
         }
         // $res = $betmodel->setTable('k_user')->where("uid = '".$uid."'")->update('money =  money -'.$moneys);
         echo 6;
@@ -4901,7 +4910,7 @@ class IndexController extends CommonController {
         $bet['mingxi_3'] = '定'; //类型
         $bet['mingxi_1'] = '2定'; //类型
         $weishu = 2;
-         $t1 = '2定';
+        $t1 = '2定';
         //得到用户下的赔率配置
         $where['uid'] = $uid;
         $data = M('uloss')->where($where)->find(); //用户赔率
@@ -4942,13 +4951,11 @@ class IndexController extends CommonController {
                         $bet['topmoney'] = $toparr[0]; //拦货金额
                         $bet['topzanc'] = $toparr[1]; //代理占成
                         $bet['topwin'] = 0;
-
                     }
                     $data1 = M('opentime')->field('m_odds,m_status,fengpan,m_loss,m_sales,2ding_xiane')->where($where1)->order('id desc')->find();
                     $adminloss = $data1['m_loss'];
                     $data1['user'] = $user['peilv'];
                     $data1['admin_loss'] = $adminloss;
-
                     $bet['mingxi_2']=$haoma1;
                     $money = $strs1[1]; //下注金额
                     $data1['money'] = $money;
@@ -4982,7 +4989,7 @@ class IndexController extends CommonController {
                             $bet['win'] = $money * $odds[1];
                             $bet['topwin'] = $odds[1] * $toparr[0];
                             $moneys+= $strs1[1]; //下注总金额
-                            
+
                         }
                     } else {
                         $bet['js'] = 4;
@@ -4991,7 +4998,7 @@ class IndexController extends CommonController {
                         $bet['win'] = 0;
                     }
                     $result = $bets->add($bet); //插入k_bet
-                    
+
                 }
             }
         }
@@ -5003,7 +5010,7 @@ class IndexController extends CommonController {
             $udata['money'] = $umoney - $moneys;
             $dd = M('user')->where($where4)->save($udata);
             //echo 6;exit;
-            
+
         }
         echo 6;
     }
@@ -5283,6 +5290,7 @@ class IndexController extends CommonController {
                 $bet[$k]['odds_dl'] = $arrs_dl[0];
                 $bet[$k]['odds_hy'] = $arrs_hy[0];
                 $bet[$k]['loss'] = $arrs[4];
+                $bet[$k]['bianse'] = $arrs[6];
                 $bet[$k]['win'] = $money * $arrs[4];
                 $bet[$k]['topwin'] = $arrs[4] * $toparr[0];
             } else {
@@ -5377,7 +5385,7 @@ class IndexController extends CommonController {
         $count = $bets->where($where)->count();
         $Page = new \Think\Page1($count,50); // 实例化分页类 传入总记录数和每页显示的记录数(25)
         $show = $Page->show(); // 分页显示输出
-        $field = 'id,did,username,addtime,mingxi_1,mingxi_2,mingxi_3,odds,odds_hy,money,js,status,win';
+        $field = 'id,did,username,addtime,mingxi_1,mingxi_2,mingxi_3,odds,odds_hy,money,js,status,win,bianse';
         $data1 = $bets->field($field)->where($where)->order('id desc')->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $keren = $this->huiyuan($data1);
         if ($data1) {

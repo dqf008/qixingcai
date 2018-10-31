@@ -32,8 +32,8 @@
                     <li><a href="JavaScript:;" rel="tab_member">会员资料</a></li>
                     <li><a href="JavaScript:;" rel="tab_award">开奖号码</a></li>
                     <li><a href="JavaScript:;" rel="tab_rule">规则说明</a></li>
-                    <li><a href="/index.php/api/load">聚宝盆APP</a></li>
-                    <li><a href="https://www.baidu.com/from=844b/s?word=chrome+dev&ts=9290406&t_kt=61&ie=utf-8&fm_kl=021394be2f&rsv_iqid=0884866759&rsv_t=c7c7cva81Nbq%252BSlswqMOPs5d19LWd%252BzOB7WQBCOkMQo1kMxsmDp4sWDtEw&sa=is_1&ms=1&rsv_pq=0884866759&rsv_sug4=4662&ss=101&tj=1&inputT=1303&rq=c">官方指定手机浏览器</a></li>
+                    <!--<li><a href="/index.php/api/load">聚宝盆APP</a></li>-->
+                    <!--<li><a href="https://www.baidu.com/from=844b/s?word=chrome+dev&ts=9290406&t_kt=61&ie=utf-8&fm_kl=021394be2f&rsv_iqid=0884866759&rsv_t=c7c7cva81Nbq%252BSlswqMOPs5d19LWd%252BzOB7WQBCOkMQo1kMxsmDp4sWDtEw&sa=is_1&ms=1&rsv_pq=0884866759&rsv_sug4=4662&ss=101&tj=1&inputT=1303&rq=c">官方指定手机浏览器</a></li>-->
                     <li><a href="JavaScript:;" rel="tab_pass">修改密码</a></li>
                     <li><a href="__MODULE__/Login/retreats">退出</a></li>
                     <!-- <li id="cgchat_num" class="cgchat_emain_no"></li> -->
@@ -115,7 +115,7 @@
                     <li class="active"><a href="JavaScript:;" rel="tab_kuaida">快打</a></li>
                     <li><a href="JavaScript:;" rel="tab_kuaixuan">快选</a></li>
                     <li><a href="JavaScript:;" rel="tab_frank">赔率变动表</a></li>
-                    <li><a href="JavaScript:;" rel="tab_import">txt导入</a></li>
+                    <!--<li><a href="JavaScript:;" rel="tab_import">txt导入</a></li>-->
                     <!-- <li><a href="http://www.jiangcho.com" target="_BLANK">（奖虫）APP</a></li> -->
                 </ul>
             </div>
@@ -224,8 +224,11 @@
 											data[i]['mingxi_3']='';
 										}
 										if(data[i]['js']==0){
-
-											html+='<tr><td>七星彩</td><td>'+data[i]['did']+'</td><td>'+data[i]['addtime']+'</td><td class="number">'+data[i]['mingxi_2']+'<span>'+data[i]['mingxi_3']+'</span></td><td class="money">'+data[i]['money']+'</td><td class="frank">'+data[i]['odds']+'</td>';
+											if(data[i]['bianse']==1){
+												html+='<tr class="bianse"><td>七星彩</td><td>'+data[i]['did']+'</td><td>'+data[i]['addtime']+'</td><td class="number">'+data[i]['mingxi_2']+'<span>'+data[i]['mingxi_3']+'</span></td><td class="money">'+data[i]['money']+'</td><td class="frank">'+data[i]['odds']+'</td>';
+											}else{
+												html+='<tr><td>七星彩</td><td>'+data[i]['did']+'</td><td>'+data[i]['addtime']+'</td><td class="number">'+data[i]['mingxi_2']+'<span>'+data[i]['mingxi_3']+'</span></td><td class="money">'+data[i]['money']+'</td><td class="frank">'+data[i]['odds']+'</td>';
+											}
 
 											if(data[i]['status']==1){
 												html+='<td>'+data[i]['zj']+'</td>';
@@ -712,7 +715,7 @@
                                 <if condition="$vo['status'] eq 1">
                                     <tr><td>--</td><td><{$vo.qishu}></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td><td><div class="periodImg periodImg_5"></div></td></tr>
                                     <else/>
-                                    <tr><td><{$vo.kaijiang}></td><td><{$vo.qishu}></td><td><div class="periodImg periodImg_1"><{$vo.m_ball1}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball2}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball3}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball4}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball5}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball6}></div></td><td><div class="periodImg periodImg_1"><{$vo.m_ball7}></div></td></tr>
+                                    <tr><td><{$vo.kaijiang}></td><td><{$vo.qishu}></td><td><div class="periodImg periodImg_5"><{$vo.m_ball1}></div></td><td><div class="periodImg periodImg_5"><{$vo.m_ball2}></div></td><td><div class="periodImg periodImg_5"><{$vo.m_ball3}></div></td><td><div class="periodImg periodImg_5"><{$vo.m_ball4}></div></td><td><div class="periodImg periodImg_5"><{$vo.m_ball5}></div></td><td><div class="periodImg periodImg_5"><{$vo.m_ball6}></div></td><td><div class="periodImg periodImg_5"><{$vo.m_ball7}></div></td></tr>
                                 </if>
                             </volist>
                             <else/>

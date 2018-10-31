@@ -59,8 +59,8 @@
 						<ul class="dropDown-menu menu radius box-shadow">
 							<li><a id="msg"  data-href="__MODULE__/Data/index" data-title="总货明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="总货明细">总货明细</a></li>
 							<li><a id="msg"  data-href="__MODULE__/Data/lotteryOrder" data-title="中奖明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="中奖明细">中奖明细</a></li> 
-							<li><a id="msg"  data-href="__MODULE__/Data/intercept" data-title="拦货明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="拦货明细">拦货明细</a></li> 
-							<li><a id="msg"  data-href="__MODULE__/Data/intercepts" data-title="拦货中奖明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="拦货中奖明细">拦货中奖明细</a></li> 
+							<!--<li><a id="msg"  data-href="__MODULE__/Data/intercept" data-title="拦货明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="拦货明细">拦货明细</a></li> -->
+							<!--<li><a id="msg"  data-href="__MODULE__/Data/intercepts" data-title="拦货中奖明细" onclick="Hui_admin_tab(this)" href="javascript:;" title="拦货中奖明细">拦货中奖明细</a></li> -->
 						</ul>
 					</li>
 
@@ -69,7 +69,7 @@
 							<li><a id="msg"  data-href="__MODULE__/Datas/index" data-title="日分类账" onclick="Hui_admin_tab(this)" href="javascript:;" title="日分类账">日分类账</a></li>
 							<li><a id="msg"  data-href="__MODULE__/Datas/monthDatas" data-title="月分类账" onclick="Hui_admin_tab(this)" href="javascript:;" title="月分类账">月分类账</a></li>
 							
-							<li><a id="msg"  data-href="__MODULE__/Datas/contribute" data-title="贡献度" onclick="Hui_admin_tab(this)" href="javascript:;" title="贡献度">贡献度</a></li>
+							<!--<li><a id="msg"  data-href="__MODULE__/Datas/contribute" data-title="贡献度" onclick="Hui_admin_tab(this)" href="javascript:;" title="贡献度">贡献度</a></li>-->
 						</ul>
 					</li>
 					<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">报表 <i class="Hui-iconfont">&#xe6d5;</i></a>
@@ -81,14 +81,14 @@
 							<li><a id="msg"  data-href="__MODULE__/Data/ureports" data-title="日报表" onclick="Hui_admin_tab(this)" href="javascript:;" title="日报表">日报表</a></li>
 							<li><a id="msg"  data-href="__MODULE__/Data/ureports1" data-title="月报表" onclick="Hui_admin_tab(this)" href="javascript:;" title="月报表">月报表</a></li>
 							<if condition="($Think.session.autype neq 'agency')">
-							<li><a id="msg"  data-href="__MODULE__/Data/backwater" data-title="赚水设置" onclick="Hui_admin_tab(this)" href="javascript:;" title="赚水设置">赚水设置</a></li>
+							<!--<li><a id="msg"  data-href="__MODULE__/Data/backwater" data-title="赚水设置" onclick="Hui_admin_tab(this)" href="javascript:;" title="赚水设置">赚水设置</a></li>-->
 							</if>
 						</ul>
 					</li>
-					<if condition="$Think.session.autype eq 'admin'">
-						<li><a id="msg"  data-href="__MODULE__/Index/excels" data-title="风控导出" onclick="Hui_admin_tab(this)" href="javascript:;" title="风控导出">风控导出</a></li>
-						
-					</if>
+					<!--<if condition="$Think.session.autype eq 'admin'">-->
+						<!--<li><a id="msg"  data-href="__MODULE__/Index/excels" data-title="风控导出" onclick="Hui_admin_tab(this)" href="javascript:;" title="风控导出">风控导出</a></li>-->
+						<!---->
+					<!--</if>-->
 					<if condition="$Think.session.autype eq 'admin' OR $Think.session.autype eq 'partner'">
 					<if condition="$Think.session.aumarkets eq '1'">
 							<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">销售统计 <i class="Hui-iconfont">&#xe6d5;</i></a>
@@ -132,9 +132,9 @@
 						<i class="Hui-iconfont">&#xe6d5;</i></a>
 						<ul class="dropDown-menu menu radius box-shadow">
 							<li><a href="javascript:;" onClick="myselfinfo()">个人信息</a></li>
-							<if condition="$Think.session.autype eq 'admin'">
-								<li><a href="javascript:;" onClick="myselfinfos()">拦货配置</a></li>
-							</if>
+							<!--<if condition="$Think.session.autype eq 'admin'">-->
+								<!--<li><a href="javascript:;" onClick="myselfinfos()">拦货配置</a></li>-->
+							<!--</if>-->
 							<li><a href="__MODULE__/Login/logout">退出</a></li>
 					</ul>
 				</li>
