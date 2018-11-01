@@ -970,7 +970,7 @@ class IndexController extends CommonController {
         //得到退码时间
         $where1['qishu'] = session('qishu');
         $time = M('opentime')->where($where1)->find();
-        $id = explode('|', I('get.tuimaid'));
+        $id = explode('|', I('post.tuimaid'));
         $uid = session('userid');
         // $where['qishu']=session('qishu');
         //$id=I('post.id');
