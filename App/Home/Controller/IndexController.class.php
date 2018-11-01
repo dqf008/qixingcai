@@ -5334,8 +5334,12 @@ class IndexController extends CommonController {
         $where['uid'] = $uid;
         if (empty($qishu)) {
             $where['qishu'] = session('qishu');
+            $where1['qishu'] = session('qishu');
+            $times = M('opentime')->where($where1)->find();
         } else {
             $where['qishu'] = $qishu;
+            $where1['qishu'] = $qishu;
+            $times = M('opentime')->where($where1)->find();
         }
         $haoma = I('get.haoma');
         $xian = I('get.xian');
@@ -5420,6 +5424,7 @@ class IndexController extends CommonController {
             $data1[0]['wins'] = $keren;
 
             $data['data'] = $data1;
+//            var_dump($data1);exit;
             $data['code'] = 200;
         } else {
             $data['code'] = 400;
