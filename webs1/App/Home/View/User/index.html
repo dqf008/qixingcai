@@ -97,9 +97,9 @@
           <if condition="$user['au_type'] neq 'admin'">
           <td><{$vo['au_money']-$vo['au_moneys']}></td>
           </if>
-          <if condition="$utype eq 'admin'">
-            <td><{$vo['au_proportion']}>%</td>
-          </if>
+          <!--<if condition="$utype eq 'admin'">-->
+            <!--<td><{$vo['au_proportion']}>%</td>-->
+          <!--</if>-->
           <!--<if condition="$utype eq 'agency'">-->
             <!--<td width="60">-->
             <!--<a class="btn btn-primary radius" title="占成配置" href="javascript:void(0);" onclick="addConfig('<{$vo['au_id']}>')">占成配置</a>-->

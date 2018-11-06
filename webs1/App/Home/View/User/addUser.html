@@ -58,10 +58,10 @@
     </div>
     <if condition="$Think.session.autype eq 'admin'">
       <div class="row cl"> 
-     <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>占成：</label> 
-     <div class="formControls col-xs-8 col-sm-9"> 
-      <input type="text" class="input-text" value="<{$data['au_proportion']}>" placeholder="" id="adminName" name="proportion" onkeyup="keyups(this)" /> 
-     </div> 
+     <!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>占成：</label> -->
+     <!--<div class="formControls col-xs-8 col-sm-9"> -->
+      <!--<input type="text" class="input-text" value="<{$data['au_proportion']}>" placeholder="" id="adminName" name="proportion" onkeyup="keyups(this)" /> -->
+     <!--</div> -->
     </div> 
     <div class="row cl"> 
      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>操作权限：</label> 
@@ -76,26 +76,26 @@
       <input type="hidden" value="<{$data['au_market']}>" name="market" /> 
     </if>
 
-    <if condition="$Think.session.autype eq 'agencys'">
-      <div class="row cl">
-     <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>拦货占成：</label>
-     <div class="formControls col-xs-8 col-sm-9">
-        <select name="zancheng" style="padding:4px 10px">
-          <option value="0" <?php if(empty($data['au_proportion'])){ echo 'selected';} ?> >0</option>
-          <option value="10" <?php if($data['au_proportion']==10){ echo 'selected';} ?> >10</option>
-          <option value="20" <?php if($data['au_proportion']==20){ echo 'selected';} ?> >20</option>
-          <option value="30" <?php if($data['au_proportion']==30){ echo 'selected';} ?> >30</option>
-          <option value="40" <?php if($data['au_proportion']==40){ echo 'selected';} ?> >40</option>
-          <option value="50" <?php if($data['au_proportion']==50){ echo 'selected';} ?> >50</option>
-          <option value="60" <?php if($data['au_proportion']==60){ echo 'selected';} ?> >60</option>
-          <option value="70" <?php if($data['au_proportion']==70){ echo 'selected';} ?> >70</option>
-          <option value="80" <?php if($data['au_proportion']==80){ echo 'selected';} ?> >80</option>
-          <option value="90" <?php if($data['au_proportion']==90){ echo 'selected';} ?> >90</option>
-          <option value="100" <?php if($data['au_proportion']==100){ echo 'selected';} ?> >100</option>
-        </select>
-     </div>
-    </div>
-    </if>
+    <!--<if condition="$Think.session.autype eq 'agencys'">-->
+      <!--<div class="row cl">-->
+     <!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>拦货占成：</label>-->
+     <!--<div class="formControls col-xs-8 col-sm-9">-->
+        <!--<select name="zancheng" style="padding:4px 10px">-->
+          <!--<option value="0" <?php if(empty($data['au_proportion'])){ echo 'selected';} ?> >0</option>-->
+          <!--<option value="10" <?php if($data['au_proportion']==10){ echo 'selected';} ?> >10</option>-->
+          <!--<option value="20" <?php if($data['au_proportion']==20){ echo 'selected';} ?> >20</option>-->
+          <!--<option value="30" <?php if($data['au_proportion']==30){ echo 'selected';} ?> >30</option>-->
+          <!--<option value="40" <?php if($data['au_proportion']==40){ echo 'selected';} ?> >40</option>-->
+          <!--<option value="50" <?php if($data['au_proportion']==50){ echo 'selected';} ?> >50</option>-->
+          <!--<option value="60" <?php if($data['au_proportion']==60){ echo 'selected';} ?> >60</option>-->
+          <!--<option value="70" <?php if($data['au_proportion']==70){ echo 'selected';} ?> >70</option>-->
+          <!--<option value="80" <?php if($data['au_proportion']==80){ echo 'selected';} ?> >80</option>-->
+          <!--<option value="90" <?php if($data['au_proportion']==90){ echo 'selected';} ?> >90</option>-->
+          <!--<option value="100" <?php if($data['au_proportion']==100){ echo 'selected';} ?> >100</option>-->
+        <!--</select>-->
+     <!--</div>-->
+    <!--</div>-->
+    <!--</if>-->
     <div class="row cl"> 
      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>手机：</label>
      <div class="formControls col-xs-8 col-sm-9"> 

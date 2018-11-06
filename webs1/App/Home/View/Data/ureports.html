@@ -57,13 +57,13 @@
         <td colspan="4" class="bg-yellow">股东</td>
     <elseif condition="$utype eq 'partner'" />
        <td rowspan="2" class="bg2" width="150"> 总代理 </td> 
-       <td colspan="4" class="bg-yellow">总代理</td> 
-       <td colspan="2" class="bg-orange">  股东  </td>
+       <td colspan="3" class="bg-yellow">总代理</td>
+       <td colspan="3" class="bg-orange">  股东  </td>
         <td colspan="2" class="bg-pink">  超级管理员  </td>
     <elseif condition="$utype eq 'agencys'" />
        <td rowspan="2" class="bg2" width="150"> 代理 </td> 
         <td colspan="4" class="bg-yellow">  代理  </td> 
-      <td colspan="4" class="bg-orange">  总代理  </td>  
+      <td colspan="4" class="bg-orange">  总代理  </td>
       <td colspan="2" class="bg-pink">  股东  </td>
     <elseif condition="$utype eq 'agency'" />
        <td rowspan="2" class="bg2" width="150"> 会员 </td> 
@@ -87,7 +87,7 @@
           <td class="bg-yellow">笔数</td> 
           <td class="bg-yellow">总投</td> 
           <td class="bg-yellow">盈亏</td>
-          <td class="bg-yellow">   赚水   </td> 
+          <td class="bg-orange">   赚水   </td>
           <td class="bg-orange">   总投   </td> 
         <td class="bg-orange">总盈亏</td> 
            <td class="bg-pink">总投</td> 
@@ -160,7 +160,7 @@
       </td> 
       <td class="bg-yellow"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
       <td class="bg-yellow"><if condition="$vo.yingkuis "><{$vo.yingkuis}><else/>0</if></td> 
-      <td class="bg-yellow"><if condition="$vo.huishuis"><{$vo.huishuis}><else/>0</if></td>
+      <td class="bg-orange"><if condition="$vo.huishuis"><{$vo.huishuis}><else/>0</if></td>
       <!-- <td class="bg-yellow">0</td>  -->
       <td class="bg-orange"><if condition="$vo.money"><{$vo.money}><else/>0</if></td>  
         <td class="bg-orange"><if condition="$vo.yingkuis"><{$vo.yingkuis}><else/>0</if></td>

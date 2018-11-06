@@ -284,7 +284,7 @@ class UserController extends CommonController
         $loss['tong212']=$m_loss['m_loss']->tong212;
         $loss['tong213']=$m_loss['m_loss']->tong213;
         $loss['tong214']=$m_loss['m_loss']->tong214;
-        $loss['tong221']=$tong221;
+        $loss['tong221']=$tong211;
         $loss['tong222']=$m_loss['m_loss']->tong222;
         $loss['tong223']=$m_loss['m_loss']->tong223;
         $loss['tong224']=$m_loss['m_loss']->tong224;//二同
@@ -1531,6 +1531,7 @@ class UserController extends CommonController
                 exit;
             }
             $data['money']=$integral;
+            $data['usermoney']=$integral;
         }
         else if( !empty($user1) && !empty($uid))
         {
